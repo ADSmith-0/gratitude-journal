@@ -1,6 +1,8 @@
 :root {
     --pink: #EA54A4;
-    --blue: #3498DB;
+    --blue: #54A4EA;
+    --green: #92DD3C;/*#A4EA54;*/
+    --red: #EA5459;
     --main-font: 'Poppins', sans-serif;
     --accent-font: 'Nunito', sans-serif;
     --title-size: 42px;
@@ -35,4 +37,8 @@
 
 .blue {
     background-color: var(--blue);
+}
+
+.green {
+    background: var(--green);
 }
