@@ -4,10 +4,10 @@
     $: selectedItem = $page.url.pathname;
 
     let items = [
-        { name: "Add entry", link: "/add-entry", src: "plus-black-icon-35x35.png", alt: "add entry icon"},
-        { name: "Edit entry", link: "/edit-entry", src: "pencil-black-icon-35x35.png", alt: "edit entry icon" },
-        { name: "All entries", link: "/all-entries", src: "list-black-icon-35x35.png", alt: "all entries icon" },
-        { name: "Account", link: "/account", src: "account-black-icon-35x35.png", alt: "account icon" }
+        { name: "Add entry", link: "/add-entry", src: "plus-black-icon-100x100.png", alt: "add entry icon"},
+        { name: "Edit entry", link: "/edit-entry", src: "pencil-black-icon-96x96.png", alt: "edit entry icon" },
+        { name: "All entries", link: "/all-entries", src: "list-black-icon-96x96.png", alt: "all entries icon" },
+        { name: "Account", link: "/account", src: "account-black-icon-96x96.png", alt: "account icon" }
     ];
 
     
@@ -78,6 +78,10 @@
         align-items: center;
         font-weight: 400;
         color: var(--font-color);
+    }
+    img {
+        height: 35px;
+        width: 36px;
     }
     .selected {
         color: var(--pink);
