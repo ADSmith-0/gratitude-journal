@@ -24,9 +24,9 @@
         border-radius: var(--radius);
         border: 1px solid black;
         box-shadow: 0px 4px 4px #0002;
-        margin: 10px;
-        padding: 10px;
-        min-height: 30vh;
+        margin: 20px;
+        padding: 10px 20px;
+        min-height: 25vh;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -35,20 +35,28 @@
     }
     #container p {
         font-size: var(--font-m-title);
+        text-align: center;
     }
     #buttons {
         display:flex;
         gap: 20px;
     }
+    a {
+        text-decoration: none;
+    }
     h1 {
         font-family: var(--accent-font);
         font-size: var(--font-normal);
+        font-weight: 400;
     }
     p {
         font-family: var(--accent-font);
         font-size: var(--font-small);
     }
-    a {
-        text-decoration: none;
+    section {
+        margin: 20px;
+    }
+    section p {
+        font-size: var(--font-x-small);
     }
 </style>
