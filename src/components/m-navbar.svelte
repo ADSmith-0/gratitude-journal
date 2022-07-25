@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { page } from '$app/stores';
 
     $: selectedItem = $page.url.pathname;
@@ -19,15 +19,25 @@
         }
         return item;
     });
-    
+
+    let keyboardExists = false;
+
+    const updateKeyboard = (e:any) => {
+        if(e.target.innerHeight <= 650){
+            keyboardExists = true;
+        }else{
+            keyboardExists = false;
+        }
+    }
 </script>
+<svelte:window on:resize={updateKeyboard}></svelte:window>
 <section id="top">
     <a id="title" href="/">Gratitude.io</a>
     <a id="settings" href="/settings">
         <img src="/settings-icon-40x40.png" alt="settings">
     </a>
 </section>
-<section id="bottom">
+<section id="bottom" class="{keyboardExists ? 'keyboard' : ''}">
     <nav>
         {#each items as {name, link, src, alt}}
             <a href={link} class="{selectedItem == link ? "selected": ""}">
@@ -58,11 +68,15 @@
         text-decoration: none;
     }
     #bottom {
+        display: block;
         position: absolute;
         bottom: 0;
         padding: 25px 0 15px 0;
         width: 100%;
         box-shadow: 0 -1px 2px #0004;
+    }
+    #bottom.keyboard {
+        display: none;
     }
     nav {
         display: grid;

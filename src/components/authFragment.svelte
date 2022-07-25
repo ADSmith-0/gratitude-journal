@@ -19,7 +19,7 @@
     <a href="/sign-up">Don't have an account? Sign up</a>
     {/if}
 
-    <button id="submit" class="button blue">Submit</button>
+    <button id="submit" class="button green">{name == "Sign up" ? "Sign up" : "Login"}</button>
 </section>
 <style>
     #container {
