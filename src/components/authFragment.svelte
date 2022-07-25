@@ -20,7 +20,7 @@
     <a href="/sign-up">Don't have an account? Sign up</a>
     {/if}
 
-    <button id="submit" class="button blue">Submit</button>
+    <button id="submit" class="button green">{name}</button>
 </section>
 <style>
     #container {
@@ -29,6 +29,7 @@
         gap: 10px;
         justify-content: space-evenly;
         align-items: center;
+        margin-top: 50px;
     }
     #btn-google {
         border: 3px solid var(--blue);
@@ -50,13 +51,12 @@
         justify-content: space-evenly;
         gap: 30px;
         width: 80%;
-        /* margin: auto; */
+        margin: 20px 0;
     }
     .line {
         flex: 3;
-        /* height: 10px; */
         align-self: center;
-        /* border: 1px solid black; */
+
     }
     a {
         font-size: var(--font-normal);
