@@ -3,7 +3,8 @@
     export let name:string;
 </script>
 <section id="container">
-    <button>
+    <button id="btn-google">
+        <img src="/google-icon-96x96.png" alt="google icon">
         {name} with google
     </button>
     <section id="or-section">
@@ -28,6 +29,19 @@
         gap: 10px;
         justify-content: space-evenly;
         align-items: center;
+    }
+    #btn-google {
+        border: 3px solid var(--blue);
+        border-radius: var(--radius);
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        background: none;
+        padding: 15px;
+    }
+    #btn-google img{
+        height: 35px;
+        width: 35px;
     }
     #or-section {
         align-self: center;
