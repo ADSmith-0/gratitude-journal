@@ -63,6 +63,8 @@
         padding: 25px 0 15px 0;
         width: 100%;
         box-shadow: 0 -1px 2px #0004;
+        background-color: #fff;
+        z-index: 99;
     }
     nav {
         display: grid;
