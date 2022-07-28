@@ -4,7 +4,7 @@
 </script>
 <section id="container">
     <button id="btn-google">
-        <img src="/google-icon-96x96.png" alt="google icon">
+        <img src="/img/google-icon-96x96.png" alt="google icon">
         {name} with google
     </button>
     <section id="or-section">
@@ -26,32 +26,32 @@
     #container {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 0.63em;
         justify-content: space-evenly;
         align-items: center;
-        margin-top: 50px;
+        margin-top: 3.1em;
     }
     #btn-google {
-        border: 3px solid var(--blue);
+        border: 0.19em solid var(--blue);
         border-radius: var(--radius);
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        gap: 1.125em;
         background: none;
-        padding: 15px;
+        padding: 0.95em;
     }
     #btn-google img{
-        height: 35px;
-        width: 35px;
+        height: 2.18em;
+        width: 2.18em;
     }
     #or-section {
         align-self: center;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        gap: 30px;
+        gap: 1.88em;
         width: 80%;
-        margin: 20px 0;
+        margin: 1.125em 0;
     }
     .line {
         flex: 3;

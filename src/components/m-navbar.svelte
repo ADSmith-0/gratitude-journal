@@ -4,10 +4,10 @@
     $: selectedItem = $page.url.pathname;
 
     let items = [
-        { name: "Add entry", link: "/add-entry", src: "plus-black-icon-100x100.png", alt: "add entry icon"},
-        { name: "Edit entry", link: "/edit-entry", src: "pencil-black-icon-96x96.png", alt: "edit entry icon" },
-        { name: "All entries", link: "/all-entries", src: "list-black-icon-96x96.png", alt: "all entries icon" },
-        { name: "Account", link: "/account", src: "account-black-icon-96x96.png", alt: "account icon" }
+        { name: "Add entry", link: "/add-entry", src: "/img/plus-black-icon-100x100.png", alt: "add entry icon"},
+        { name: "Edit entry", link: "/edit-entry", src: "/img/pencil-black-icon-96x96.png", alt: "edit entry icon" },
+        { name: "All entries", link: "/all-entries", src: "/img/list-black-icon-96x96.png", alt: "all entries icon" },
+        { name: "Account", link: "/account", src: "/img/account-black-icon-96x96.png", alt: "account icon" }
     ];
 
     
@@ -24,7 +24,7 @@
 <section id="top">
     <a id="title" href="/">Gratitude.io</a>
     <a id="settings" href="/settings">
-        <img src="/settings-icon-40x40.png" alt="settings">
+        <img src="/img/settings-icon-40x40.png" alt="settings">
     </a>
 </section>
 <section id="bottom">
@@ -43,7 +43,7 @@
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         place-items: center;
-        min-height: 65px;
+        min-height: 4em;
     }
     #title {
         color: var(--title-color);
@@ -60,9 +60,9 @@
     #bottom {
         position: absolute;
         bottom: 0;
-        padding: 25px 0 15px 0;
+        padding: 1.6em 0 0.94em 0;
         width: 100%;
-        box-shadow: 0 -1px 2px #0004;
+        box-shadow: 0 -0.06em 0.125em #0004;
         background-color: #fff;
         z-index: 99;
     }
@@ -76,14 +76,14 @@
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        gap: 5px;
+        gap: 0.31em;
         align-items: center;
         font-weight: 400;
         color: var(--font-color);
     }
     img {
-        height: 35px;
-        width: 36px;
+        height: 2.18em;
+        width: 2.18em;
     }
     .selected {
         color: var(--pink);

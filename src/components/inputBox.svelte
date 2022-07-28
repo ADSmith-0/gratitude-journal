@@ -20,7 +20,7 @@
     <p id="placeholder">{name}</p>
     {#if name == "Password"}
     <img 
-        src="/{passwordVisible ? 'hide' : 'eye'}-black-icon-96x96.png"
+        src="/img/{passwordVisible ? 'hide' : 'eye'}-black-icon-96x96.png"
         alt="{passwordVisible ? 'hide' : 'eye'} password icon"
         on:click={toggleVisible}
     >
@@ -29,18 +29,18 @@
 
 <style>
     :root {
-        --y-coordinate: 14px;
+        --y-coordinate: 0.88em;
+        --padding: 0.63em;
         --input-width: 75vw;
     }
     input {
         border-radius: var(--radius);
         outline: none;
-        border: 2px solid black;
+        border: 0.12em solid black;
         font-family: var(--accent-font);
         font-size: var(--font-small);
-        height: 45px;
-        padding: 10px;
-        padding-bottom: 0;
+        height: 2.8em;
+        padding: var(--padding);
         width: var(--input-width);
     }
     #container {
@@ -49,7 +49,7 @@
     #placeholder {
         position: absolute;
         top: var(--y-coordinate);
-        left: 10px;
+        left: 0.63em;
         font-weight: 400;
         font-family: var(--accent-font);
         font-size: var(--font-normal);
@@ -58,7 +58,7 @@
     }
     input:focus,
     .active input {
-        border: 2px solid var(--blue);
+        border: 0.12em solid var(--blue);
     }
     input:focus ~ p#placeholder,
     .active p#placeholder{
@@ -68,9 +68,9 @@
     }
     img {
         position: absolute;
-        top: var(--y-coordinate);
-        left: calc(var(--input-width) - 22px);
-        height: 35px;
-        width: 35px;
+        top: calc(var(--y-coordinate) + (var(--padding)/2));
+        left: calc(var(--input-width) - 1.35em);
+        height: 2.18em;
+        width: 2.18em;
     }
 </style>

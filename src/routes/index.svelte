@@ -22,24 +22,24 @@
     }
     #container {
         border-radius: var(--radius);
-        border: 1px solid black;
-        box-shadow: 0px 4px 4px #0002;
-        margin: 20px;
-        padding: 10px 20px;
+        border: 0.063em solid black;
+        box-shadow: 0 0.25em 0.25em #0002;
+        margin: 1.25em;
+        padding: 0.63em 0.125em;
         min-height: 25vh;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 0.63em;
         justify-content: space-evenly;
         align-items: center;
     }
     #container p {
-        font-size: var(--font-m-title);
+        font-size: var(--font-large);
         text-align: center;
     }
     #buttons {
         display:flex;
-        gap: 20px;
+        gap: 1.25em;
     }
     a {
         text-decoration: none;
@@ -54,7 +54,7 @@
         font-size: var(--font-small);
     }
     section {
-        margin: 20px;
+        margin: 1.25em;
     }
     section p {
         font-size: var(--font-x-small);
