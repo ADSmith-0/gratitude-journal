@@ -27,6 +27,11 @@ a, p {
     font-size: var(--font-normal);
 }
 
+button {
+    font-size: var(--font-small);
+    align-items: center;
+}
+
 .button {
     border-radius: var(--radius);
     font-weight: 400;

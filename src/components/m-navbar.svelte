@@ -53,6 +53,7 @@
     }
     #settings {
         display: flex;
+        font-size: var(--font-x-small);
     }
     a {
         text-decoration: none;
