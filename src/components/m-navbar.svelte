@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
     import { page } from '$app/stores';
+import Navbar from './navbar.svelte';
 
     $: selectedItem = $page.url.pathname;
 
@@ -19,15 +20,23 @@
         }
         return item;
     });
+
+    let navbarVisible = true;
+
+    const toggleNavbarVisible = (e:any) => {
+        const height = e.target.innerHeight;
+        navbarVisible = (height >= 600);
+    }
     
 </script>
+<svelte:window on:resize={toggleNavbarVisible}></svelte:window>
 <section id="top">
     <a id="title" href="/">Gratitude.io</a>
     <a id="settings" href="/settings">
         <img src="/img/settings-icon-40x40.png" alt="settings">
     </a>
 </section>
-<section id="bottom">
+<section id="bottom" class="{navbarVisible ? 'visible' : ''}">
     <nav>
         {#each items as {name, link, src, alt}}
             <a href={link} class="{selectedItem == link ? "selected": ""}">
@@ -59,6 +68,7 @@
         text-decoration: none;
     }
     #bottom {
+        display: none;
         position: absolute;
         bottom: 0;
         padding: 1.6em 0 0.94em 0;
@@ -88,5 +98,8 @@
     }
     .selected {
         color: var(--pink);
+    }
+    #bottom.visible {
+        display: block;
     }
 </style>

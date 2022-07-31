@@ -15,9 +15,9 @@
         type = (passwordVisible) ? "text" : "password";
     }
 </script>
-<section id="container" class="{style}">
+<section class="container {style}">
     <input type={type} on:input={checkInput} on:blur={scrollToStart}>
-    <p id="placeholder">{name}</p>
+    <p class="placeholder">{name}</p>
     {#if name == "Password"}
     <img 
         src="/img/{passwordVisible ? 'hide' : 'eye'}-black-icon-96x96.png"
@@ -29,7 +29,7 @@
 
 <style>
     :root {
-        --y-coordinate: 0.88em;
+        --y-coordinate: 0.65em;
         --padding: 0.63em;
         --input-width: 75vw;
     }
@@ -39,14 +39,14 @@
         border: 0.12em solid black;
         font-family: var(--accent-font);
         font-size: var(--font-small);
-        height: 2.8em;
+        height: 2em;
         padding: var(--padding);
         width: var(--input-width);
     }
-    #container {
+    .container {
         position: relative;
     }
-    #placeholder {
+    .placeholder {
         position: absolute;
         top: var(--y-coordinate);
         left: 0.63em;
@@ -55,16 +55,18 @@
         font-size: var(--font-normal);
         color: #666;
         transition: all 0.1s ease-in-out 0s;
+        background-color: #fff;
+        padding: 0 0.25em;
     }
     input:focus,
     .active input {
         border: 0.12em solid var(--blue);
     }
-    input:focus ~ p#placeholder,
-    .active p#placeholder{
+    input:focus ~ p.placeholder,
+    .active p.placeholder{
         color: var(--blue);
         font-size: var(--font-x-small);
-        transform: translateY(calc(-1*var(--y-coordinate)));
+        transform: translateY(calc(-1*var(--y-coordinate) - 0.55em));
     }
     img {
         position: absolute;
