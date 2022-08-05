@@ -48,11 +48,14 @@ import Navbar from './navbar.svelte';
 </section>
 <style>
     #top {
+        position: relative;
+        top: 0;
         background-color: var(--pink);
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         place-items: center;
         min-height: 4em;
+        z-index: 99;
     }
     #title {
         color: var(--title-color);
