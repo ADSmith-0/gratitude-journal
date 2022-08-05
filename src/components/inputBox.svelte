@@ -9,6 +9,10 @@
         style = (value.length !== 0) ? "active" : "";
     }
     const scrollToStart = (e:any) => e.target.scrollTo(0,0);
+    const focusInput = (e:any) => {
+        const inputBox = e.target.parentElement.querySelector('input');
+        inputBox.focus();
+    }
     let passwordVisible = false;
     const toggleVisible = () => {
         passwordVisible = !passwordVisible;
@@ -17,7 +21,7 @@
 </script>
 <section class="container {style}">
     <input type={type} on:input={checkInput} on:blur={scrollToStart}>
-    <p class="placeholder">{name}</p>
+    <p class="placeholder" on:click={focusInput}>{name}</p>
     {#if name == "Password"}
     <img 
         src="/img/{passwordVisible ? 'hide' : 'eye'}-black-icon-96x96.png"

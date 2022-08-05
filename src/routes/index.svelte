@@ -1,16 +1,14 @@
 <main>
-    <div id="container">
+    <h1>Welcome to Gratitude.io</h1>
+    <p><em>Did you know?</em><br>There have been studies linking gratitude journals to increased happiness and reduced stress</p>
+    <section class="container">
         <p>
             Create an account or login to continue
         </p>
-        <div id="buttons">
+        <div class="buttons">
             <a href="/sign-up" class="button blue">Sign up</a>
             <a href="/login" class="button pink">Login</a>
         </div>
-    </div>
-    <section>
-        <h1>Why use a gratitude journal?</h1>
-        <p>There have been studies linking gratitude journals to increased happiness</p>
     </section>
 </main>
 
@@ -19,8 +17,18 @@
         display: flex;
         flex-direction: column;
         justify-content:space-evenly;
+        gap: 1.25em;
+        margin: 0 1em;
     }
-    #container {
+    main h1 {
+        text-align: center;
+        margin-top: 1em;
+        font-size: var(--font-large);
+    }
+    main p {
+        margin: 0 1.25em;
+    }
+    .container {
         border-radius: var(--radius);
         border: 0.063em solid black;
         box-shadow: 0 0.25em 0.25em #0002;
@@ -33,11 +41,12 @@
         justify-content: space-evenly;
         align-items: center;
     }
-    #container p {
-        font-size: var(--font-large);
+    .container p {
+        font-size: var(--font-normal);
         text-align: center;
+        margin: 0 0.7em;
     }
-    #buttons {
+    .buttons {
         display:flex;
         gap: 1.25em;
     }
@@ -49,14 +58,8 @@
         font-size: var(--font-normal);
         font-weight: 400;
     }
-    p {
+    p, em {
         font-family: var(--accent-font);
-        font-size: var(--font-small);
-    }
-    section {
-        margin: 1.25em;
-    }
-    section p {
         font-size: var(--font-x-small);
     }
 </style>
