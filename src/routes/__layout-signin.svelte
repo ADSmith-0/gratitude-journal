@@ -1,11 +1,20 @@
 <script>
     import Navbar from '../components/navbar.svelte';
     import SigninPopup from '../components/signin-popup.svelte';
+    
+    const isUserAuthorised = () => {
+        // checkToken();
+        return true;
+    }
+
+    let userAuthorised = isUserAuthorised();
 </script>
 <Navbar/>
+{#if userAuthorised}
+<slot></slot>
+{:else}
 <SigninPopup type="popup"/>
 <div class="blocker"></div>
-<slot></slot>
 <style>
     .blocker {
         position: absolute;
@@ -18,3 +27,4 @@
         z-index: 10;
     }
 </style>
+{/if}
