@@ -1,6 +1,47 @@
-<script lang="ts">
+<script>
     import InputBox from './inputBox.svelte';
-    export let name:string;
+    import ErrorMsg from './errorMsg.svelte';
+    export let name;
+
+    let fields = {
+        email: undefined,
+        password: undefined
+    };
+    let errorMessage = "";
+    let errorVisible = false;
+
+    const updateField = e => {
+        const { id, newValue } = e.target;
+        fields[id] = newValue;
+    }
+
+    const doesEmailExist = async (email) => {
+        const checkDBForEmail = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({ "matched": false });
+            }, 1000);
+        })
+        return (await checkDBForEmail.json(res => res));
+    }
+
+    const trySubmit = async () => {
+        let emailExists = false;
+        for(let key in fields){
+            if(!(fields[key]) || fields[key] == ""){
+                errorMessage = "Enter your "+key;
+                errorVisible = true;
+                return false;
+            }else{
+                if(key == "email"){
+                    emailExists = doesEmailExist(fields["email"]);
+                }
+            }
+        }
+        errorMessage = "";
+        errorVisible = false;
+        return true;
+    }
+
 </script>
 <section class="container">
     {#if name == "Sign up"}
@@ -17,10 +58,11 @@
         <p>or</p>
         <hr class="line">
     </section>
-    <InputBox name="Email" type="text"/>
-    <InputBox name="Password" type="password"/>
-    <button id="submit" class="button green">{name}</button>
+    <InputBox id="email" name="Email" type="text" onInput={updateField}/>
+    <InputBox id="password" name="Password" type="password" onInput={updateField}/>
+    <button id="submit" class="button green" on:click={trySubmit}>{name}</button>
 </section>
+<ErrorMsg visible={errorVisible} message={errorMessage}/>
 <style>
     .container {
         display: flex;

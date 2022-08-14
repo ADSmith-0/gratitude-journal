@@ -1,5 +1,5 @@
-<script lang="ts">
-    export let type:string = "";
+<script>
+    export let type = "";
 </script>
 <section class="container {type}">
     <p>

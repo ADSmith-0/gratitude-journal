@@ -1,6 +1,6 @@
-<script lang="ts">
+<script>
     import { page } from '$app/stores';
-import Navbar from './navbar.svelte';
+    import Navbar from './navbar.svelte';
 
     $: selectedItem = $page.url.pathname;
 
@@ -23,7 +23,7 @@ import Navbar from './navbar.svelte';
 
     let navbarVisible = true;
 
-    const toggleNavbarVisible = (e:any) => {
+    const toggleNavbarVisible = (e) => {
         const height = e.target.innerHeight;
         navbarVisible = (height >= 600);
     }

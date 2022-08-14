@@ -1,15 +1,35 @@
-<script lang="ts">
-    export let name:string;
-    export let type:string;
+<script>
+    export let id;
+    export let name;
+    export let type;
+    export let onInput; //Function
+    export let validateAs = undefined;
+
+    const validateInput = value => {
+        const validationCriteria = validateAs?.toLowerCase() || "text";
+        switch(validationCriteria){
+            case "email":
+                const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                return emailRegex.test(value);
+            case "text":
+                return (typeof value == "string");
+            default:
+                console.error("cannot find: ", validationCriteria);
+                break;
+        }
+    }
 
     let style = "";
-    const checkInput = (e:any) => {
+    const checkInput = e => {
         const value = e.target.value;
         
         style = (value.length !== 0) ? "active" : "";
+
+        e.target.newValue = (validateInput(value)) ? value : undefined;
+        onInput(e);
     }
-    const scrollToStart = (e:any) => e.target.scrollTo(0,0);
-    const focusInput = (e:any) => {
+    const scrollToStart = e => e.target.scrollTo(0,0);
+    const focusInput = e => {
         const inputBox = e.target.parentElement.querySelector('input');
         inputBox.focus();
     }
@@ -20,7 +40,7 @@
     }
 </script>
 <section class="container {style}">
-    <input type={type} on:input={checkInput} on:blur={scrollToStart}>
+    <input id={id} type={type} on:input={checkInput} on:blur={scrollToStart}>
     <p class="placeholder" on:click={focusInput}>{name}</p>
     {#if name == "Password"}
     <img 
