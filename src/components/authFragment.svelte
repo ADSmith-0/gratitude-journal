@@ -18,29 +18,43 @@
     const doesEmailExist = async (email) => {
         const checkDBForEmail = new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve({ "matched": false });
+                resolve({ "matched": true });
             }, 1000);
         })
-        return (await checkDBForEmail.json(res => res));
+        return (await checkDBForEmail);
     }
 
-    const trySubmit = async () => {
-        let emailExists = false;
+    const setError = (message, visible) => {
+        errorMessage = message;        
+        errorVisible = visible;
+    }
+
+    const areFieldsEmpty = () => {
         for(let key in fields){
-            if(!(fields[key]) || fields[key] == ""){
-                errorMessage = "Enter your "+key;
-                errorVisible = true;
-                return false;
-            }else{
-                if(key == "email"){
-                    emailExists = doesEmailExist(fields["email"]);
-                }
+            if(!fields[key] || fields[key] == ""){
+                return key;
             }
         }
-        errorMessage = "";
-        errorVisible = false;
-        return true;
+        return false;
     }
+
+    const trySignup = async () => {
+        const fieldsEmpty = areFieldsEmpty();
+        if(!fieldsEmpty){
+            const { matched } = await doesEmailExist(fields["email"]);
+            if(matched){
+                setError("Email already exists", true);
+                return false;
+            }
+        }else{
+            setError("Enter your "+fieldsEmpty, true);
+        }
+    }
+
+    const tryLogin = () => {
+
+    }
+
 
 </script>
 <section class="container">
@@ -60,7 +74,7 @@
     </section>
     <InputBox id="email" name="Email" type="text" onInput={updateField}/>
     <InputBox id="password" name="Password" type="password" onInput={updateField}/>
-    <button id="submit" class="button green" on:click={trySubmit}>{name}</button>
+    <button id="submit" class="button green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
 </section>
 <ErrorMsg visible={errorVisible} message={errorMessage}/>
 <style>
