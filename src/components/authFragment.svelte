@@ -29,6 +29,14 @@
         errorVisible = visible;
     }
 
+    const signupWithGoogle = () => {
+        // TODO GOOGLE API
+    }
+
+    const loginWithGoogle = () => {
+        // TODO GOOGLE API
+    }
+
     const findEmptyField = () => {
         for(let key in fields){
             if(!fields[key] || fields[key] == ""){
@@ -51,27 +59,34 @@
             return false;
         }
         
-        // add to db
+        // TODO SERVER SIDE: add to db
     }
 
-    const areLoginDetailsCorrect = () => {
-
+    const areLoginDetailsCorrect = async () => {
+        const detailsCorrect = await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({ "status": 200 });
+            }, 1000);
+        });
+        return (await detailsCorrect);
     }
 
-    const tryLogin = () => {
+    const tryLogin = async () => {
         const emptyField = findEmptyField();
         if(emptyField){
             setError("Enter your "+emptyField, true);           
             return false;
         }        
 
-        const isCorrectDetails = areLoginDetailsCorrect();
-        if(!isCorrectDetails){
+        const isCorrectDetails = await areLoginDetailsCorrect();
+        if(isCorrectDetails == 404){
             setError("Incorrect email or password, check and try again", true);
             return false;
         }
-        
-        // login code
+
+        if(isCorrectDetails == 200){
+            // TODO SERVER SIDE: login code
+        }
     }
 
 
@@ -82,7 +97,7 @@
     {:else}
     <a href="/sign-up" class="link">Don't have an account? Sign up</a>
     {/if}
-    <button id="btn-google">
+    <button id="btn-google" on:click={name=="Sign up" ? signupWithGoogle : loginWithGoogle}>
         <img src="/img/google-icon-96x96.png" alt="google icon">
         {name} with google
     </button>
