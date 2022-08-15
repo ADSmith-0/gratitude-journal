@@ -29,7 +29,7 @@
         errorVisible = visible;
     }
 
-    const areFieldsEmpty = () => {
+    const findEmptyField = () => {
         for(let key in fields){
             if(!fields[key] || fields[key] == ""){
                 return key;
@@ -39,20 +39,39 @@
     }
 
     const trySignup = async () => {
-        const fieldsEmpty = areFieldsEmpty();
-        if(!fieldsEmpty){
-            const { matched } = await doesEmailExist(fields["email"]);
-            if(matched){
-                setError("Email already exists", true);
-                return false;
-            }
-        }else{
-            setError("Enter your "+fieldsEmpty, true);
+        const emptyField = findEmptyField();
+        if(emptyField){
+            setError("Enter your "+emptyField, true);
+            return false;
         }
+
+        const { matched } = await doesEmailExist(fields["email"]);
+        if(matched){
+            setError("Email already exists", true);
+            return false;
+        }
+        
+        // add to db
+    }
+
+    const areLoginDetailsCorrect = () => {
+
     }
 
     const tryLogin = () => {
+        const emptyField = findEmptyField();
+        if(emptyField){
+            setError("Enter your "+emptyField, true);           
+            return false;
+        }        
 
+        const isCorrectDetails = areLoginDetailsCorrect();
+        if(!isCorrectDetails){
+            setError("Incorrect email or password, check and try again", true);
+            return false;
+        }
+        
+        // login code
     }
 
 
