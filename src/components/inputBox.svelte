@@ -53,7 +53,7 @@
 
 <style>
     :root {
-        --y-coordinate: 0.65em;
+        --y-coordinate: 0.7em;
         --padding: 0.63em;
         --input-width: 75vw;
     }
@@ -62,8 +62,8 @@
         outline: none;
         border: 0.12em solid black;
         font-family: var(--accent-font);
-        font-size: var(--font-small);
-        height: 2em;
+        font-size: var(--font-x-small);
+        height: 1.65em;
         padding: var(--padding);
         width: var(--input-width);
     }
@@ -76,7 +76,7 @@
         left: 0.63em;
         font-weight: 400;
         font-family: var(--accent-font);
-        font-size: var(--font-normal);
+        font-size: var(--font-small);
         color: #666;
         transition: all 0.1s ease-in-out 0s;
         background-color: #fff;
@@ -94,9 +94,9 @@
     }
     img {
         position: absolute;
-        top: calc(var(--y-coordinate) + (var(--padding)/2));
+        top: 20%;
         left: calc(var(--input-width) - 1.35em);
-        height: 2.18em;
-        width: 2.18em;
+        height: 2em;
+        width: 2em;
     }
 </style>

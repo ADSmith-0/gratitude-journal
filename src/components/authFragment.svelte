@@ -106,7 +106,7 @@
         <p>or</p>
         <hr class="line">
     </section>
-    <InputBox id="email" name="Email" type="text" onInput={updateField}/>
+    <InputBox id="email" name="Email" type="text" onInput={updateField} validateAs="email"/>
     <InputBox id="password" name="Password" type="password" onInput={updateField}/>
     <button id="submit" class="button green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
 </section>

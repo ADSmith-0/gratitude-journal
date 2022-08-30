@@ -96,8 +96,8 @@
         color: var(--font-color);
     }
     img {
-        height: 2.18em;
-        width: 2.18em;
+        height: 2em;
+        width: 2em;
     }
     .selected {
         color: var(--pink);

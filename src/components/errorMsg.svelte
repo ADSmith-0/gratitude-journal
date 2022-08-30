@@ -8,11 +8,11 @@
 </section>
 <style>
     .container {
-        margin-top: 1em;
+        margin-top: 0.5em;
         opacity: 0;
         background-color: var(--red);
-        padding: 1em;
-        padding-left: 2.5em;
+        padding: 0.5em;
+        padding-left: 4em;
         display: flex;
         flex-direction: row;
         gap: 1.5em;
@@ -24,14 +24,13 @@
         opacity: 1;
     }
     img {
-        height: 2.4em;
-        width: 2.4em;
+        height: 2em;
+        width: 2em;
         flex: 1;
     }
     .container p {
-        /* color: white; */
         font-family: var(--accent-font);
-        /* text-align: center; */
-        flex: 20;
+        font-size: var(--font-small);
+        flex: 15;
     }
 </style>
