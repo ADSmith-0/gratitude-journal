@@ -5,7 +5,6 @@
 
     let items = [
         { name: "Add entry", link: "/add-entry", src: "/img/plus-black-icon-100x100.png", alt: "add entry icon"},
-        // { name: "Edit entry", link: "/edit-entry", src: "/img/pencil-black-icon-96x96.png", alt: "edit entry icon" },
         { name: "All entries", link: "/all-entries", src: "/img/list-black-icon-96x96.png", alt: "all entries icon" },
         { name: "Account", link: "/account", src: "/img/account-black-icon-96x96.png", alt: "account icon" }
     ];
