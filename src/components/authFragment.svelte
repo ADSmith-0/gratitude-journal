@@ -106,8 +106,8 @@
         <p>or</p>
         <hr class="line">
     </section>
-    <InputBox id="email" name="Email" type="text" onInput={updateField} validateAs="email"/>
-    <InputBox id="password" name="Password" type="password" onInput={updateField}/>
+    <InputBox id="email" name="Email" type="text" passValueBack={updateField} validateAs="email"/>
+    <InputBox id="password" name="Password" type="password" passValueBack={updateField}/>
     <button id="submit" class="button green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
 </section>
 <ErrorMsg visible={errorVisible} message={errorMessage}/>
@@ -115,25 +115,25 @@
     .container {
         display: flex;
         flex-direction: column;
-        gap: 1.5em;
+        gap: 1.75em;
         justify-content: space-evenly;
         align-items: center;
         margin-top: 1.5em;
     }
     #btn-google {
-        border: 0.19em solid var(--blue);
+        border: 0.15em solid var(--blue);
         border-radius: var(--radius);
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 1.125em;
         background: none;
-        padding: 0.7em 0.95em;
+        padding: 0.6em 0.8em;
         font-weight: 400;
     }
     #btn-google img{
-        height: 2.18em;
-        width: 2.18em;
+        height: 2em;
+        width: 2em;
     }
     #or-section {
         align-self: center;
@@ -157,5 +157,6 @@
     #submit {
         border: none;
         cursor: pointer;
+        margin-top: 2em;
     }
 </style>

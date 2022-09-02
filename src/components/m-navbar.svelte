@@ -1,12 +1,11 @@
 <script>
     import { page } from '$app/stores';
-    import Navbar from './navbar.svelte';
 
     $: selectedItem = $page.url.pathname;
 
     let items = [
         { name: "Add entry", link: "/add-entry", src: "/img/plus-black-icon-100x100.png", alt: "add entry icon"},
-        { name: "Edit entry", link: "/edit-entry", src: "/img/pencil-black-icon-96x96.png", alt: "edit entry icon" },
+        // { name: "Edit entry", link: "/edit-entry", src: "/img/pencil-black-icon-96x96.png", alt: "edit entry icon" },
         { name: "All entries", link: "/all-entries", src: "/img/list-black-icon-96x96.png", alt: "all entries icon" },
         { name: "Account", link: "/account", src: "/img/account-black-icon-96x96.png", alt: "account icon" }
     ];
@@ -65,7 +64,7 @@
     }
     #settings {
         display: flex;
-        font-size: var(--font-x-small);
+        font-size: var(--font-size-default);
     }
     a {
         text-decoration: none;
@@ -82,11 +81,11 @@
     }
     nav {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         place-items: center;
     }
     nav a {
-        font-size: var(--font-x-small);
+        font-size: var(--font-size-default);
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;

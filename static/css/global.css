@@ -11,8 +11,9 @@
     --title-m-size: 2em;
     --font-large: 1.75em;
     --font-normal: 1.5em;
-    --font-small: 1.125em;
-    --font-x-small: 1em;
+    --font-small: 1.25em;
+    --font-x-small: 1.125em;
+    --font-size-default: 1em;
     --title-color: #fff;
     --font-color: #000;
     --radius: 0.31em;
@@ -39,7 +40,7 @@ button {
     border: none;
     cursor: pointer;
     font-weight: 400;
-    font-size: var(--font-x-small);
+    font-size: var(--font-size-default);
     color: #212121;
     padding: 0.63em 1.56em;
     box-shadow: 0 0.125em 0.25em #0002;

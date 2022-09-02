@@ -2,21 +2,18 @@
     export let id;
     export let name;
     export let type;
-    export let onInput; //Function
+    export let passValueBack; //Function
     export let validateAs = undefined;
+
+    const regexPatterns = {
+        "email": /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        "text": /[a-zA-Z]+/,
+        "number": /\d+/
+    }
 
     const validateInput = value => {
         const validationCriteria = validateAs?.toLowerCase() || "text";
-        switch(validationCriteria){
-            case "email":
-                const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-                return emailRegex.test(value);
-            case "text":
-                return (typeof value == "string");
-            default:
-                console.error("cannot find: ", validationCriteria);
-                break;
-        }
+        return regexPatterns[validationCriteria].test(value);
     }
 
     let style = "";
@@ -26,7 +23,7 @@
         style = (value.length !== 0) ? "active" : "";
 
         e.target.newValue = (validateInput(value)) ? value : undefined;
-        onInput(e);
+        passValueBack(e);
     }
     const scrollToStart = e => e.target.scrollTo(0,0);
     const focusInput = e => {
@@ -53,7 +50,7 @@
 
 <style>
     :root {
-        --y-coordinate: 0.7em;
+        --y-coordinate: 0.6em;
         --padding: 0.63em;
         --input-width: 75vw;
     }
@@ -62,7 +59,7 @@
         outline: none;
         border: 0.12em solid black;
         font-family: var(--accent-font);
-        font-size: var(--font-x-small);
+        font-size: var(--font-size-default);
         height: 1.65em;
         padding: var(--padding);
         width: var(--input-width);
@@ -89,7 +86,7 @@
     input:focus ~ p.placeholder,
     .active p.placeholder{
         color: var(--blue);
-        font-size: var(--font-x-small);
+        font-size: var(--font-size-default);
         transform: translateY(calc(-1*var(--y-coordinate) - 0.55em));
     }
     img {

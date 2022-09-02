@@ -30,6 +30,6 @@
     }
     p, em {
         font-family: var(--accent-font);
-        font-size: var(--font-x-small);
+        font-size: var(--font-size-default);
     }
 </style>
