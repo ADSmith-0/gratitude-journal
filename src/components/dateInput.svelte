@@ -1,13 +1,31 @@
 <script>
-    export let passDateBack = undefined;
-    let dateSelected = new Date().toISOString().split("T")[0];
-    $: (passDateBack && passDateBack(dateSelected));
+    import DateSelector from './calendarScreen.svelte';
+
+    let currentDate = new Date().toLocaleDateString();
+    export let passDateBack = () => {};
+
+    $: passDateBack(currentDate);
+
+    let dateSelectorOpen = false;
+    const openDateSelector = () => dateSelectorOpen = true;
+    const closeDateSelector = () => dateSelectorOpen = false;
 </script>
+{#if dateSelectorOpen}
+    <DateSelector closeDateSelector={closeDateSelector}/>
+{/if}
 <div class="date-picker-wrapper">
     <div class="date-picker-component">
-        <p>Select a date:</p>
+        <p>Date:</p>
         <section class="date-picker-container">
-            <input class="date-picker" type="date" bind:value={dateSelected} aria-label="date picker" placeholder="dd/mm/yyyy">
+            <button class="date-picker" on:click={openDateSelector}>
+                {currentDate}
+                <img 
+                    src="./img/calendar-icon-black-96x96.png" 
+                    alt="calendar icon"
+                    height="35"
+                    width="35"
+                >
+            </button>
         </section>
     </div>
 </div>
@@ -30,29 +48,24 @@
         position: relative;
         width: 15em;
     }
-    .date-picker-container:after {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 25%;
-        right: 0.25em;
-        background-image: url("./img/calendar-icon-black-96x96.png");
-        background-size: contain;
-        background-color: white;
-        background-repeat: no-repeat;
-        height: 1.5em;
-        width: 1.5em;
-        padding-right: 0.5em;
-    }
     .date-picker {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         height: 2.7em;
         padding-left: 1em;
+        padding-right: 0.5em;
         font-family: var(--accent-font);
         font-size: var(--font-size-normal);
         border: 0.15em solid var(--black-translucent);
         border-radius: var(--radius);
         width: 100%;
         background: #fff;
+    }
+    .date-picker img {
+        height: 1.5em;
+        width: 1.5em;
     }
     .date-picker:focus {
         outline: none;

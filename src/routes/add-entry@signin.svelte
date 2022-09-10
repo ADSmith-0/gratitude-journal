@@ -1,5 +1,5 @@
 <script>
-    import DatePicker from '../components/datePicker.svelte';
+    import DateInput from '../components/dateInput.svelte';
     let date = "";
     const setDate = newDate => date = newDate;
     const getEntryFromDate = date => {
@@ -7,7 +7,7 @@
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 const val = Math.floor(Math.random() * 2);
-                resolve(val ? true : false);
+                resolve(val);
             }, 500);
         })
     }
@@ -15,14 +15,14 @@
 
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    $: day = days[new Date(date).getUTCDay()];
+    $: day = days[date];
 </script>
 <div class="container">
-    <DatePicker passDateBack={setDate}/>
+    <DateInput passDateBack={setDate} currentDate={date}/>
 </div>
 <div class="main-wrapper">
     <main>
-        {#if date === (new Date().toISOString().split("T")[0])}
+        {#if date === (new Date().toLocaleDateString())}
             <p class="entry-title">What are you grateful for today?</p>
         {:else}
             <p class="entry-title">What were you grateful for on {day}?</p>
@@ -36,7 +36,7 @@
                 <button class="button blue">Edit</button>
             {:else}
                 <textarea class="entry-text" placeholder="Today I'm grateful for..."></textarea>
-                <button class="button blue">Add</button>
+                <button class="button green">Add</button>
             {/if}        
         {/await}
     </main>

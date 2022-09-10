@@ -1,15 +1,16 @@
 <script>
     export let disableWithClick = false;
+    export let backgroundColor = "#0003";
     const disable = e => {
         // disableWithClick();
     }
 </script>
 {#if disableWithClick}
-    <div class="blocker" on:click={disable}>
+    <div class="blocker" style="background-color:{backgroundColor};" on:click={disable}>
         <slot></slot>
     </div>
 {:else}
-    <div class="blocker">
+    <div class="blocker" style="background-color:{backgroundColor};">
         <slot></slot>
     </div>
 {/if}
@@ -18,7 +19,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 95vh;
+        height: calc(100vh - 4em);
         width: 100vw;
         overflow: hidden;
         background-color: #0003;

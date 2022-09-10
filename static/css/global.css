@@ -1,9 +1,13 @@
 :root {
     --pink: #EA54A4;
+    /* --pink: #E8479D; */
     --blue: #54A4EA;
-    --green: #92DD3C;/*#A4EA54;*/
+    /* --blue: #479DE8; */
+    --green: #A4EA54;
+    /* --green: #9DE847; */
     --red: #EA5459;
     --grey: #f5f5f5;
+    --dark-grey: #999;
     --black-translucent: #0003;
     --main-font: 'Poppins', sans-serif;
     --accent-font: 'Nunito', sans-serif;
@@ -16,6 +20,7 @@
     --font-size-default: 1em;
     --title-color: #fff;
     --font-color: #000;
+    --font-color-alt: #1d1d1d;
     --radius: 0.31em;
 }
 
@@ -34,16 +39,15 @@ button {
     font-size: var(--font-small);
     align-items: center;
 }
-
 .button {
     border-radius: var(--radius);
     border: none;
     cursor: pointer;
     font-weight: 400;
     font-size: var(--font-size-default);
-    color: #212121;
+    color: var(--font-color);
     padding: 0.63em 1.56em;
-    box-shadow: 0 0.125em 0.25em #0002;
+    box-shadow: 0 0.125em 0.25em var(--black-translucent);
 }
 
 .pink {
@@ -56,4 +60,8 @@ button {
 
 .green {
     background: var(--green);
+}
+
+.grey {
+    background: var(--grey);
 }
