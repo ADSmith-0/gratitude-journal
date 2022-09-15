@@ -1,6 +1,7 @@
 <script>
     import DateInput from '../components/dateInput.svelte';
-    let date = "";
+    let date = new Date();
+    $: readableDate = date.toLocaleDateString();
     const setDate = newDate => date = newDate;
     const getEntryFromDate = date => {
         // TODO: query backend for data
@@ -15,14 +16,14 @@
 
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    $: day = days[date];
+    $: day = days[date.getDay()];
 </script>
 <div class="container">
-    <DateInput passDateBack={setDate} currentDate={date}/>
+    <DateInput passDateBack={setDate}/>
 </div>
 <div class="main-wrapper">
     <main>
-        {#if date === (new Date().toLocaleDateString())}
+        {#if readableDate === (new Date().toLocaleDateString())}
             <p class="entry-title">What are you grateful for today?</p>
         {:else}
             <p class="entry-title">What were you grateful for on {day}?</p>

@@ -11,26 +11,26 @@ import { modulo } from "./util.svelte";
         https://www.geeksforgeeks.org/how-to-get-negative-result-using-modulo-operator-in-javascript/
     */
     const gregorianFromDay = day => modulo(day-1, 7);
-    const getDaysArray = (currentMonth, currentYear) => {
+    const getDatesArray = (currentMonth, currentYear) => {
         const lastDate = getLastDateOfMonth(currentMonth, currentYear);
         const firstDay = gregorianFromDay(getFirstDayOfMonth(currentMonth, currentYear));
 
-        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        const dates = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
         // add buffer if first day of month isn't monday
         for(let buffer = 0; buffer < firstDay; buffer++){
-            days.push("");
+            dates.push("");
         }
 
         for(let date = 1; date <= lastDate; date++){
-            days.push(date);
+            dates.push(date);
         }
 
-        while(days.length % 7 !== 0){
-            days.push("");
+        while(dates.length % 7 !== 0){
+            dates.push("");
         }
 
-        return days;
+        return dates;
     }
     
-    export { getDaysArray };
+    export { getDatesArray };
 </script>

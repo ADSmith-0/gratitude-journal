@@ -19,13 +19,14 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: calc(100vh - 4em);
+        height: calc(95vh - 4em);
         width: 100vw;
         overflow: hidden;
         background-color: #0003;
         z-index: 10;
         display: flex;
         justify-content: center;
-        align-items: center;
+        padding-top: 5em;
+        align-items: flex-start;
     }
 </style>
