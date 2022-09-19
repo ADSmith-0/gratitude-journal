@@ -3,6 +3,7 @@
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     export let passMonthBack = () => {};
     export let passYearBack = () => {};
+    export let allowFuture = false;
     let currentDate = new Date();
     export let month = currentDate.getMonth();
     export let year = currentDate.getFullYear();
@@ -29,7 +30,7 @@
     <p class="year">{year}</p>
     <button on:click={prevMonth}>&lt;</button>
     <p class="month">{monthName}</p>
-    <button on:click={nextMonth}>&gt;</button>
+    <button on:click={nextMonth} disabled={!allowFuture && (new Date().getMonth() === month)}>&gt;</button>
 </section>
 <style>
     .year {
@@ -56,5 +57,8 @@
         height: 2em;
         width: 2em;
         cursor: pointer;
+    }
+    .month-picker button:disabled {
+        opacity: 0;
     }
 </style>

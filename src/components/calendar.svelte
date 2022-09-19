@@ -2,6 +2,7 @@
     import { getDatesArray } from '../helpers/calendarHelper.svelte';
     import CalendarDate from './calendarDate.svelte';
     export let passBackSelectedDate = () => {};
+    export let allowFuture = false;
     let currentDate = new Date();
     export let month = currentDate.getMonth();
     export let year = currentDate.getFullYear();
@@ -21,6 +22,7 @@
             date={date}
             setSelected={setSelected}
             isSelected={selectedDate === date}
+            disabled={!allowFuture && (new Date(year, month, date).valueOf()) > currentDate.valueOf()}
         />
     {/each}
 </section>
