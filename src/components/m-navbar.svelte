@@ -52,7 +52,7 @@
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         place-items: center;
-        min-height: 4em;
+        height: 4em;
         z-index: 99;
     }
     #title {
