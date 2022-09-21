@@ -8,6 +8,7 @@
     --red: #EA5459;
     --grey: #f5f5f5;
     --dark-grey: #999;
+    --darker-grey: #585858;
     --black-translucent: #0003;
     --main-font: 'Poppins', sans-serif;
     --accent-font: 'Nunito', sans-serif;
@@ -22,6 +23,8 @@
     --font-color: #000;
     --font-color-alt: #1d1d1d;
     --radius: 0.31em;
+    --radius-less: 0.15em;
+    --box-shadow: 0 0.125em 0.25em var(--black-translucent);
 }
 
 * {
@@ -47,7 +50,18 @@ button {
     font-size: var(--font-size-default);
     color: var(--font-color);
     padding: 0.63em 1.56em;
-    box-shadow: 0 0.125em 0.25em var(--black-translucent);
+    box-shadow: var(--box-shadow);
+}
+
+.button-small {
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: var(--font-size-default);
+    color: var(--font-color);
+    padding: 0.5em 0.7em;
+    box-shadow: none;
 }
 
 .pink {
@@ -64,4 +78,8 @@ button {
 
 .grey {
     background: var(--grey);
+}
+
+mark {
+    font-family: var(--accent-font);
 }

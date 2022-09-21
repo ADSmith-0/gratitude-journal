@@ -1,5 +1,6 @@
 <script>
     import DateInput from '../components/dateInput.svelte';
+    import { getDayStrFromNum } from '../helpers/util.svelte';
     let date = new Date();
     $: readableDate = date.toLocaleDateString();
     const setDate = newDate => date = newDate;
@@ -14,9 +15,7 @@
     }
     $: entry = date && getEntryFromDate(date);
 
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-    $: day = days[date.getDay()];
+    $: day = getDayStrFromNum(date.getDay());
 </script>
 <div class="container">
     <DateInput passDateBack={setDate}/>
