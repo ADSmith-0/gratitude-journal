@@ -2,4 +2,4 @@
 
 2. Add select next empty date button to the add entry screen
 
-3. Make search function case-insensitive
+3. ~~Make search function case-insensitive~~

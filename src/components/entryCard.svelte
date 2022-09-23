@@ -1,14 +1,14 @@
 <script>
     import { getDayStrFromNum } from '../helpers/util.svelte';
     export let entry = {};
-    export let searchTerm = "good";
+    export let searchTerm = "";
     const highlightSearchTerm = text => {
-        const highlighted = `<mark>${searchTerm}</mark>`;
-        const search = new RegExp(searchTerm, 'i');
-        return text.replace(search, highlighted);
+        let newText = text.replace(new RegExp('.(?='+searchTerm+')', 'ig'), ' <mark>');
+        newText = newText.replace(new RegExp('(?<='+searchTerm+').', 'ig'), '</mark> ');
+        return newText;
     }
     const { date: dateStr, text } = entry;
-    $: highlightedText = highlightSearchTerm(text);
+    $: highlightedText = searchTerm ? highlightSearchTerm(text) : text;
     const getDayFromDateStr = dateStr => {
         const [date, month, year] = dateStr.split("/");
         return (getDayStrFromNum(new Date(year, month-1, date).getDay()));
