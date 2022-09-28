@@ -23,17 +23,34 @@
     .wrapper {
         display: flex;
         flex-direction: column;
+        gap: 1em;
         align-items: stretch;
         overflow-y: scroll;
+        font-size: var(--font-size-default);
+        height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height)));
+        background: var(--grey);
+        padding: 2em;
+        box-sizing: border-box;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .wrapper::-webkit-scrollbar {
+        display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .wrapper {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
     .wrapper section,
     .wrapper > button {
         padding: 0.9em 1.5em;
-        border: 0 solid var(--black-translucent);
-        border-bottom-width: 0.01em;
-        border-radius: 0;
+        /* border: 0 solid var(--black-translucent); */
+        /* border-bottom-width: 0.01em;
+        border-radius: 0; */
+        border-radius: var(--radius-less);
         background-color: #fff;
-        font-size: var(--font-small);
+        font-size: var(--font-x-small);
+        box-shadow: var(--box-shadow);
     }
     .wrapper section p {
         font-size: var(--font-size-default);

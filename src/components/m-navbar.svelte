@@ -52,7 +52,7 @@
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         place-items: center;
-        height: 4em;
+        height: var(--top-bar-height);
         z-index: 99;
     }
     #title {
@@ -72,16 +72,22 @@
         display: none;
         position: absolute;
         bottom: 0;
-        padding: 1.6em 0 0.94em 0;
+        flex-direction: row;
+        justify-content: stretch;
+        align-items: center;
+        padding: 0.5em 0;
         width: 100%;
         box-shadow: 0 -0.06em 0.125em #0004;
         background-color: #fff;
         z-index: 99;
+        height: var(--bottom-bar-height);
+        box-sizing: border-box;
     }
     nav {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         place-items: center;
+        width: 100%;
     }
     nav a {
         font-size: var(--font-size-default);
@@ -101,6 +107,6 @@
         color: var(--pink);
     }
     #bottom.visible {
-        display: block;
+        display: flex;
     }
 </style>
