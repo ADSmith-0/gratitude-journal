@@ -23,7 +23,7 @@
 <section class="searchbar-wrapper">
     <Searchbar passSearchTermBack={setSearchTerm}/>
 </section>
-<section class="entries">
+<section class="entries hide-scrollbar">
     {#await entriesPromise}
         <Loading />
     {:then entries}
@@ -36,7 +36,9 @@
     .entries {
         background-color: var(--grey);
         padding: 1em;
-        height: 62vh;
+        height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height) + 4.5em));
         overflow-y: scroll;
+        box-sizing: border-box;
+        padding-bottom: 3vh;
     }
 </style>
