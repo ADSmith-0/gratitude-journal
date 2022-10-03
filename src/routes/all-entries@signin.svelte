@@ -36,7 +36,8 @@
     .entries {
         background-color: var(--grey);
         padding: 1em;
-        height: 62vh;
+        height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height) + 4.5em));
         overflow-y: scroll;
+        padding-bottom: 5em;
     }
 </style>
