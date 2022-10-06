@@ -47,7 +47,7 @@
     }
     .main-wrapper {
         background-color: var(--grey);
-        height: 60vh;
+        height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height) + 7.5em));
     }
     main {
         display: flex;

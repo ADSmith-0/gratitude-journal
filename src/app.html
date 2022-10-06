@@ -9,8 +9,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&family=Poppins:wght@200;400&display=swap"
             rel="stylesheet">
         <link rel="stylesheet" href="%sveltekit.assets%/css/global.css">
+        <link rel="apple-touch-icon" href="/icons/192.png">
+        <meta name="theme-color" content="#ea54a4">
         <link rel="manifest" href="/app.webmanifest">
 		%sveltekit.head%
+        <script>
+            // if('serviceWorker' in navigator){
+            //     navigator.serviceWorker.register('./serviceWorker.js');
+            // }
+        </script>
 	</head>
 	<body>
 		<div>%sveltekit.body%</div>
