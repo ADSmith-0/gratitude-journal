@@ -1,3 +1,36 @@
 {
-    "name": "Gratitude Journal"
+    "name": "Gratitude Journal",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#ea54a4",
+    "background_color": "#fff",
+    "icons": [
+        {
+            "src": "icons/192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "icons/384.png",
+            "type": "image/png",
+            "sizes": "384x384"
+        },
+        {
+            "src": "icons/512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "icons/512.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/1024.png",
+            "type": "image/png",
+            "sizes": "1024x1024"
+        }
+    ],
+    "description": "A Gratitude Journal to record what you are grateful for"
 }

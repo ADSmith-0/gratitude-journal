@@ -8,8 +8,14 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: adapter()
-	}
+		adapter: adapter(),
+        files: {
+            serviceWorker: "src/service-worker"
+        }
+	},
+    serviceWorker: {
+        register: true
+    }
 };
 
 export default config;
