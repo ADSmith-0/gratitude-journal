@@ -10,11 +10,13 @@
 
     let userAuthorised = isUserAuthorised();
 </script>
-<Navbar/>
-{#if userAuthorised}
-<slot></slot>
-{:else}
-<Blocker>
-    <SigninPopup type="popup"/>
-</Blocker>
-{/if}
+<Navbar>
+    {#if userAuthorised}
+        <slot></slot>
+    {:else}
+        <Blocker>
+            <SigninPopup type="popup"/>
+        </Blocker>
+    {/if}
+</Navbar>
+
