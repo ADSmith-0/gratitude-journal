@@ -1,5 +1,8 @@
 <script>
     import { page } from '$app/stores';
+    import { browser } from '$app/env';
+
+    $: if(browser) document.querySelector('html').classList.add('hide-scrollbar');
 
     $: selectedItem = $page.url.pathname;
 
