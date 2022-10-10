@@ -6,7 +6,11 @@
 </script>
 <svelte:window bind:innerWidth={windowWidth}></svelte:window>
 {#if windowWidth < 780}
-    <M_Navbar/>
+    <M_Navbar>
+        <slot></slot>
+    </M_Navbar>
 { :else }
-    <O_Navbar/>
+    <O_Navbar>
+        <slot></slot>
+    </O_Navbar>
 {/if}

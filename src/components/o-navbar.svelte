@@ -7,6 +7,7 @@
         <a href="/account">Account</a>
     </nav>
 </section>
+<slot></slot>
 <style>
     @media(min-width: 780px){
         section {

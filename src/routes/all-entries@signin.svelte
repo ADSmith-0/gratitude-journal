@@ -33,12 +33,12 @@
     {/await}
 </section>
 <style>
+    .searchbar-wrapper {
+        background-color: #fff;
+    }
     .entries {
         background-color: var(--grey);
         padding: 1em;
-        height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height) + 4.5em));
-        overflow-y: scroll;
         box-sizing: border-box;
-        padding-bottom: 3vh;
     }
 </style>

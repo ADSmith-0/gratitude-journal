@@ -44,10 +44,10 @@
 <style>
     .container {
         border: 0.01em solid var(--grey);
+        background-color: #fff;
     }
     .main-wrapper {
         background-color: var(--grey);
-        height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height) + 7.5em));
     }
     main {
         display: flex;

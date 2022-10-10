@@ -34,6 +34,9 @@
         <img src="/img/settings-icon-40x40.png" alt="settings">
     </a>
 </section>
+<div class="content-wrapper hide-scrollbar">
+    <slot></slot>
+</div>
 <section id="bottom" class="{navbarVisible ? 'visible' : ''}">
     <nav>
         {#each items as {name, link, src, alt}}
@@ -46,7 +49,7 @@
 </section>
 <style>
     #top {
-        position: relative;
+        position: sticky;
         top: 0;
         background-color: var(--pink);
         display: grid;
@@ -65,12 +68,18 @@
         display: flex;
         font-size: var(--font-size-default);
     }
+    .content-wrapper {
+        padding-bottom: 6em;
+        overflow-y: scroll;
+        min-height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height)));
+        background-color: var(--grey);
+    }
     a {
         text-decoration: none;
     }
     #bottom {
         display: none;
-        position: absolute;
+        position: fixed;
         bottom: 0;
         flex-direction: row;
         justify-content: stretch;
