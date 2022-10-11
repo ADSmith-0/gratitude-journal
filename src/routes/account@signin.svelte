@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <section>
+    <section class="card">
         <p>Account details</p>
         <div class="detail">
             <p>Joined</p>
@@ -14,10 +14,10 @@
             <p>adam00199382818@gmail.com</p>
         </div>
     </section>
-    <button class="button-small">Change Email</button>
-    <button class="button-small">Change password</button>
-    <button id="logout" class="button-small">Logout</button>
-    <button id="delete-btn" class="button-small">Delete Account</button>
+    <button class="button-small card">Change Email</button>
+    <button class="button-small card">Change password</button>
+    <button id="logout" class="button-small card">Logout</button>
+    <button id="delete-btn" class="button-small card">Delete Account</button>
 </div>
 <style>
     .wrapper {
@@ -33,13 +33,7 @@
     .wrapper section,
     .wrapper > button {
         padding: 0.9em 1.5em;
-        /* border: 0 solid var(--black-translucent); */
-        /* border-bottom-width: 0.01em;
-        border-radius: 0; */
-        border-radius: var(--radius-less);
-        background-color: #fff;
         font-size: var(--font-x-small);
-        box-shadow: var(--box-shadow);
     }
     .wrapper section p {
         font-size: var(--font-size-default);

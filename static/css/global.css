@@ -66,6 +66,13 @@ button {
     box-shadow: none;
 }
 
+.card {
+    padding: 1em;
+    border-radius: var(--radius-less);
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+}
+
 .pink {
     background-color: var(--pink);
 }

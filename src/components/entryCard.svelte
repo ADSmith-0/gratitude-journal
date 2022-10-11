@@ -24,11 +24,6 @@
 </section>
 <style>
     .card {
-        background-color: #fff;
-        padding: 1em;
-        gap: 1em;
-        border-radius: var(--radius);
-        box-shadow: var(--box-shadow);
         margin-bottom: 1.5em;
     }
     .info {

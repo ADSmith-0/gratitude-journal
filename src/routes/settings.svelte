@@ -4,14 +4,14 @@
     let phoneNotifications = false;
 </script>
 <div class="wrapper">
-    <section id="theme">
+    <section id="theme" class="card">
         <p>Theme</p>
         <select bind:value={theme}>
             <option value="light">Light theme</option>
             <option value="dark">Dark theme</option>
         </select>
     </section>
-    <section id="notifications">
+    <section id="notifications" class="card">
         <p>Notifications</p>
         <label>
             <input type="checkbox" bind:checked={emailNotifications}>
@@ -30,15 +30,19 @@
     .wrapper {
         display: flex;
         flex-direction: column;
+        padding-top: 1em;
+        gap: 1em;
         align-items: stretch;
-    }
-    section {
-        border: 0 solid var(--black-translucent);
-        padding: 1em;
-        border-bottom-width: 0.05em;
+        width: 80vw;
+        margin: auto;
     }
     section * {
         font-family: var(--accent-font);
+    }
+    section p {
+        font-size: var(--font-small);
+        border: 0 solid var(--grey);
+        border-bottom-width: 0.1em;
     }
     #theme option {
         font-family: var(--accent-font);
