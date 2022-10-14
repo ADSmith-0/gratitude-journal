@@ -1,4 +1,5 @@
 <script>
+    import NotificationComponent from '../components/notificationComponent.svelte';
     let theme = "";
     let emailNotifications = false;
     let phoneNotifications = false;
@@ -13,27 +14,17 @@
     </section>
     <section id="notifications" class="card">
         <p>Notifications</p>
-        <label>
-            <input type="checkbox" bind:checked={emailNotifications}>
-            Email reminders
-        </label>
-        {#if emailNotifications }
-            <input type="text" placeholder="time">
-        {/if}
-        <label>
-            <input type="checkbox" bind:checked={phoneNotifications}>
-            Phone notifications
-        </label>
+        <NotificationComponent label="Email notification"/>
+        <NotificationComponent label="Phone notification"/>
     </section>
 </div>
 <style>
     .wrapper {
         display: flex;
         flex-direction: column;
-        padding-top: 1em;
+        padding: 1em; 
         gap: 1em;
         align-items: stretch;
-        width: 80vw;
         margin: auto;
     }
     section * {
@@ -41,8 +32,10 @@
     }
     section p {
         font-size: var(--font-small);
-        border: 0 solid var(--grey);
-        border-bottom-width: 0.1em;
+        border: 0 solid var(--black-translucent);
+        border-bottom-width: 0.05em;
+        padding-bottom: 0.5em;
+        margin-bottom: 0.5em;
     }
     #theme option {
         font-family: var(--accent-font);
