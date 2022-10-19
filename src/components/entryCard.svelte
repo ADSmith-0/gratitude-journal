@@ -2,17 +2,24 @@
     import { getDayStrFromNum } from '../helpers/util.svelte';
     export let entry = {};
     export let searchTerm = "";
+
     const highlightSearchTerm = text => {
-        let newText = text.replace(new RegExp('.(?='+searchTerm+')', 'ig'), ' <mark>');
+        // Pad start and end of text to allow for finding search terms at start and end of text
+        let newText = ` ${text} `;
+        newText = newText.replace(new RegExp('.(?='+searchTerm+')', 'ig'), ' <mark>');
         newText = newText.replace(new RegExp('(?<='+searchTerm+').', 'ig'), '</mark> ');
-        return newText;
+        // trim the spaces if unused
+        return newText.trim();
     }
     const { date: dateStr, text } = entry;
+
     $: highlightedText = searchTerm ? highlightSearchTerm(text) : text;
+
     const getDayFromDateStr = dateStr => {
         const [date, month, year] = dateStr.split("/");
         return (getDayStrFromNum(new Date(year, month-1, date).getDay()));
     }
+
     $: day = getDayFromDateStr(dateStr);
 </script>
 <section class="card">

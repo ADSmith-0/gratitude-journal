@@ -19,7 +19,6 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: calc(95vh - 4em);
         width: 100vw;
         overflow: hidden;
         background-color: #0003;

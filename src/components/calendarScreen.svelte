@@ -1,7 +1,6 @@
 <script>
     export let passDateBack = () => {};
     export let closeDateSelector = () => {};
-    import Blocker from './blocker.svelte';
     import MonthPicker from './monthPicker.svelte';
     import Calendar from './calendar.svelte';
     
@@ -17,7 +16,7 @@
         closeDateSelector();
     }
 </script>
-<Blocker backgroundColor="#fff">
+<div class="wrapper">
     <section class="container">
         <MonthPicker month={selectedMonth} year={selectedYear} passMonthBack={setMonth} passYearBack={setYear}/>
         <Calendar month={selectedMonth} year={selectedYear} passBackSelectedDate={setSelectedDate}/>
@@ -30,9 +29,19 @@
             <button class="button" on:click={closeDateSelector}>Cancel</button>
         </section>
     </section>
-</Blocker>
+</div>
 
 <style>
+    .wrapper {
+        position: absolute;
+        padding-top: 1em;
+        z-index: 10;
+        top: var(--top-bar-height);
+        left: 0;
+        background-color: #fff;
+        width: 100vw;
+        height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height)));
+    }
     .container {
         display: flex;
         flex-direction: column;
@@ -64,5 +73,6 @@
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
+        font-size: var(--font-size-default);
     }
 </style>

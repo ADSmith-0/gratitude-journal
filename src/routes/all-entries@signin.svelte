@@ -33,12 +33,20 @@
     {/await}
 </section>
 <style>
+    :root {
+        --searchbar-height: 4.5em;
+    }
     .searchbar-wrapper {
         background-color: #fff;
+        position: fixed;
+        top: var(--top-bar-height);
+        height: var(--searchbar-height);
+        width: 100%;
     }
     .entries {
         background-color: var(--grey);
         padding: 1em;
+        padding-top: calc(1em + var(--searchbar-height));
         box-sizing: border-box;
     }
 </style>
