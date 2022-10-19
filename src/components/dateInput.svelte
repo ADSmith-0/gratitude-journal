@@ -43,6 +43,9 @@
         margin-top: 1em;
         padding-bottom: 1.5em;
     }
+    .date-picker-component > p {
+        font-size: var(--font-small);
+    }
     .date-picker-container {
         display: flex;
         flex-direction: row;

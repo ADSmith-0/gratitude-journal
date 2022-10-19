@@ -1,6 +1,6 @@
 <script>
     import NotificationComponent from '../components/notificationComponent.svelte';
-    let theme = "";
+    let theme = "light";
     let emailNotifications = false;
     let phoneNotifications = false;
 </script>
