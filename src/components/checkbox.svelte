@@ -16,6 +16,7 @@
     }
     label {
         font-family: var(--accent-font);
+        font-size: var(--font-x-small);
     }
     label::before {
         content: "";
@@ -28,6 +29,7 @@
         border: 0.15rem solid var(--darker-grey);
         border-radius: var(--radius-less);
         box-sizing: border-box;
+        margin-right: 0.15em;
     }
     label.checked::before {
         border-color: var(--green);

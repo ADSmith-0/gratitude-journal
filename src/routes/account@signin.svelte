@@ -11,7 +11,7 @@
         </div>
         <div class="detail">
             <p>Email</p>
-            <p>adam00199382818@gmail.com</p>
+            <p class="email-address">adam00199382818@gmail.com</p>
         </div>
     </section>
     <button class="button-small card">Change Email</button>
@@ -30,9 +30,15 @@
         padding: 2em;
         box-sizing: border-box;
     }
+    .email-address {
+        overflow-wrap: break-word;
+    }
     .wrapper section,
     .wrapper > button {
         padding: 0.9em 1.5em;
+        font-size: var(--font-x-small);
+    }
+    .wrapper section {
         font-size: var(--font-x-small);
     }
     .wrapper section p {
