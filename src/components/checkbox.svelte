@@ -1,12 +1,14 @@
 <script>
+    export let key = "";
     export let label = "";
-    export let checked = false;
+    export let checked = (localStorage.getItem(key) === "true");
     export let passCheckedBack = () => {};
     $: passCheckedBack(checked);
+    $: localStorage.setItem(key, checked);
 </script>
 <div>
     <label class="{checked ? 'checked' : ''}">
-        <input id="checkbox" type="checkbox" bind:checked={checked}>
+        <input type="checkbox" bind:checked={checked}>
         {label}
     </label>
 </div>

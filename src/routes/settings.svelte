@@ -1,21 +1,26 @@
 <script>
     import NotificationComponent from '../components/notificationComponent.svelte';
-    let theme = "light";
+    let theme = localStorage.getItem("theme") || "light";
+    $: localStorage.setItem("theme", theme);
     let emailNotifications = false;
     let phoneNotifications = false;
 </script>
 <div class="wrapper">
     <section class="theme card">
-        <p>Theme</p>
-        <select bind:value={theme}>
-            <option value="light">Light theme</option>
-            <option value="dark">Dark theme</option>
-        </select>
+        <p class="card-header">Theme</p>
+        <label>
+            <input type="radio" bind:group={theme} name="theme" value="light">
+            Light Theme
+        </label>
+        <label>
+            <input type="radio" bind:group={theme} name="theme" value="dark">
+            Dark Theme
+        </label>
     </section>
     <section class="notifications card">
         <p class="card-header">Notifications</p>
-        <NotificationComponent label="Email notification"/>
-        <NotificationComponent label="Phone notification"/>
+        <NotificationComponent key="email-notification" label="Email notification"/>
+        <NotificationComponent key="phone-notification" label="Phone notification"/>
     </section>
     <button class="delete-data button">Delete all local data</button>
 </div>
@@ -41,11 +46,10 @@
         font-size: var(--font-normal);
         margin-bottom: 1em;
     }
-    .theme option {
-        font-family: var(--accent-font);
-    }
-    .theme select {
+    .theme label {
+        display: block;
         font-size: var(--font-x-small);
+        margin-bottom: 1em;
     }
     .notifications {
         display: flex;
