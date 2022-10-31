@@ -8,14 +8,21 @@
         // TODO: query backend for data
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                const val = Math.floor(Math.random() * 2);
-                resolve(val);
+                
+                resolve(false);
             }, 500);
         })
     }
     $: entry = date && getEntryFromDate(date);
 
     $: day = getDayStrFromNum(date.getDay());
+
+    const addEntry = () => {
+
+    }
+    const editEntry = () => {
+        
+    }
 </script>
 <div class="container">
     <DateInput passDateBack={setDate}/>
