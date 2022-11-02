@@ -1,27 +1,49 @@
 <script>
+    import { db } from '../db';
+    import { browser } from '$app/env';
+    import { ISOFromDate } from '../util';
     import DateInput from '../components/dateInput.svelte';
     import { getDayStrFromNum } from '../helpers/util.svelte';
     let date = new Date();
+    let content = "";
+    let entry = "";
+    
     $: readableDate = date.toLocaleDateString();
+
     const setDate = newDate => date = newDate;
-    const getEntryFromDate = date => {
-        // TODO: query backend for data
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                
-                resolve(false);
-            }, 500);
-        })
+
+    const setEntry = newEntry => entry = newEntry;
+
+    const getEntry = async (date, callback) => {
+        let entry = browser ? (await db.entries.get(ISOFromDate(date))) : { content: "" };
+        entry = entry || { content: "" };
+        callback(entry);
     }
-    $: entry = date && getEntryFromDate(date);
+
+    $: getEntry(date, setEntry);
+
+    $: content = entry && entry.content;
 
     $: day = getDayStrFromNum(date.getDay());
 
-    const addEntry = () => {
+    const addEntry = async () => {
+        try {
+            const result = await db.entries.add({
+                date: ISOFromDate(date),
+                content: content
+            });
+            console.log(result);
+        }catch(error){
+            console.error(error);
+        }
+    }
+
+    const editEntry = () => {
 
     }
-    const editEntry = () => {
-        
+
+    const deleteEntry = () => {
+
     }
 </script>
 <div class="container">
@@ -34,18 +56,16 @@
         {:else}
             <p class="entry-title">What were you grateful for on {day}?</p>
         {/if}
-        {#await entry}
-            <!-- TODO: replace with skeleton/spinner -->
-            <p>Loading...</p>
-        {:then entry} 
-            {#if entry}
-                <textarea class="entry-text" disabled>Hello there</textarea>
-                <button class="button blue">Edit</button>
-            {:else}
-                <textarea class="entry-text" placeholder="Today I'm grateful for..."></textarea>
-                <button class="button green">Add</button>
-            {/if}        
-        {/await}
+        {#if entry.content}
+            <textarea class="entry-text" value={content} on:input={e => content = e.target.value}></textarea>
+            <div class="buttons">
+                <button class="button blue" on:click={editEntry}>Edit</button>
+                <button class="button light-red" on:click={deleteEntry}>Delete</button>
+            </div>
+        {:else}
+            <textarea class="entry-text" value={content} on:input={e => content = e.target.value} placeholder="Today I'm grateful for..."></textarea>
+            <button class="button green" on:click={addEntry}>Add</button>
+        {/if}
     </main>
 </div>
 <style>
@@ -77,5 +97,10 @@
         padding: 1em;
         box-sizing: border-box;
         font-size: var(--font-x-small);
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 2em;
     }
 </style>

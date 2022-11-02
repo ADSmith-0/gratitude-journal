@@ -6,6 +6,7 @@
     --green: #A4EA54;
     /* --green: #9DE847; */
     --red: #EA5459;
+    --light-red: #EE797D;
     --grey: #f5f5f5;
     --dark-grey: #999;
     --darker-grey: #585858;
@@ -83,6 +84,14 @@ button {
 
 .green {
     background: var(--green);
+}
+
+.red {
+    background-color: var(--red);
+}
+
+.light-red {
+    background-color: var(--light-red);
 }
 
 .grey {
