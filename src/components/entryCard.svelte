@@ -11,23 +11,25 @@
         // trim the spaces if unused
         return newText.trim();
     }
-    const { date: dateStr, text } = entry;
+    const { date, content } = entry;
 
-    $: highlightedText = searchTerm ? highlightSearchTerm(text) : text;
+    $: highlightedContent = searchTerm ? highlightSearchTerm(content) : content;
 
     const getDayFromDateStr = dateStr => {
-        const [date, month, year] = dateStr.split("/");
+        const [year, month, date] = dateStr.split("-");
         return (getDayStrFromNum(new Date(year, month-1, date).getDay()));
     }
 
-    $: day = getDayFromDateStr(dateStr);
+    $: dateStr = new Date(date).toLocaleDateString();
+
+    $: day = getDayFromDateStr(date);
 </script>
 <section class="card">
     <div class="info">
         <p>{dateStr} - {day}</p>
         <button class="button-small">Edit</button>
     </div>
-    <p>{@html highlightedText}</p>
+    <p>{@html highlightedContent}</p>
 </section>
 <style>
     .card {

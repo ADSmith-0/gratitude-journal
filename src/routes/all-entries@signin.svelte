@@ -2,23 +2,32 @@
     import Searchbar from '../components/searchbar.svelte';
     import Loading from '../components/loading.svelte';
 	import EntryCard from '../components/entryCard.svelte';
+	import { db } from '../db';
+    import { browser } from '$app/env';
     let searchTerm = "";
+    const errorVal = [{ date:"01/01/1970", content: " " }];
     const setSearchTerm = newTerm => searchTerm = newTerm;
-    const getEntriesFromSearchTerm = searchTerm => (
-        new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve([
-                    {date:"16/09/2022", text:"I got to have a good workout and chat to faez which was nice"},
-                    {date:"17/09/2022", text:"Had a very chill day at work"},
-                    {date:"18/09/2022", text:"Had a good workout at the gym and got to chat to Faez and Meri which was nice"},
-                    {date:"19/09/2022", text:"Mum and Dad got a takeaway and got to read more of my book in the sun which was nice"},
-                    {date:"20/09/2022", text:"Got to hang out with the group which was really nice, had a very chill day at work, got to hear from friends which was really nice as well, and this text just keeps on going and going and going and when is it going to stop, nobody knows!"}
-                ]);
-            }, 500);
-        })
-    );
     
-    $: entriesPromise = getEntriesFromSearchTerm(searchTerm);
+    const getEntriesFromSearchTerm = searchTerm => {
+        return new Promise(async (resolve, reject) => {
+            try {
+
+                if(!browser) resolve(errorVal);
+                const entries = await db.entries.toArray();
+                console.log(entries);
+                resolve(
+                    searchTerm ?
+                    entries.filter(entry => entry.content.includes(searchTerm)) :
+                    entries
+                );
+            }catch(error){
+                console.error(error);
+                reject(errorVal);
+            }
+        })
+    };
+
+    $: entriesPromise = getEntriesFromSearchTerm(searchTerm) || errorVal;
 </script>
 <section class="searchbar-wrapper">
     <Searchbar passSearchTermBack={setSearchTerm}/>
@@ -27,9 +36,15 @@
     {#await entriesPromise}
         <Loading />
     {:then entries}
+    {#if entries.length !== 0}
         {#each entries as entry}
             <EntryCard entry={entry} searchTerm={searchTerm}/>
         {/each}
+    {:else} 
+        <p class="no-entries-msg">No Entries found</p>
+    {/if}
+    {:catch error}
+        <p>Error: Please try again {error}</p>
     {/await}
 </section>
 <style>
@@ -48,5 +63,8 @@
         padding: 1em;
         padding-top: calc(1em + var(--searchbar-height));
         box-sizing: border-box;
+    }
+    .no-entries-msg {
+        text-align: center;
     }
 </style>
