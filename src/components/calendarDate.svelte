@@ -1,14 +1,21 @@
 <script>
+	import { ISOFromDate } from "../util";
+	import { db } from "../db";
     export let date;
+    export let month;
+    export let year;
     export let setSelected = () => {};
     export let isSelected = false;
     export let disabled = false;
     const entryExists = async () => (
-        await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                const coinFlip = Math.floor(Math.random()*2);
-                resolve(coinFlip);
-            }, 500);
+        new Promise(async (resolve, reject) => {
+            try {
+                const thisDate = new Date(year, month, date);
+                const exists = await db.entries.get(ISOFromDate(thisDate));
+                resolve(exists);
+            }catch(error){
+                console.error(error);
+            }
         })
     )
 </script>
@@ -19,7 +26,7 @@
         {#await entryExists()}
             <button class="date-btn grey">{date}</button>
         {:then dateExists}
-            <button class="date-btn {dateExists == 0 ? 'pink': 'grey'} {isSelected ? 'selected' : ''}" on:click={() => setSelected(date)}>{date}</button>
+            <button class="date-btn {dateExists ? 'pink': 'grey'} {isSelected ? 'selected' : ''}" on:click={() => setSelected(date)}>{date}</button>
         {/await}
     {/if}
 {:else}

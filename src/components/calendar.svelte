@@ -20,6 +20,8 @@
     {#each dates as date}
         <CalendarDate 
             date={date}
+            month={month}
+            year={year}
             setSelected={setSelected}
             isSelected={selectedDate === date}
             disabled={!allowFuture && (new Date(year, month, date).valueOf()) > currentDate.valueOf()}
