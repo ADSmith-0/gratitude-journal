@@ -22,9 +22,9 @@
 {#if parseInt(date)}
     {#if disabled}
         <button class="date-btn grey" disabled=true>{date}</button>
-        {:else}
+    {:else}
         {#await entryExists()}
-            <button class="date-btn grey">{date}</button>
+            <button class="date-btn grey {isSelected ? 'selected' : ''}">{date}</button>
         {:then dateExists}
             <button class="date-btn {dateExists ? 'pink': 'grey'} {isSelected ? 'selected' : ''}" on:click={() => setSelected(date)}>{date}</button>
         {/await}

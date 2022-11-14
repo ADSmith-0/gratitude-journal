@@ -36,13 +36,13 @@
     {#await entriesPromise}
         <Loading />
     {:then entries}
-    {#if entries.length !== 0}
-        {#each entries as entry}
-            <EntryCard entry={entry} searchTerm={searchTerm}/>
-        {/each}
-    {:else} 
-        <p class="no-entries-msg">No Entries found</p>
-    {/if}
+        {#if entries.length !== 0}
+            {#each entries as entry}
+                <EntryCard entry={entry} searchTerm={searchTerm}/>
+            {/each}
+        {:else} 
+            <p class="no-entries-msg">No Entries found</p>
+        {/if}
     {:catch error}
         <p>Error: Please try again {error}</p>
     {/await}

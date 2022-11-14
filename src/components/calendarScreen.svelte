@@ -4,13 +4,14 @@
     import MonthPicker from './monthPicker.svelte';
     import Calendar from './calendar.svelte';
     
-    let selectedDate, selectedMonth, selectedYear;
+    export let selectedDate;
+    let selectedMonth, selectedYear;
     const setMonth = month => selectedMonth = month;
     const setYear = year => selectedYear = year; 
 
     const setSelectedDate = date => selectedDate = date;
     $: selectedFullDate = selectedDate ? new Date(selectedYear, selectedMonth, selectedDate) : "";
-    $: readableSelectedFullDate = selectedFullDate ? selectedFullDate.toLocaleDateString() : "";
+    $: selectedFullDateStr = selectedFullDate ? selectedFullDate.toLocaleDateString() : "";
     const saveDate = () => {
         passDateBack(selectedFullDate);
         closeDateSelector();
@@ -19,10 +20,10 @@
 <div class="wrapper">
     <section class="container">
         <MonthPicker month={selectedMonth} year={selectedYear} passMonthBack={setMonth} passYearBack={setYear}/>
-        <Calendar month={selectedMonth} year={selectedYear} passBackSelectedDate={setSelectedDate}/>
+        <Calendar selectedDate={selectedDate} month={selectedMonth} year={selectedYear} passBackSelectedDate={setSelectedDate}/>
         <div class="selected-date-input-wrapper">
             <label for="selected-date">Selected Date:</label>
-            <input id="selected-date" type="text" disabled value={readableSelectedFullDate}>
+            <input id="selected-date" type="text" disabled value={selectedFullDateStr}>
         </div>
         <section class="buttons">
             <button class="button {selectedDate ? 'green' : ''}" on:click={saveDate}>Select</button>

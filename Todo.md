@@ -15,3 +15,5 @@
 - [ ] Add entry screen should update when an entry is added to the edit buttons
 
 - [ ] Currently selected date should show on the calendar
+
+- [ ] Disable add button when nothing written in box

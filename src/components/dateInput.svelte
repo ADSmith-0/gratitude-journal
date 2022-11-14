@@ -1,27 +1,28 @@
 <script>
     import CalendarScreen from './calendarScreen.svelte';
 
-    let selectedDate = new Date();
+    let selectedFullDate = new Date();
+    $: date = selectedFullDate.getDate();
     export let passDateBack = () => {};
 
-    const setSelectedDate = date => selectedDate = date;
+    const setSelectedDate = date => selectedFullDate = date;
 
-    $: passDateBack(selectedDate);
-    $: readableSelectedDate = selectedDate.toLocaleDateString();
+    $: passDateBack(selectedFullDate);
+    $: selectedFullDateStr = selectedFullDate.toLocaleDateString();
 
     let dateSelectorOpen = false;
     const openDateSelector = () => dateSelectorOpen = true;
     const closeDateSelector = () => dateSelectorOpen = false;
 </script>
 {#if dateSelectorOpen}
-    <CalendarScreen passDateBack={setSelectedDate} closeDateSelector={closeDateSelector}/>
+    <CalendarScreen selectedDate={date} passDateBack={setSelectedDate} closeDateSelector={closeDateSelector}/>
 {/if}
 <div class="date-picker-wrapper">
     <div class="date-picker-component">
         <p>Date:</p>
         <section class="date-picker-container">
             <button class="date-picker" on:click={openDateSelector}>
-                {readableSelectedDate}
+                {selectedFullDateStr}
                 <img 
                     src="./img/calendar-icon-black-96x96.png" 
                     alt="calendar icon"

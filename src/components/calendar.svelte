@@ -3,14 +3,13 @@
     import CalendarDate from './calendarDate.svelte';
     export let passBackSelectedDate = () => {};
     export let allowFuture = false;
-    let currentDate = new Date();
-    export let month = currentDate.getMonth();
-    export let year = currentDate.getFullYear();
+    let currentFullDate = new Date();
+    export let selectedDate = currentFullDate.getDate();
+    export let month = currentFullDate.getMonth();
+    export let year = currentFullDate.getFullYear();
 
-    let dates;
     $: dates = getDatesArray(month, year);
     
-    let selectedDate = "";
     const resetSelectedDate = () => selectedDate = "";
     const setSelected = date => selectedDate = date;
     $: ((dates) && resetSelectedDate());
@@ -24,7 +23,7 @@
             year={year}
             setSelected={setSelected}
             isSelected={selectedDate === date}
-            disabled={!allowFuture && (new Date(year, month, date).valueOf()) > currentDate.valueOf()}
+            disabled={!allowFuture && (new Date(year, month, date).valueOf()) > currentFullDate.valueOf()}
         />
     {/each}
 </section>
