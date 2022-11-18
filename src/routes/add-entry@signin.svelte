@@ -64,7 +64,7 @@
             </div>
         {:else}
             <textarea class="entry-text" value={content} on:input={e => content = e.target.value} placeholder="Today I'm grateful for..."></textarea>
-            <button class="button green" on:click={addEntry}>Add</button>
+            <button class="button green" on:click={addEntry} disabled={content === ""}>Add</button>
         {/if}
     </main>
 </div>
@@ -102,5 +102,8 @@
         display: flex;
         flex-direction: row;
         gap: 2em;
+    }
+    button:disabled {
+        background-color: var(--grey);
     }
 </style>

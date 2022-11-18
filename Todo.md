@@ -14,6 +14,8 @@
 
 - [ ] Add entry screen should update when an entry is added to the edit buttons
 
-- [ ] Currently selected date should show on the calendar
+~~- [ ] Currently selected date should show on the calendar~~
 
-- [ ] Disable add button when nothing written in box
+- [x] Disable add button when nothing written in box
+
+- [x] Make it so that you can't select no date on date picker
