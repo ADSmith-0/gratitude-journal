@@ -38,12 +38,20 @@
         }
     }
 
-    const editEntry = () => {
-
+    const editEntry = async () => {
+        try {
+            const dateId = ISOFromDate(date);
+            const result = await db.entries.update(dateId, {
+                content: content
+            });
+            console.log(result);
+        }catch(error){
+            console.error(error);
+        }
     }
 
     const deleteEntry = () => {
-
+        // TODO: add code
     }
 </script>
 <div class="container">

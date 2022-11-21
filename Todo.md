@@ -1,6 +1,5 @@
+# Todo:
 - [x] Calendar shouldn't be able to select dates in the future, it currently can
-
-- [ ] Add select next empty date button to the add entry screen
 
 - [x] Make search function case-insensitive
 
@@ -19,3 +18,11 @@
 - [x] Disable add button when nothing written in box
 
 - [x] Make it so that you can't select no date on date picker
+
+- [ ] Add entry edit button doesn't work
+
+- [ ] Add entry delete button doesn't work
+
+# Future features:
+
+- Add select next empty date button to the add entry screen
