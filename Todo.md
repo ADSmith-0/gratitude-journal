@@ -19,9 +19,9 @@
 
 - [x] Make it so that you can't select no date on date picker
 
-- [ ] Add entry edit button doesn't work
+- [x] Add entry edit button doesn't work
 
-- [ ] Add entry delete button doesn't work
+- [x] Add entry delete button doesn't work
 
 # Future features:
 

@@ -28,8 +28,9 @@
 
     const addEntry = async () => {
         try {
+            const dateId = ISOFromDate(date);
             const result = await db.entries.add({
-                date: ISOFromDate(date),
+                date: dateId,
                 content: content
             });
             console.log(result);
@@ -41,17 +42,21 @@
     const editEntry = async () => {
         try {
             const dateId = ISOFromDate(date);
-            const result = await db.entries.update(dateId, {
+            await db.entries.update(dateId, {
                 content: content
             });
-            console.log(result);
         }catch(error){
             console.error(error);
         }
     }
 
-    const deleteEntry = () => {
-        // TODO: add code
+    const deleteEntry = async () => {
+        try {
+            const dateId = ISOFromDate(date);
+            await db.entries.delete(dateId);
+        }catch(error){
+            console.error(error);
+        }
     }
 </script>
 <div class="container">
