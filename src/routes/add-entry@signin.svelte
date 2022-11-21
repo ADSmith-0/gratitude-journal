@@ -37,6 +37,8 @@
         }catch(error){
             console.error(error);
         }
+        
+        getEntry(date, setEntry);
     }
 
     const editEntry = async () => {
@@ -48,6 +50,8 @@
         }catch(error){
             console.error(error);
         }
+
+        getEntry(date, setEntry);
     }
 
     const deleteEntry = async () => {
@@ -57,6 +61,8 @@
         }catch(error){
             console.error(error);
         }
+
+        getEntry(date, setEntry);
     }
 </script>
 <div class="container">

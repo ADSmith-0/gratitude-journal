@@ -11,7 +11,7 @@
 
 - [x] Fix calendar colouring so it accurately represents which dates have been filled in
 
-- [ ] Add entry screen should update when an entry is added to the edit buttons
+- [x] Add entry screen should update when an entry is modified
 
 ~~- [ ] Currently selected date should show on the calendar~~
 
