@@ -5,6 +5,7 @@
     import DateInput from '../components/dateInput.svelte';
     import { getDayStrFromNum } from '../helpers/util.svelte';
     let date = new Date();
+    // console.log(date);
     let content = "";
     let entry = "";
     
@@ -33,7 +34,7 @@
                 date: dateId,
                 content: content
             });
-            console.log(result);
+            // console.log(result);
         }catch(error){
             console.error(error);
         }
