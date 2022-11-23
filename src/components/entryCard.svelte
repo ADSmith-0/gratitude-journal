@@ -3,14 +3,11 @@
     export let entry = {};
     export let searchTerm = "";
 
-    const highlightSearchTerm = text => {
-        // Pad start and end of text to allow for finding search terms at start and end of text
-        let newText = ` ${text} `;
-        newText = newText.replace(new RegExp('.(?='+searchTerm+')', 'ig'), ' <mark>');
-        newText = newText.replace(new RegExp('(?<='+searchTerm+').', 'ig'), '</mark> ');
-        // trim the spaces if unused
-        return newText.trim();
-    }
+    const highlightSearchTerm = text => (
+        text.replace(new RegExp(searchTerm, 'gi'), function(term){
+            return `<mark>${term}</mark>`;
+        })
+    )
     const { date, content } = entry;
 
     $: highlightedContent = searchTerm ? highlightSearchTerm(content) : content;

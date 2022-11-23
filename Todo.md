@@ -5,7 +5,7 @@
 
 - [ ] All entries should be able to sorted by different criteria
 
-- [ ] Make edit button on all entries work
+- [x] Make edit button on all entries work
 
 - [ ] Fix apple icon - should be 180x180
 

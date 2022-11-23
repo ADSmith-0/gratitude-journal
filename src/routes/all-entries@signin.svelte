@@ -11,13 +11,11 @@
     const getEntriesFromSearchTerm = searchTerm => {
         return new Promise(async (resolve, reject) => {
             try {
-
                 if(!browser) resolve(errorVal);
                 const entries = await db.entries.toArray();
-                console.log(entries);
                 resolve(
                     searchTerm ?
-                    entries.filter(entry => entry.content.includes(searchTerm)) :
+                    entries.filter(entry => entry.content.toLowerCase().includes(searchTerm.toLowerCase())) :
                     entries
                 );
             }catch(error){
