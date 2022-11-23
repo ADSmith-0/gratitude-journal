@@ -108,7 +108,7 @@
     </section>
     <InputBox id="email" name="Email" type="text" passValueBack={updateField} validateAs="email"/>
     <InputBox id="password" name="Password" type="password" passValueBack={updateField}/>
-    <button id="submit" class="button green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
+    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
 </section>
 <ErrorMsg visible={errorVisible} message={errorMessage}/>
 <style>

@@ -78,12 +78,12 @@
         {#if entry.content}
             <textarea class="entry-text" value={content} on:input={e => content = e.target.value}></textarea>
             <div class="buttons">
-                <button class="button blue" on:click={editEntry}>Edit</button>
-                <button class="button light-red" on:click={deleteEntry}>Delete</button>
+                <button class="button bg-blue" on:click={editEntry}>Edit</button>
+                <button class="button bg-light-red" on:click={deleteEntry}>Delete</button>
             </div>
         {:else}
             <textarea class="entry-text" value={content} on:input={e => content = e.target.value} placeholder="Today I'm grateful for..."></textarea>
-            <button class="button green" on:click={addEntry} disabled={content === ""}>Add</button>
+            <button class="button bg-green" on:click={addEntry} disabled={content === ""}>Add</button>
         {/if}
     </main>
 </div>

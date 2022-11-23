@@ -27,7 +27,7 @@
 <section class="card">
     <div class="info">
         <p>{dateStr} - {day}</p>
-        <button class="button-small">Edit</button>
+        <a class="button-small bg-default-grey" href="/add-entry?date={date}">Edit</a>
     </div>
     <p>{@html highlightedContent}</p>
 </section>
@@ -45,9 +45,10 @@
         padding-bottom: 0.5em;
         margin-bottom: 0.5em;
     }
-    .info button {
+    .info a {
         padding: 0.2em 0.7em;
         font-size: 0.9em;
+        text-decoration: none;
     }
     p {
         font-family: var(--accent-font);

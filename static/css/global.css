@@ -8,6 +8,7 @@
     --red: #EA5459;
     --light-red: #EE797D;
     --grey: #f5f5f5;
+    --default-grey: #e9e9ed;
     --dark-grey: #999;
     --darker-grey: #585858;
     --black-translucent: #0003;
@@ -74,28 +75,32 @@ button {
     box-shadow: var(--box-shadow);
 }
 
-.pink {
+.bg-pink {
     background-color: var(--pink);
 }
 
-.blue {
+.bg-blue {
     background-color: var(--blue);
 }
 
-.green {
+.bg-green {
     background: var(--green);
 }
 
-.red {
+.bg-red {
     background-color: var(--red);
 }
 
-.light-red {
+.bg-light-red {
     background-color: var(--light-red);
 }
 
-.grey {
+.bg-grey {
     background: var(--grey);
+}
+
+.bg-default-grey {
+    background: var(--default-grey);
 }
 
 mark {

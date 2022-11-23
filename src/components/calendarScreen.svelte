@@ -26,7 +26,7 @@
             <input id="selected-date" type="text" disabled value={selectedFullDateStr}>
         </div>
         <section class="buttons">
-            <button class="button {selectedDate ? 'green' : ''}" on:click={saveDate} disabled={selectedDate === ""}>Select</button>
+            <button class="button {selectedDate ? 'bg-green' : ''}" on:click={saveDate} disabled={selectedDate === ""}>Select</button>
             <button class="button" on:click={closeDateSelector}>Cancel</button>
         </section>
     </section>

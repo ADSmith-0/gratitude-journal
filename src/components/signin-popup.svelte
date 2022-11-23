@@ -6,8 +6,8 @@
         Create an account or login to continue
     </p>
     <div class="buttons">
-        <a href="/sign-up" class="button blue">Sign up</a>
-        <a href="/login" class="button pink">Login</a>
+        <a href="/sign-up" class="button bg-blue">Sign up</a>
+        <a href="/login" class="button bg-pink">Login</a>
     </div>
 </section>
 <style>

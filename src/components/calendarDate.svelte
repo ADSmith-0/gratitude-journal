@@ -21,12 +21,12 @@
 </script>
 {#if parseInt(date)}
     {#if disabled}
-        <button class="date-btn grey" disabled=true>{date}</button>
+        <button class="date-btn bg-grey" disabled=true>{date}</button>
     {:else}
         {#await entryExists()}
-            <button class="date-btn grey {isSelected ? 'selected' : ''}">{date}</button>
+            <button class="date-btn bg-grey {isSelected ? 'selected' : ''}">{date}</button>
         {:then dateExists}
-            <button class="date-btn {dateExists ? 'pink': 'grey'} {isSelected ? 'selected' : ''}" on:click={() => setSelected(date)}>{date}</button>
+            <button class="date-btn {dateExists ? 'bg-pink': 'bg-grey'} {isSelected ? 'selected' : ''}" on:click={() => setSelected(date)}>{date}</button>
         {/await}
     {/if}
 {:else}
