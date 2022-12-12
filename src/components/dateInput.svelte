@@ -2,7 +2,8 @@
     import CalendarScreen from './calendarScreen.svelte';
     import { browser } from "$app/env";
 
-    let selectedFullDate = browser ? new Date(new URLSearchParams(window.location.search).get("date")) : new Date();
+    const urlDate = browser ? new URLSearchParams(window.location.search).get("date") : "";
+    let selectedFullDate = urlDate ? new Date(urlDate) : new Date();
     $: date = selectedFullDate.getDate();
     export let passDateBack = () => {};
 

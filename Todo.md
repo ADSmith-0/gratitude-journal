@@ -3,7 +3,7 @@
 
 - [x] Make search function case-insensitive
 
-- [ ] All entries should be able to sorted by different criteria
+- [x] All entries should be able to sorted by different criteria
 
 - [x] Make edit button on all entries work
 
@@ -27,7 +27,7 @@
 
 - [ ] Placeholder text for add entry needs to be fixed
 
-- [ ] Fix add entry selecting empty date when no date is given
+- [x] Fix add entry selecting empty date when no date is given
 
 # Future features:
 
