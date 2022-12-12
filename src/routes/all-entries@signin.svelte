@@ -1,12 +1,16 @@
 <script>
     import Searchbar from '../components/searchbar.svelte';
+    import FilterEntries from '../components/filterEntries.svelte';
     import Loading from '../components/loading.svelte';
 	import EntryCard from '../components/entryCard.svelte';
 	import { db } from '../db';
     import { browser } from '$app/env';
+	import { sortDateAsc, sortDateDesc } from '../util';
     let searchTerm = "";
+    let filter = "date-desc";
     const errorVal = [{ date:"01/01/1970", content: " " }];
     const setSearchTerm = newTerm => searchTerm = newTerm;
+    const setFilter = newFilter => filter = newFilter;
     
     const getEntriesFromSearchTerm = searchTerm => {
         return new Promise(async (resolve, reject) => {
@@ -23,12 +27,29 @@
                 reject(errorVal);
             }
         })
-    };
+    }
 
-    $: entriesPromise = getEntriesFromSearchTerm(searchTerm) || errorVal;
+    const filterEntries = async (pEntriesRaw, filter) => (
+        new Promise(async (resolve, reject) => {
+            const rEntriesRaw = await pEntriesRaw;
+            if(filter == "date-desc"){
+                resolve(rEntriesRaw.sort((a,b) => sortDateDesc(a, b)));
+            }
+            if(filter == "date-asc"){
+                resolve(rEntriesRaw.sort((a,b) => sortDateAsc(a, b)));
+            }
+            resolve(rEntriesRaw);
+        })
+    )
+
+    $: entriesRaw = getEntriesFromSearchTerm(searchTerm) || errorVal;
+    $: entriesPromise = filterEntries(entriesRaw, filter) || entriesRaw;
 </script>
-<section class="searchbar-wrapper">
-    <Searchbar passSearchTermBack={setSearchTerm}/>
+<section class="searchbar-section">
+    <section class="searchbar-wrapper">
+        <Searchbar passSearchTermBack={setSearchTerm}/>
+        <FilterEntries passFilterBack={setFilter}/>
+    </section>
 </section>
 <section class="entries hide-scrollbar">
     {#await entriesPromise}
@@ -47,14 +68,18 @@
 </section>
 <style>
     :root {
-        --searchbar-height: 4.5em;
+        --searchbar-height: 7em;
     }
-    .searchbar-wrapper {
+    .searchbar-section {
         background-color: #fff;
         position: fixed;
         top: var(--top-bar-height);
-        height: var(--searchbar-height);
         width: 100%;
+    }
+    .searchbar-wrapper {
+        position: relative;
+        box-shadow: var(--box-shadow);
+        padding: 1em 1em 0.5em 1em;
     }
     .entries {
         background-color: var(--grey);

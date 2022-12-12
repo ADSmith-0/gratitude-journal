@@ -23,6 +23,12 @@
 
 - [x] Add entry delete button doesn't work
 
+- [ ] Fix styling for login/sign up page
+
+- [ ] Placeholder text for add entry needs to be fixed
+
+- [ ] Fix add entry selecting empty date when no date is given
+
 # Future features:
 
 - Add select next empty date button to the add entry screen

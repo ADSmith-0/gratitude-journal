@@ -13,9 +13,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.5em;
-        padding: 1em 0;
-        position: relative;
-        box-shadow: var(--box-shadow);
+        padding-bottom: 1em;
     }
     input {
         max-width: 12em;
