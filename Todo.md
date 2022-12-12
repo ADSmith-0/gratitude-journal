@@ -25,7 +25,7 @@
 
 - [ ] Fix styling for login/sign up page
 
-- [ ] Placeholder text for add entry needs to be fixed
+- [x] Placeholder text for add entry needs to be fixed
 
 - [x] Fix add entry selecting empty date when no date is given
 

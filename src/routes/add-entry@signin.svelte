@@ -82,7 +82,7 @@
                 <button class="button bg-light-red" on:click={deleteEntry}>Delete</button>
             </div>
         {:else}
-            <textarea class="entry-text" value={content} on:input={e => content = e.target.value} placeholder="Today I'm grateful for..."></textarea>
+            <textarea class="entry-text" value={content} on:input={e => content = e.target.value} placeholder={readableDate === (new Date().toLocaleDateString()) ? "I'm grateful for..." : "I was grateful for..."}></textarea>
             <button class="button bg-green" on:click={addEntry} disabled={content === ""}>Add</button>
         {/if}
     </main>
