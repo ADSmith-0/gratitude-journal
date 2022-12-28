@@ -1,9 +1,9 @@
 <script>
-    import { db } from '../db';
+    import { db } from '../../db';
     import { browser } from '$app/env';
-    import { ISOFromDate } from '../util';
-    import DateInput from '../components/dateInput.svelte';
-    import { getDayStrFromNum } from '../helpers/util.svelte';
+    import { ISOFromDate } from '../../util';
+    import DateInput from '../../components/dateInput.svelte';
+    import { getDayStrFromNum } from '../../helpers/util.svelte';
     let date = new Date();
     let content = "";
     let entry = "";

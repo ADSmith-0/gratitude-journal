@@ -1,11 +1,11 @@
 <script>
-    import Searchbar from '../components/searchbar.svelte';
-    import FilterEntries from '../components/filterEntries.svelte';
-    import Loading from '../components/loading.svelte';
-	import EntryCard from '../components/entryCard.svelte';
-	import { db } from '../db';
+    import Searchbar from '../../components/searchbar.svelte';
+    import FilterEntries from '../../components/filterEntries.svelte';
+    import Loading from '../../components/loading.svelte';
+	import EntryCard from '../../components/entryCard.svelte';
+	import { db } from '../../db';
     import { browser } from '$app/env';
-	import { sortDateAsc, sortDateDesc } from '../util';
+	import { sortDateAsc, sortDateDesc } from '../../util';
     let searchTerm = "";
     let filter = "date-desc";
     const errorVal = [{ date:"01/01/1970", content: " " }];

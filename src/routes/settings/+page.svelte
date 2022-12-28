@@ -1,5 +1,5 @@
 <script>
-    import NotificationComponent from '../components/notificationComponent.svelte';
+    import NotificationComponent from '../../components/notificationComponent.svelte';
     let theme = localStorage.getItem("theme") || "light";
     $: localStorage.setItem("theme", theme);
     let emailNotifications = false;
