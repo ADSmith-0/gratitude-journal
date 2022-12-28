@@ -1,6 +1,6 @@
 <script>
     import CalendarScreen from './calendarScreen.svelte';
-    import { browser } from "$app/env";
+    import { browser } from "$app/environment";
 
     const urlDate = browser ? new URLSearchParams(window.location.search).get("date") : "";
     let selectedFullDate = urlDate ? new Date(urlDate) : new Date();

@@ -1,6 +1,6 @@
 <script>
     import { db } from '../../db';
-    import { browser } from '$app/env';
+    import { browser } from '$app/environment';
     import { ISOFromDate } from '../../util';
     import DateInput from '../../components/dateInput.svelte';
     import { getDayStrFromNum } from '../../helpers/util.svelte';

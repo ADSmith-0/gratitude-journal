@@ -1,6 +1,6 @@
 <script>
     import { page } from '$app/stores';
-    import { browser } from '$app/env';
+    import { browser } from '$app/environment';
 
     $: if(browser) document.querySelector('html').classList.add('hide-scrollbar');
 

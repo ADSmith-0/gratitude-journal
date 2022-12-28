@@ -4,7 +4,7 @@
     import Loading from '../../components/loading.svelte';
 	import EntryCard from '../../components/entryCard.svelte';
 	import { db } from '../../db';
-    import { browser } from '$app/env';
+    import { browser } from '$app/environment';
 	import { sortDateAsc, sortDateDesc } from '../../util';
     let searchTerm = "";
     let filter = "date-desc";
