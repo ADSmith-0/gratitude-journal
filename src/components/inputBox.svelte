@@ -76,7 +76,7 @@
         font-size: var(--font-small);
         color: #666;
         transition: all 0.1s ease-in-out 0s;
-        background-color: #fff;
+        background-color: var(--background-color);
         padding: 0 0.25em;
     }
     input:focus,

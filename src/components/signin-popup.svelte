@@ -15,7 +15,7 @@
         border-radius: var(--radius);
         border: 0.063em solid black;
         box-shadow: 0 0.25em 0.25em #0002;
-        background-color: #fff;
+        background-color: var(--background-color);
         margin: 1.25em;
         padding: 0.63em 0.125em;
         min-height: 25vh;
@@ -30,6 +30,7 @@
         font-size: var(--font-normal);
         text-align: center;
         margin: 0 0.7em;
+        color: var(--font-color);
     }
     .container.popup {
         position: absolute;

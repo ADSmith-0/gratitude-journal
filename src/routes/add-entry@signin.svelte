@@ -90,7 +90,7 @@
 <style>
     .container {
         border: 0.01em solid var(--grey);
-        background-color: #fff;
+        background-color: var(--background-color);
     }
     .main-wrapper {
         background-color: var(--grey);

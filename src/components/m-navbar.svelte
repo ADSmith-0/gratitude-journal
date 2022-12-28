@@ -90,7 +90,7 @@
         padding: 0.5em 0;
         width: 100%;
         box-shadow: 0 -0.06em 0.125em #0004;
-        background-color: #fff;
+        background-color: var(--background-color);
         z-index: 99;
         height: var(--bottom-bar-height);
         box-sizing: border-box;

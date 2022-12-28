@@ -27,7 +27,7 @@
         top: 0.15rem;
         width: 1rem;
         height: 1rem;
-        background-color: #fff;
+        background-color: var(--background-color);
         border: 0.15rem solid var(--darker-grey);
         border-radius: var(--radius-less);
         box-sizing: border-box;

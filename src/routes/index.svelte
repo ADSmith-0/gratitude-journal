@@ -19,9 +19,11 @@
         text-align: center;
         margin-top: 1em;
         font-size: var(--font-large);
+        color: var(--font-color);
     }
     main p {
         margin: 0 1.25em;
+        color: var(--font-color);
     }
     h1 {
         font-family: var(--accent-font);

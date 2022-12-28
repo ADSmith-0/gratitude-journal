@@ -60,7 +60,7 @@
     }
     .delete-data {
         color: var(--red);
-        background-color: #fff;
+        background-color: var(--background-color);
         box-shadow: var(--box-shadow);
         padding: 0.9em;
         border-radius: var(--radius-less);

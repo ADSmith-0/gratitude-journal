@@ -71,7 +71,7 @@
         --searchbar-height: 7em;
     }
     .searchbar-section {
-        background-color: #fff;
+        background-color: var(--background-color);
         position: fixed;
         top: var(--top-bar-height);
         width: 100%;

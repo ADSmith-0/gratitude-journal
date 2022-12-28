@@ -39,7 +39,7 @@
         z-index: 10;
         top: var(--top-bar-height);
         left: 0;
-        background-color: #fff;
+        background-color: var(--background-color);
         width: 100vw;
         height: calc(100vh - (var(--top-bar-height) + var(--bottom-bar-height)));
     }
@@ -67,7 +67,7 @@
         background-color: var(--grey);
         padding: 0.1em 0.5em;
         text-align: center;
-        color: #000;
+        color: var(--font-color);
     }
     .buttons {
         display: flex;

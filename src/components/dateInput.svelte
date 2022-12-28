@@ -70,7 +70,7 @@
         border: 0.15em solid var(--black-translucent);
         border-radius: var(--radius);
         width: 100%;
-        background: #fff;
+        background-color: var(--background-color);
     }
     .date-picker img {
         height: 1.5em;
