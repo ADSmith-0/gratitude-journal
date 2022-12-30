@@ -1,21 +1,20 @@
 <script>
+	import { changeTheme } from '../../helpers/util.svelte';
     import NotificationComponent from '../../components/notificationComponent.svelte';
     let theme = localStorage.getItem("theme") || "light";
-    $: localStorage.setItem("theme", theme);
+    $: localStorage.setItem("theme", theme)
+    $: theme && changeTheme();
     let emailNotifications = false;
     let phoneNotifications = false;
 </script>
 <div class="wrapper">
     <section class="theme card">
         <p class="card-header">Theme</p>
-        <label>
-            <input type="radio" bind:group={theme} name="theme" value="light">
-            Light Theme
-        </label>
-        <label>
-            <input type="radio" bind:group={theme} name="theme" value="dark">
-            Dark Theme
-        </label>
+        <select bind:value={theme}>
+            <option value="default">System default</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
     </section>
     <section class="notifications card">
         <p class="card-header">Notifications</p>
@@ -46,9 +45,9 @@
         font-size: var(--font-normal);
         margin-bottom: 1em;
     }
-    .theme label {
-        display: block;
+    .theme select, .theme option {
         font-size: var(--font-x-small);
+        font-family: var(--accent-font);
         margin-bottom: 1em;
     }
     .notifications {

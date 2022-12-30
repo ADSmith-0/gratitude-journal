@@ -1,7 +1,7 @@
-import { build, files, timestamp } from '$service-worker';
+import { build, files, version } from '$service-worker';
 const urlsToCache = [...build, ...files];
 
-const cacheName = `pwa-assets${timestamp}`;
+const cacheName = `pwa-assets${version}`;
 
 console.log("[Service Worker] working")
 

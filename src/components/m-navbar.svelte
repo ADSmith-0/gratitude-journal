@@ -1,23 +1,31 @@
 <script>
     import { page } from '$app/stores';
     import { browser } from '$app/environment';
+	import { getTheme } from '../helpers/util.svelte';
 
     $: if(browser) document.querySelector('html').classList.add('hide-scrollbar');
 
     $: selectedItem = $page.url.pathname;
 
     let items = [
-        { name: "Add entry", link: "/add-entry", src: "/img/plus-black-icon-100x100.png", alt: "add entry icon"},
-        { name: "All entries", link: "/all-entries", src: "/img/list-black-icon-96x96.png", alt: "all entries icon" },
-        { name: "Account", link: "/account", src: "/img/account-black-icon-96x96.png", alt: "account icon" }
+        { name: "Add entry", link: "/add-entry", src: `/img/plus-${getTheme() == "dark" ? "white" : "black"}-icon-96x96.png`, alt: "add entry icon"},
+        { name: "All entries", link: "/all-entries", src: `/img/list-${getTheme() == "dark" ? "white" : "black"}-icon-96x96.png`, alt: "all entries icon" },
+        { name: "Account", link: "/account", src: `/img/account-${getTheme() == "dark" ? "white" : "black"}-icon-96x96.png`, alt: "account icon" }
     ];
 
     
     $: items = items.map(item => {
+        let unhighlightedColour = "black";
+        let highlightedColour = "pink";
+
+        if(getTheme() == "dark"){
+            unhighlightedColour = "white";
+        }
+
         if(selectedItem == item.link){
-            item.src = item.src.replace('black', 'pink');
+            item.src = item.src.replace(unhighlightedColour, highlightedColour);
         }else{
-            item.src = item.src.replace('pink', 'black');
+            item.src = item.src.replace(highlightedColour, unhighlightedColour);
         }
         return item;
     });

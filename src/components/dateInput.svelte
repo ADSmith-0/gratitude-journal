@@ -26,7 +26,7 @@
             <button class="date-picker" on:click={openDateSelector}>
                 {selectedFullDateStr}
                 <img 
-                    src="./img/calendar-icon-black-96x96.png" 
+                    src="./img/calendar-black-icon-96x96.png" 
                     alt="calendar icon"
                     height="35"
                     width="35"
