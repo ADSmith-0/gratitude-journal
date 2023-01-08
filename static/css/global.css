@@ -33,6 +33,7 @@
     --bottom-bar-height: 7em;
 }
 
+/*
 :root .dark{
     --pink: #E8479D;
     --blue: #479DE8;
@@ -51,7 +52,8 @@
         --grey: #212121;
         --font-color: #e5e5e5;
     }
-}
+} 
+*/
 
 * {
     margin: 0;

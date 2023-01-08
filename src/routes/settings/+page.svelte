@@ -11,9 +11,9 @@
     <section class="theme card">
         <p class="card-header">Theme</p>
         <select bind:value={theme}>
-            <option value="default">System default</option>
+            <!-- <option value="default">System default</option> -->
             <option value="light">Light</option>
-            <option value="dark">Dark</option>
+            <!-- <option value="dark">Dark</option> -->
         </select>
     </section>
     <section class="notifications card">

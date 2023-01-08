@@ -1,34 +1,37 @@
 <script>
     import { page } from '$app/stores';
     import { browser } from '$app/environment';
-	import { getTheme } from '../helpers/util.svelte';
 
     $: if(browser) document.querySelector('html').classList.add('hide-scrollbar');
 
     $: selectedItem = $page.url.pathname;
 
     let items = [
-        { name: "Add entry", link: "/add-entry", src: `/img/plus-${getTheme() == "dark" ? "white" : "black"}-icon-96x96.png`, alt: "add entry icon"},
-        { name: "All entries", link: "/all-entries", src: `/img/list-${getTheme() == "dark" ? "white" : "black"}-icon-96x96.png`, alt: "all entries icon" },
-        { name: "Account", link: "/account", src: `/img/account-${getTheme() == "dark" ? "white" : "black"}-icon-96x96.png`, alt: "account icon" }
+        { 
+            name: "Add entry",
+            link: "/add-entry",
+            imgs: {
+                "black": { src: "/img/plus-black-icon-96x96.png", alt: "add entry black icon" },
+                "selected": { src: "/img/plus-pink-icon-96x96.png", alt: "add entry selected icon" },
+            }
+        },
+        { 
+            name: "All entries",
+            link: "/all-entries",
+            imgs: {
+                "black": { src: "/img/list-black-icon-96x96.png", alt: "all entries black icon" },
+                "selected": { src: "/img/list-pink-icon-96x96.png", alt: "all entries selected icon" }
+            }
+        },
+        { 
+            name: "Account",
+            link: "/account",
+            imgs: {
+                "black": {src: "/img/account-black-icon-96x96.png", alt: "account black icon" },
+                "selected": {src: "/img/account-pink-icon-96x96.png", alt: "account selected icon" }
+            }
+        }
     ];
-
-    
-    $: items = items.map(item => {
-        let unhighlightedColour = "black";
-        let highlightedColour = "pink";
-
-        if(getTheme() == "dark"){
-            unhighlightedColour = "white";
-        }
-
-        if(selectedItem == item.link){
-            item.src = item.src.replace(unhighlightedColour, highlightedColour);
-        }else{
-            item.src = item.src.replace(highlightedColour, unhighlightedColour);
-        }
-        return item;
-    });
 
     let navbarVisible = true;
 
@@ -50,9 +53,13 @@
 </div>
 <section id="bottom" class="{navbarVisible ? 'visible' : ''}">
     <nav>
-        {#each items as {name, link, src, alt}}
-            <a href={link} class="{selectedItem == link ? "selected": ""}">
-                <img src={src} alt={alt}>
+        {#each items as {name, link, imgs}}
+            <a href={link} class="{selectedItem === link ? "selected": ""}">
+                {#if selectedItem === link}
+                    <img src={imgs.selected.src} alt={imgs.selected.alt}> 
+                {:else}
+                    <img src={imgs.black.src} alt={imgs.black.alt}>
+                {/if}
                 {name}
             </a>
         {/each}

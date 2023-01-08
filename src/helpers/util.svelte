@@ -11,10 +11,21 @@
     }
 
     // always run client side - if(browser)
-    const getTheme = () => {
-        if(browser && (localStorage.getItem("theme") == "dark" || !!window.matchMedia("(prefers-color-scheme: dark)")))
+    const getThemeColour = () => {
+        // ordered this way as light theme should override prefers-color-scheme
+        if(browser && (localStorage.getItem("theme") == "dark"))
             return "dark";
 
+        if(browser && (localStorage.getItem("theme") == "light"))
+            return "light";
+
+        if(browser && window.matchMedia("(prefers-color-scheme: dark)").matches)
+            return "dark";
+
+        if(browser && window.matchMedia("(prefers-color-scheme: light)").matches)
+            return "light";
+
+        console.error("cannot parse theme colour");
         return "light";
     }
 
@@ -26,5 +37,5 @@
         body.classList.add(localStorage.getItem("theme"));
     }
 
-    export { modulo, getDayStrFromNum, getTheme, changeTheme };
+    export { modulo, getDayStrFromNum, getThemeColour, changeTheme };
 </script>
