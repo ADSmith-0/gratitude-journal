@@ -7,23 +7,27 @@
     export let setSelected = () => {};
     export let isSelected = false;
     export let disabled = false;
-    const entryExists = async () => (
+    const entryExists = async (date, month, year) => (
         new Promise(async (resolve, reject) => {
             try {
-                const thisDate = new Date(year, month, date);
-                const exists = await db.entries.get(ISOFromDate(thisDate));
-                resolve(exists);
+                if(parseInt(date)){
+                    const thisDate = new Date(year, month, date);
+                    const exists = await db.entries.get(ISOFromDate(thisDate));
+                    resolve(exists);
+                }
             }catch(error){
                 console.error(error);
             }
         })
     )
+
+    $: doesEntryExist = entryExists(date, month, year);
 </script>
 {#if parseInt(date)}
     {#if disabled}
         <button class="date-btn bg-grey" disabled=true>{date}</button>
     {:else}
-        {#await entryExists()}
+        {#await doesEntryExist}
             <button class="date-btn bg-grey {isSelected ? 'selected' : ''}">{date}</button>
         {:then dateExists}
             <button class="date-btn {dateExists ? 'bg-pink': 'bg-grey'} {isSelected ? 'selected' : ''}" on:click={() => setSelected(date)}>{date}</button>
