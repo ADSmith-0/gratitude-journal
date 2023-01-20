@@ -43,7 +43,7 @@
 </script>
 <svelte:window on:resize={toggleNavbarVisible}></svelte:window>
 <section id="top">
-    <a id="title" href="/">Gratitude.io</a>
+    <a id="title" href="/">Grately</a>
     <a id="settings" href="/settings">
         <img src="/img/settings-icon-40x40.png" alt="settings">
     </a>
@@ -79,7 +79,7 @@
     #title {
         color: var(--title-color);
         font-size: var(--title-m-size);
-        font-weight: 200;
+        font-weight: 400;
         grid-column: 2/3;
     }
     #settings {
