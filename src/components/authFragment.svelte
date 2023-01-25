@@ -92,23 +92,24 @@
 
 </script>
 <section class="container">
+    <section class="selector">
+        <button class="button" on:click={() => name="Login"}>Login</button>
+        <button class="button" on:click={() => name="Sign up"}>Sign up</button>
+        <div class={"underline " + (name=="Sign up" && "translate")}></div>
+    </section>
+    <InputBox id="email" name="Email" type="text" passValueBack={updateField} validateAs="email"/>
+    <InputBox id="password" name="Password" type="password" passValueBack={updateField}/>
+    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
+    <!-- TODO: if not used remove google IMG -->
+    <!-- <button id="btn-google" on:click={name=="Sign up" ? signupWithGoogle : loginWithGoogle}>
+        <img src="/img/google-icon-96x96.png" alt="google icon">
+        {name} with google
+    </button> -->
     {#if name == "Sign up"}
     <a href="/login" class="link">Have an account already? Login</a>
     {:else}
     <a href="/sign-up" class="link">Don't have an account? Sign up</a>
     {/if}
-    <button id="btn-google" on:click={name=="Sign up" ? signupWithGoogle : loginWithGoogle}>
-        <img src="/img/google-icon-96x96.png" alt="google icon">
-        {name} with google
-    </button>
-    <section id="or-section">
-        <hr class="line">
-        <p>or</p>
-        <hr class="line">
-    </section>
-    <InputBox id="email" name="Email" type="text" passValueBack={updateField} validateAs="email"/>
-    <InputBox id="password" name="Password" type="password" passValueBack={updateField}/>
-    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
 </section>
 <ErrorMsg visible={errorVisible} message={errorMessage}/>
 <style>
@@ -118,9 +119,44 @@
         gap: 1.75em;
         justify-content: space-evenly;
         align-items: center;
-        margin-top: 1.5em;
+        background: var(--background-color);
+        padding: 1em;
+        box-shadow: var(--box-shadow);
     }
-    #btn-google {
+    .selector {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .selector button {
+        width: 100%;
+        height: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: var(--background-color);
+    }
+    .selector button:first-child {
+        border-right: 2px solid var(--dark-grey);
+    }
+    .underline {
+        border-bottom: 3px solid #000;
+        width: 5em;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 12.5%;
+        transition: all 0.3s cubic-bezier(.68,-0.55,.27,1.55) 0s;
+    }
+    .translate {
+        /* transform: translateX(10.7em); */
+        /* transform: translateX(216%); */
+        left: 63%;
+    }
+
+    /* TODO: Remove if unused */
+    /* #btn-google {
         border: 0.15em solid var(--blue);
         border-radius: var(--radius);
         display: flex;
@@ -134,23 +170,9 @@
     #btn-google img{
         height: 2em;
         width: 2em;
-    }
-    #or-section {
-        align-self: center;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        gap: 1.88em;
-        width: 80%;
-        margin: 0.2em 0;
-    }
-    .line {
-        flex: 3;
-        align-self: center;
-        border: 0.05em solid #000;
-    }
+    } */
     .link {
-        font-size: var(--font-small);
+        font-size: var(--font-size-default);
         text-align: center;
         font-weight: 400;
     }

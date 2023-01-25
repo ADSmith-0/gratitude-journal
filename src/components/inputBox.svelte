@@ -38,8 +38,10 @@
 </script>
 <section class="container {style}">
     <input id={id} type={type} on:input={checkInput} on:blur={scrollToStart}>
-    <p class="placeholder" on:click={focusInput}>{name}</p>
+    <!-- TODO change to button -->
+    <p class="placeholder" on:click={focusInput} role="button">{name}</p>
     {#if name == "Password"}
+    <!-- TODO change to button -->
     <img 
         src="/img/{passwordVisible ? 'hide' : 'eye'}-black-icon-96x96.png"
         alt="{passwordVisible ? 'hide' : 'eye'} password icon"
@@ -55,7 +57,7 @@
         --input-width: 75vw;
     }
     input {
-        border-radius: var(--radius);
+        border-radius: var(--radius-less);
         outline: none;
         border: 0.12em solid black;
         font-family: var(--accent-font);
