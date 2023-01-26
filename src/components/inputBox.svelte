@@ -57,9 +57,9 @@
         --input-width: 75vw;
     }
     input {
-        border-radius: var(--radius-less);
         outline: none;
-        border: 0.12em solid black;
+        border: 0 solid black;
+        border-bottom-width: 0.12em;
         font-family: var(--accent-font);
         font-size: var(--font-size-default);
         height: 1.65em;
@@ -72,24 +72,23 @@
     .placeholder {
         position: absolute;
         top: var(--y-coordinate);
-        left: 0.63em;
+        left: 0.5em;
         font-weight: 400;
         font-family: var(--accent-font);
         font-size: var(--font-small);
         color: #666;
         transition: all 0.1s ease-in-out 0s;
-        background-color: var(--background-color);
-        padding: 0 0.25em;
+        /* background-color: var(--background-color); */
     }
     input:focus,
     .active input {
-        border: 0.12em solid var(--blue);
+        border-color: var(--blue);
     }
     input:focus ~ p.placeholder,
     .active p.placeholder{
         color: var(--blue);
         font-size: var(--font-size-default);
-        transform: translateY(calc(-1*var(--y-coordinate) - 0.55em));
+        transform: translateY(calc(-1*var(--y-coordinate) - 1.1em));
     }
     img {
         position: absolute;
