@@ -42,11 +42,13 @@
     <p class="placeholder" on:click={focusInput} role="button">{name}</p>
     {#if name == "Password"}
     <!-- TODO change to button -->
-    <img 
-        src="/img/{passwordVisible ? 'hide' : 'eye'}-black-icon-96x96.png"
-        alt="{passwordVisible ? 'hide' : 'eye'} password icon"
-        on:click={toggleVisible}
-    >
+    <button on:click={toggleVisible}>
+    {#if passwordVisible}
+        <img src="/img/hide-black-icon-48x48.png" alt="hide password icon">
+    {:else}
+        <img src="/img/eye-black-icon-48x48.png" alt="show password icon">
+    {/if}
+    </button>
     {/if}
 </section>
 
@@ -68,6 +70,7 @@
     }
     .container {
         position: relative;
+        margin: 0.5em 0;
     }
     .placeholder {
         position: absolute;
@@ -78,7 +81,6 @@
         font-size: var(--font-small);
         color: #666;
         transition: all 0.1s ease-in-out 0s;
-        /* background-color: var(--background-color); */
     }
     input:focus,
     .active input {
@@ -90,11 +92,17 @@
         font-size: var(--font-size-default);
         transform: translateY(calc(-1*var(--y-coordinate) - 1.1em));
     }
-    img {
+    .container button {
         position: absolute;
-        top: 20%;
-        left: calc(var(--input-width) - 1.35em);
-        height: 2em;
-        width: 2em;
+        top: 15%;
+        right: 0.5em;
+        height: 1.5em;
+        width: 1.5em;
+        background-color: transparent;
+        border: none;
+    }
+    .container button img {
+        height: 100%;
+        width: 100%;
     }
 </style>

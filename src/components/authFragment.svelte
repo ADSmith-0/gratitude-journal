@@ -105,11 +105,11 @@
         <img src="/img/google-icon-96x96.png" alt="google icon">
         {name} with google
     </button> -->
-    {#if name == "Sign up"}
+    <!-- {#if name == "Sign up"}
     <a href="/login" class="link">Have an account already? Login</a>
     {:else}
     <a href="/sign-up" class="link">Don't have an account? Sign up</a>
-    {/if}
+    {/if} -->
 </section>
 <ErrorMsg visible={errorVisible} message={errorMessage}/>
 <style>
@@ -121,6 +121,7 @@
         align-items: center;
         background: var(--background-color);
         padding: 1em;
+        padding-bottom: 2em;
         box-shadow: var(--box-shadow);
     }
     .selector {
@@ -150,8 +151,6 @@
         transition: all 0.3s cubic-bezier(.68,-0.55,.27,1.55) 0s;
     }
     .translate {
-        /* transform: translateX(10.7em); */
-        /* transform: translateX(216%); */
         left: 63%;
     }
 
@@ -179,6 +178,6 @@
     #submit {
         border: none;
         cursor: pointer;
-        margin-top: 2em;
+        margin-top: 0.8em;
     }
 </style>

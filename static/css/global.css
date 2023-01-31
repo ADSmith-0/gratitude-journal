@@ -33,6 +33,7 @@
     --box-shadow: 0 0.125em 0.25em var(--black-translucent);
     --top-bar-height: 4em;
     --bottom-bar-height: 7em;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /*
