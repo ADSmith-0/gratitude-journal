@@ -1,5 +1,5 @@
 <script>
-    import { auth } from '../firebase.svelte';
+    import { auth } from '../firebase';
     import { createUserWithEmailAndPassword } from 'firebase/auth';
     import InputBox from './inputBox.svelte';
     import ErrorMsg from './errorMsg.svelte';
