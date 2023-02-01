@@ -1,11 +1,13 @@
 <script>
+    import { auth } from '../firebase.svelte';
+    import { createUserWithEmailAndPassword } from 'firebase/auth';
     import InputBox from './inputBox.svelte';
     import ErrorMsg from './errorMsg.svelte';
     export let name;
 
     let fields = {
-        email: undefined,
-        password: undefined
+        email: "",
+        password: ""
     };
     let errorMessage = "";
     let errorVisible = false;
@@ -15,26 +17,9 @@
         fields[id] = newValue;
     }
 
-    const doesEmailExist = async (email) => {
-        const checkDBForEmail = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve({ "matched": true });
-            }, 1000);
-        })
-        return (await checkDBForEmail);
-    }
-
     const setError = (message, visible) => {
         errorMessage = message;        
         errorVisible = visible;
-    }
-
-    const signupWithGoogle = () => {
-        // TODO GOOGLE API
-    }
-
-    const loginWithGoogle = () => {
-        // TODO GOOGLE API
     }
 
     const findEmptyField = () => {
@@ -53,22 +38,21 @@
             return false;
         }
 
-        const { matched } = await doesEmailExist(fields["email"]);
-        if(matched){
-            setError("Email already exists", true);
-            return false;
-        }
+        const { email, password } = fields;
         
-        // TODO SERVER SIDE: add to db
-    }
-
-    const areLoginDetailsCorrect = async () => {
-        const detailsCorrect = await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve({ "status": 200 });
-            }, 1000);
-        });
-        return (await detailsCorrect);
+        // createUserWithEmailAndPassword(auth, email, password)
+        // .then((userCredential) => {
+        //     // Signed in 
+            
+        // })
+        // .catch((error) => {
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        //     console.error(`${errorCode}: ${errorMessage}`);
+        // });
+        name="Login";
+        fields["email"]="";
+        fields["password"]="";
     }
 
     const tryLogin = async () => {
@@ -97,8 +81,8 @@
         <button class="button" on:click={() => name="Sign up"}>Sign up</button>
         <div class={"underline " + (name=="Sign up" && "translate")}></div>
     </section>
-    <InputBox id="email" name="Email" type="text" passValueBack={updateField} validateAs="email"/>
-    <InputBox id="password" name="Password" type="password" passValueBack={updateField}/>
+    <InputBox id="email" name="Email" value={fields["email"]} type="text" passValueBack={updateField} validateAs="email"/>
+    <InputBox id="password" name="Password" value={fields["password"]} type="password" passValueBack={updateField}/>
     <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
     <!-- TODO: if not used remove google IMG -->
     <!-- <button id="btn-google" on:click={name=="Sign up" ? signupWithGoogle : loginWithGoogle}>

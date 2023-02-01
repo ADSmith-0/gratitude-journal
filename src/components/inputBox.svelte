@@ -1,6 +1,7 @@
 <script>
     export let id;
     export let name;
+    export let value;
     export let type;
     export let passValueBack; //Function
     export let validateAs = undefined;
@@ -37,7 +38,7 @@
     }
 </script>
 <section class="container {style}">
-    <input id={id} type={type} on:input={checkInput} on:blur={scrollToStart}>
+    <input id={id} type={type} value={value} on:input={checkInput} on:blur={scrollToStart}>
     <!-- TODO change to button -->
     <p class="placeholder" on:click={focusInput} role="button">{name}</p>
     {#if name == "Password"}
