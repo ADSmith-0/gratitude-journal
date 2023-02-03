@@ -1,10 +1,15 @@
 <script>
-    export let id;
-    export let name;
-    export let value;
+	export let id;
+    export let placeholder;
     export let type;
     export let passValueBack; //Function
     export let validateAs = undefined;
+    export let errorVisible = false;
+
+    let rawValue = "";
+    let errorMessage = "";
+
+    const updateRawValue = e => rawValue = e.target.value;
 
     const regexPatterns = {
         "email": /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
@@ -12,36 +17,43 @@
         "number": /\d+/
     }
 
-    const validateInput = value => {
+    const isValueEmpty = value => value == ""; 
+
+    const validateValue = value => {
         const validationCriteria = validateAs?.toLowerCase() || "text";
         return regexPatterns[validationCriteria].test(value);
     }
 
     let style = "";
-    const checkInput = e => {
-        const value = e.target.value;
-        
-        style = (value.length !== 0) ? "active" : "";
-
-        e.target.newValue = (validateInput(value)) ? value : undefined;
-        passValueBack(e);
+    const checkValue = value => {
+        if(isValueEmpty(value)){
+            errorMessage = "Please enter a value";
+            return;
+        }
+        errorMessage = "";
+        style = "active";
+        const valueValid = validateValue(value);
+        if(!valueValid){
+            errorMessage = `Please enter a valid ${id}`;
+            passValueBack([id, ""]);
+            return;
+        }
+        passValueBack([id, value]);
     }
     const scrollToStart = e => e.target.scrollTo(0,0);
-    const focusInput = e => {
-        const inputBox = e.target.parentElement.querySelector('input');
-        inputBox.focus();
-    }
     let passwordVisible = false;
     const toggleVisible = () => {
         passwordVisible = !passwordVisible;
         type = (passwordVisible) ? "text" : "password";
     }
+
+    $: checkValue(rawValue);
 </script>
-<section class="container {style}">
-    <input id={id} type={type} value={value} on:input={checkInput} on:blur={scrollToStart}>
-    <!-- TODO change to button -->
-    <p class="placeholder" on:click={focusInput} role="button">{name}</p>
-    {#if name == "Password"}
+<section class="container {style} {errorVisible && errorMessage ? 'error' : ''}">
+    <!-- Can't use bind because of variable type -->
+    <input type={type} value={rawValue} on:input={updateRawValue} on:blur={scrollToStart}>
+    <span class="placeholder">{placeholder}</span>
+    {#if id == "password"}
     <!-- TODO change to button -->
     <button on:click={toggleVisible}>
     {#if passwordVisible}
@@ -50,6 +62,12 @@
         <img src="/img/eye-black-icon-48x48.png" alt="show password icon">
     {/if}
     </button>
+    {/if}
+    {#if errorVisible && errorMessage}
+        <span class="error-msg">
+            <img src="./img/exclamation-mark-icon-red-48x48.png" alt="Warning symbol">
+            {errorMessage}
+        </span>
     {/if}
 </section>
 
@@ -72,6 +90,10 @@
     .container {
         position: relative;
         margin: 0.5em 0;
+        --color: var(--blue);
+    }
+    .container.error {
+        --color: var(--red);
     }
     .placeholder {
         position: absolute;
@@ -82,14 +104,15 @@
         font-size: var(--font-small);
         color: #666;
         transition: all 0.1s ease-in-out 0s;
+        pointer-events: none;
     }
     input:focus,
     .active input {
-        border-color: var(--blue);
+        border-color: var(--color);
     }
-    input:focus ~ p.placeholder,
-    .active p.placeholder{
-        color: var(--blue);
+    input:focus ~ .placeholder,
+    .active .placeholder{
+        color: var(--color);
         font-size: var(--font-size-default);
         transform: translateY(calc(-1*var(--y-coordinate) - 1.1em));
     }
@@ -105,5 +128,18 @@
     .container button img {
         height: 100%;
         width: 100%;
+    }
+    .error-msg {
+        color: var(--red);
+        font-weight: 400;
+        font-size: var(--font-x-small);
+        display: flex;
+        align-items: center;
+        margin-top: 0.2em;
+    }
+    .error-msg img {
+        height: 1em;
+        width: 1em;
+        margin-right: 0.3em;
     }
 </style>

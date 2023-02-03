@@ -1,25 +1,21 @@
 <script>
-    import { auth } from '../firebase';
+    import { auth } from '../firebase.js';
     import { createUserWithEmailAndPassword } from 'firebase/auth';
     import InputBox from './inputBox.svelte';
-    import ErrorMsg from './errorMsg.svelte';
     export let name;
+    let loading = false;
 
     let fields = {
         email: "",
         password: ""
     };
-    let errorMessage = "";
-    let errorVisible = false;
+    let errorsVisible = false;
 
-    const updateField = e => {
-        const { id, newValue } = e.target;
+    const setErrorsVisible = bool => errorsVisible = bool;
+
+    const updateField = values => {
+        const [ id, newValue ] = values;
         fields[id] = newValue;
-    }
-
-    const setError = (message, visible) => {
-        errorMessage = message;        
-        errorVisible = visible;
     }
 
     const findEmptyField = () => {
@@ -32,48 +28,35 @@
     }
 
     const trySignup = async () => {
-        const emptyField = findEmptyField();
-        if(emptyField){
-            setError("Enter your "+emptyField, true);
+        if(findEmptyField()){
+            setErrorsVisible(true);
             return false;
         }
 
         const { email, password } = fields;
         
-        // createUserWithEmailAndPassword(auth, email, password)
-        // .then((userCredential) => {
-        //     // Signed in 
-            
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     console.error(`${errorCode}: ${errorMessage}`);
-        // });
-        name="Login";
-        fields["email"]="";
-        fields["password"]="";
+        const createUser = createUserWithEmailAndPassword(auth, email, password);
+        loading = true;
+        createUser.then((userCredential) => {
+            loading = false;
+            name="Login";
+            fields["email"] = "";
+            fields["password"] = "";
+        })
+        .catch((error) => {
+            loading = false;
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(`${errorCode}: ${errorMessage}`);
+        });
     }
 
     const tryLogin = async () => {
-        const emptyField = findEmptyField();
-        if(emptyField){
-            setError("Enter your "+emptyField, true);           
+        if(findEmptyField()){
+            setErrorsVisible(true);        
             return false;
-        }        
-
-        const isCorrectDetails = await areLoginDetailsCorrect();
-        if(isCorrectDetails == 404){
-            setError("Incorrect email or password, check and try again", true);
-            return false;
-        }
-
-        if(isCorrectDetails == 200){
-            // TODO SERVER SIDE: login code
         }
     }
-
-
 </script>
 <section class="container">
     <section class="selector">
@@ -81,21 +64,29 @@
         <button class="button" on:click={() => name="Sign up"}>Sign up</button>
         <div class={"underline " + (name=="Sign up" && "translate")}></div>
     </section>
-    <InputBox id="email" name="Email" value={fields["email"]} type="text" passValueBack={updateField} validateAs="email"/>
-    <InputBox id="password" name="Password" value={fields["password"]} type="password" passValueBack={updateField}/>
-    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
-    <!-- TODO: if not used remove google IMG -->
-    <!-- <button id="btn-google" on:click={name=="Sign up" ? signupWithGoogle : loginWithGoogle}>
-        <img src="/img/google-icon-96x96.png" alt="google icon">
-        {name} with google
-    </button> -->
-    <!-- {#if name == "Sign up"}
-    <a href="/login" class="link">Have an account already? Login</a>
+    <InputBox 
+        id="email"
+        placeholder="Email"
+        value={fields["email"]}
+        type="text"
+        passValueBack={updateField}
+        validateAs="email"
+        errorVisible={errorsVisible}
+    />
+    <InputBox
+        id="password"
+        placeholder="Password"
+        value={fields["password"]}
+        type="password"
+        passValueBack={updateField}
+        errorVisible={errorsVisible}
+    />
+    {#if loading}
+    <button class="button bg-green loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
     {:else}
-    <a href="/sign-up" class="link">Don't have an account? Sign up</a>
-    {/if} -->
+    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
+    {/if}
 </section>
-<ErrorMsg visible={errorVisible} message={errorMessage}/>
 <style>
     .container {
         display: flex;
@@ -137,23 +128,6 @@
     .translate {
         left: 63%;
     }
-
-    /* TODO: Remove if unused */
-    /* #btn-google {
-        border: 0.15em solid var(--blue);
-        border-radius: var(--radius);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 1.125em;
-        background: none;
-        padding: 0.6em 0.8em;
-        font-weight: 400;
-    }
-    #btn-google img{
-        height: 2em;
-        width: 2em;
-    } */
     .link {
         font-size: var(--font-size-default);
         text-align: center;
@@ -164,4 +138,27 @@
         cursor: pointer;
         margin-top: 0.8em;
     }
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: not-allowed;
+    }
+    .loading img {
+        height: 1.5em;
+        width: 1.5em;
+    }
+    .rotating {
+        animation: rotating 2s linear infinite;
+
+    }
+    @keyframes rotating {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
 </style>
