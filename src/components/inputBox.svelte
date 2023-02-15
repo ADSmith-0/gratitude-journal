@@ -5,9 +5,13 @@
     export let passValueBack; //Function
     export let validateAs = undefined;
     export let errorVisible = false;
+    
+    let rawValue = "", errorMessage = "", style = "";
 
-    let rawValue = "";
-    let errorMessage = "";
+    export const clear = () => {
+        rawValue = "";
+        style = "";
+    }
 
     const updateRawValue = e => rawValue = e.target.value;
 
@@ -24,7 +28,6 @@
         return regexPatterns[validationCriteria].test(value);
     }
 
-    let style = "";
     const checkValue = value => {
         if(isValueEmpty(value)){
             errorMessage = "Please enter a value";
@@ -54,7 +57,6 @@
     <input type={type} value={rawValue} on:input={updateRawValue} on:blur={scrollToStart}>
     <span class="placeholder">{placeholder}</span>
     {#if id == "password"}
-    <!-- TODO change to button -->
     <button on:click={toggleVisible}>
     {#if passwordVisible}
         <img src="/img/hide-black-icon-48x48.png" alt="hide password icon">
@@ -64,10 +66,10 @@
     </button>
     {/if}
     {#if errorVisible && errorMessage}
-        <span class="error-msg">
-            <img src="./img/exclamation-mark-icon-red-48x48.png" alt="Warning symbol">
-            {errorMessage}
-        </span>
+    <span class="error-msg">
+        <img src="./img/exclamation-mark-icon-red-48x48.png" alt="Warning symbol">
+        {errorMessage}
+    </span>
     {/if}
 </section>
 

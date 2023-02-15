@@ -4,6 +4,7 @@
     import InputBox from './inputBox.svelte';
     export let name;
     let loading = false;
+    let emailInput, passwordInput;
 
     let fields = {
         email: "",
@@ -12,6 +13,12 @@
     let errorsVisible = false;
 
     const setErrorsVisible = bool => errorsVisible = bool;
+
+    const setName = newName => {
+        name = newName;
+        emailInput.clear();
+        passwordInput.clear();
+    }
 
     const updateField = values => {
         const [ id, newValue ] = values;
@@ -60,26 +67,26 @@
 </script>
 <section class="container">
     <section class="selector">
-        <button class="button" on:click={() => name="Login"}>Login</button>
-        <button class="button" on:click={() => name="Sign up"}>Sign up</button>
+        <button class="button" on:click={() => setName("Login")}>Login</button>
+        <button class="button" on:click={() => setName("Sign up")}>Sign up</button>
         <div class={"underline " + (name=="Sign up" && "translate")}></div>
     </section>
     <InputBox 
         id="email"
         placeholder="Email"
-        value={fields["email"]}
         type="text"
         passValueBack={updateField}
         validateAs="email"
         errorVisible={errorsVisible}
+        bind:this={emailInput}
     />
     <InputBox
         id="password"
         placeholder="Password"
-        value={fields["password"]}
         type="password"
         passValueBack={updateField}
         errorVisible={errorsVisible}
+        bind:this={passwordInput}
     />
     {#if loading}
     <button class="button bg-green loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
