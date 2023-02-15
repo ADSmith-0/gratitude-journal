@@ -49,6 +49,9 @@
             name="Login";
             fields["email"] = "";
             fields["password"] = "";
+            emailInput.clear();
+            passwordInput.clear();
+            setErrorsVisible(false);
         })
         .catch((error) => {
             loading = false;
@@ -89,7 +92,7 @@
         bind:this={passwordInput}
     />
     {#if loading}
-    <button class="button bg-green loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
+    <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
     {:else}
     <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
     {/if}
