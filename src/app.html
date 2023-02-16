@@ -13,6 +13,13 @@
         <!-- <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ea54a4"> -->
         <meta name="theme-color" content="#ea54a4">
         <link rel="manifest" href="/app.webmanifest">
+        <script>
+            String.prototype.toTitleCase = function () {
+                const firstChar = this[0];
+                const remainder = this.slice(1, this.length);
+                return firstChar.toUpperCase() + remainder;
+            }
+        </script>
 		%sveltekit.head%
 	</head>
 	<body>

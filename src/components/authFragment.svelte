@@ -1,6 +1,7 @@
 <script>
     import { auth } from '../firebase.js';
     import { createUserWithEmailAndPassword } from 'firebase/auth';
+    import { onMount, onDestroy } from 'svelte';
     import InputBox from './inputBox.svelte';
     export let name;
     let loading = false;
@@ -56,8 +57,10 @@
         .catch((error) => {
             loading = false;
             const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(`${errorCode}: ${errorMessage}`);
+            // const errorMessage = error.message;
+            const readableErrorCode = errorCode.split("/")[1].replace(/-/g, " ");
+            emailInput.setErrorMessage(readableErrorCode.toTitleCase());
+            errorsVisible = true;
         });
     }
 
@@ -67,6 +70,17 @@
             return false;
         }
     }
+
+    let ctaBtn;
+    // Event Listener for keypresses to listen for enter being pressed
+    const listenForEnter = e => {
+        if(e.key === "Enter"){
+            ctaBtn.click();
+        }
+    }
+    onMount(async () => window.addEventListener("onkeydown", listenForEnter));
+
+    onDestroy(() => window.removeEventListener("onkeydown", listenForEnter));
 </script>
 <section class="container">
     <section class="selector">
@@ -94,7 +108,7 @@
     {#if loading}
     <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
     {:else}
-    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin}>{name}</button>
+    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin} bind:this={ctaBtn}>{name}</button>
     {/if}
 </section>
 <style>
@@ -170,5 +184,4 @@
             transform: rotate(360deg);
         }
     }
-
 </style>

@@ -13,10 +13,12 @@
         style = "";
     }
 
+    export const setErrorMessage = msg => errorMessage = msg;
+
     const updateRawValue = e => rawValue = e.target.value;
 
     const regexPatterns = {
-        "email": /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        "email": /^[\w|\d]+(\.[\w|\d]+)*@[\w|\d]+(\.[\w|\d]+)+$/,
         "text": /[a-zA-Z]+/,
         "number": /\d+/
     }
