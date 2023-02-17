@@ -29,6 +29,8 @@
 
 - [x] Fix add entry selecting empty date when no date is given
 
+- [ ] Need to refactor inputs with forms
+
 # Future features:
 
 - Add select next empty date button to the add entry screen

@@ -13,6 +13,9 @@
         style = "";
     }
 
+    let input;
+    export const blur = () => input.blur();
+
     export const setErrorMessage = msg => errorMessage = msg;
 
     const updateRawValue = e => rawValue = e.target.value;
@@ -56,7 +59,7 @@
 </script>
 <section class="container {style} {errorVisible && errorMessage ? 'error' : ''}">
     <!-- Can't use bind because of variable type -->
-    <input type={type} value={rawValue} on:input={updateRawValue} on:blur={scrollToStart}>
+    <input type={type} value={rawValue} on:input={updateRawValue} on:blur={scrollToStart} bind:this={input}>
     <span class="placeholder">{placeholder}</span>
     {#if id == "password"}
     <button on:click={toggleVisible}>

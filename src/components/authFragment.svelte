@@ -51,6 +51,8 @@
             fields["password"] = "";
             emailInput.clear();
             passwordInput.clear();
+            emailInput.blur();
+            passwordInput.blur();
             setErrorsVisible(false);
         })
         .catch((error) => {
