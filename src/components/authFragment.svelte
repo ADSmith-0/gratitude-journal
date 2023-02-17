@@ -1,7 +1,6 @@
 <script>
     import { auth } from '../firebase.js';
     import { createUserWithEmailAndPassword } from 'firebase/auth';
-    import { onMount, onDestroy } from 'svelte';
     import InputBox from './inputBox.svelte';
     export let name;
     let loading = false;
@@ -78,10 +77,8 @@
             ctaBtn.click();
         }
     }
-    onMount(async () => window.addEventListener("onkeydown", listenForEnter));
-
-    onDestroy(() => window.removeEventListener("onkeydown", listenForEnter));
 </script>
+<svelte:window on:keydown={listenForEnter} />
 <section class="container">
     <section class="selector">
         <button class="button" on:click={() => setName("Login")}>Login</button>
