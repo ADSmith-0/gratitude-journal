@@ -1,3 +1,12 @@
+<script>
+	import { goto } from "$app/navigation";
+
+
+    const logout = () => {
+        localStorage.removeItem("accessToken");
+        goto("/account");
+    }
+</script>
 <div class="wrapper">
     <section class="card">
         <p>Account details</p>
@@ -16,7 +25,7 @@
     </section>
     <button class="button-small card">Change Email</button>
     <button class="button-small card">Change password</button>
-    <button id="logout" class="button-small card">Logout</button>
+    <button id="logout" class="button-small card" on:click={logout}>Logout</button>
     <button id="delete-btn" class="button-small card">Delete Account</button>
 </div>
 <style>
