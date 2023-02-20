@@ -54,8 +54,8 @@
 <section id="bottom" class="{navbarVisible ? 'visible' : ''}">
     <nav>
         {#each items as {name, link, imgs}}
-            <a href={link} class="{selectedItem === link ? "selected": ""}">
-                {#if selectedItem === link}
+            <a href={link} class="{selectedItem.includes(link) ? "selected": ""}">
+                {#if selectedItem.includes(link)}
                     <img src={imgs.selected.src} alt={imgs.selected.alt}> 
                 {:else}
                     <img src={imgs.black.src} alt={imgs.black.alt}>
