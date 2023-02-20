@@ -59,7 +59,7 @@
             passwordInput.blur();
             setErrorsVisible(false);
         })
-        .catch((error) => {
+        .catch(error => {
             const errorCode = error.code;
             // const errorMessage = error.message;
             const readableErrorCode = errorCode.split("/")[1].replace(/-/g, " ");
@@ -83,11 +83,11 @@
 
         const signIn = signInWithEmailAndPassword(auth, email, password);
         loading = true;
-        signIn.then((userCredential) => {
+        signIn.then(userCredential => {
             localStorage.setItem("accessToken", userCredential.user.accessToken);
             goto("/account/details");
         })
-        .catch((error) => {
+        .catch(error => {
             const errorCode = error.code;
             // const errorMessage = error.message;
             const readableErrorCode = errorCode.split("/")[1].replace(/-/g, " ");

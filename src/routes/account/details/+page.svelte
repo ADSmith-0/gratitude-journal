@@ -1,10 +1,24 @@
 <script>
 	import { goto } from "$app/navigation";
-
+    import { auth } from "../../../firebase";
+    import { deleteUser } from "firebase/auth";
 
     const logout = () => {
         localStorage.removeItem("accessToken");
         goto("/account");
+    }
+
+    const deleteAccount = () => {
+        const user = auth.currentUser;
+
+        deleteUser(user).then(() => {
+            logout();    
+        })
+        .catch(error => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error(errorCode, ": ", errorMessage);
+        })
     }
 </script>
 <div class="wrapper">
@@ -26,7 +40,7 @@
     <button class="button-small card">Change Email</button>
     <button class="button-small card">Change password</button>
     <button id="logout" class="button-small card" on:click={logout}>Logout</button>
-    <button id="delete-btn" class="button-small card">Delete Account</button>
+    <button id="delete-btn" class="button-small card" on:click={deleteAccount}>Delete Account</button>
 </div>
 <style>
     .wrapper {
