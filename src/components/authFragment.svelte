@@ -1,7 +1,8 @@
 <script>
     import { auth } from '../firebase.js';
-    import { createUserWithEmailAndPassword } from 'firebase/auth';
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
     import InputBox from './inputBox.svelte';
+	import { goto } from '$app/navigation';
     export let name;
     let loading = false;
     let emailInput, passwordInput;
@@ -11,6 +12,10 @@
         password: ""
     };
     let errorsVisible = false;
+
+    if(!!localStorage.getItem("accessToken")){
+        goto("/account/details");
+    }
 
     const setErrorsVisible = bool => errorsVisible = bool;
 
@@ -44,8 +49,7 @@
         
         const createUser = createUserWithEmailAndPassword(auth, email, password);
         loading = true;
-        createUser.then((userCredential) => {
-            loading = false;
+        createUser.then(() => {
             name="Login";
             fields["email"] = "";
             fields["password"] = "";
@@ -56,12 +60,14 @@
             setErrorsVisible(false);
         })
         .catch((error) => {
-            loading = false;
             const errorCode = error.code;
             // const errorMessage = error.message;
             const readableErrorCode = errorCode.split("/")[1].replace(/-/g, " ");
             emailInput.setErrorMessage(readableErrorCode.toTitleCase());
             errorsVisible = true;
+        })
+        .finally(() => {
+            loading = false;
         });
     }
 
@@ -70,6 +76,27 @@
             setErrorsVisible(true);        
             return false;
         }
+
+        const auth = getAuth();
+
+        const { email, password } = fields;
+
+        const signIn = signInWithEmailAndPassword(auth, email, password);
+        loading = true;
+        signIn.then((userCredential) => {
+            localStorage.setItem("accessToken", userCredential.user.accessToken);
+            goto("/account/details");
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            // const errorMessage = error.message;
+            const readableErrorCode = errorCode.split("/")[1].replace(/-/g, " ");
+            emailInput.setErrorMessage(readableErrorCode.toTitleCase());
+            errorsVisible = true;
+        })
+        .finally(() => {
+            loading = false;
+        });
     }
 
     let ctaBtn;
