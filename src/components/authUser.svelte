@@ -19,12 +19,6 @@
 
     const setErrorsVisible = bool => errorsVisible = bool;
 
-    const setName = newName => {
-        name = newName;
-        emailInput.clear();
-        passwordInput.clear();
-    }
-
     const updateField = values => {
         const [ id, newValue ] = values;
         fields[id] = newValue;
@@ -39,7 +33,7 @@
         return false;
     }
 
-    const trySignup = async () => {
+    const signup = async () => {
         if(findEmptyField()){
             setErrorsVisible(true);
             return false;
@@ -71,7 +65,7 @@
         });
     }
 
-    const tryLogin = async () => {
+    const login = async () => {
         if(findEmptyField()){
             setErrorsVisible(true);        
             return false;
@@ -109,11 +103,6 @@
 </script>
 <svelte:window on:keydown={listenForEnter} />
 <section class="container">
-    <section class="selector">
-        <button class="button" on:click={() => setName("Login")}>Login</button>
-        <button class="button" on:click={() => setName("Sign up")}>Sign up</button>
-        <div class={"underline " + (name=="Sign up" && "translate")}></div>
-    </section>
     <InputBox 
         id="email"
         placeholder="Email"
@@ -134,7 +123,7 @@
     {#if loading}
     <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
     {:else}
-    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? trySignup : tryLogin} bind:this={ctaBtn}>{name}</button>
+    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? signup : login} bind:this={ctaBtn}>{name}</button>
     {/if}
 </section>
 <style>
@@ -147,41 +136,6 @@
         background: var(--background-color);
         padding: 1em;
         padding-bottom: 2em;
-        box-shadow: var(--box-shadow);
-    }
-    .selector {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
-    .selector button {
-        width: 100%;
-        height: 100%;
-        box-shadow: none;
-        border-radius: 0;
-        background-color: var(--background-color);
-    }
-    .selector button:first-child {
-        border-right: 2px solid var(--dark-grey);
-    }
-    .underline {
-        border-bottom: 3px solid #000;
-        width: 5em;
-        height: 1px;
-        position: absolute;
-        bottom: 0;
-        left: 12.5%;
-        transition: all 0.3s cubic-bezier(.68,-0.55,.27,1.55) 0s;
-    }
-    .translate {
-        left: 63%;
-    }
-    .link {
-        font-size: var(--font-size-default);
-        text-align: center;
-        font-weight: 400;
     }
     #submit {
         border: none;
