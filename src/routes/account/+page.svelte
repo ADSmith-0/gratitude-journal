@@ -2,10 +2,11 @@
     import AuthUser from '../../components/authUser.svelte';
 
     let name = "Sign up";
+    let authUser;
     const setName = newName => {
         name = newName;
-        emailInput.clear();
-        passwordInput.clear();
+        authUser.clearInputs();
+        authUser.resetErrors();
     }
 </script>
 <section class="container">
@@ -14,7 +15,7 @@
         <button class="button" on:click={() => setName("Sign up")}>Sign up</button>
         <div class={"underline " + (name=="Sign up" && "translate")}></div>
     </section>
-    <AuthUser name={name}/>
+    <AuthUser name={name} bind:this={authUser}/>
 </section>
 <style>
     .container {

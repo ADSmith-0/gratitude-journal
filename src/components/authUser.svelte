@@ -3,6 +3,7 @@
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
     import InputBox from './inputBox.svelte';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
     export let name;
     let loading = false;
     let emailInput, passwordInput;
@@ -13,11 +14,18 @@
     };
     let errorsVisible = false;
 
-    if(!!localStorage.getItem("accessToken")){
+    if(browser && !!localStorage.getItem("accessToken")){
         goto("/account/details");
     }
 
     const setErrorsVisible = bool => errorsVisible = bool;
+
+    export const clearInputs = () => {
+        emailInput.clear();
+        passwordInput.clear();
+    }
+    
+    export const resetErrors = () => setErrorsVisible(false);
 
     const updateField = values => {
         const [ id, newValue ] = values;
@@ -134,8 +142,8 @@
         justify-content: space-evenly;
         align-items: center;
         background: var(--background-color);
-        padding: 1em;
-        padding-bottom: 2em;
+        padding: 2em 1em;
+        border-radius: var(--radius-less);
     }
     #submit {
         border: none;

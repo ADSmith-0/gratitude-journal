@@ -2,6 +2,11 @@
 	import { goto } from "$app/navigation";
     import { auth } from "../../../firebase";
     import { deleteUser } from "firebase/auth";
+    import ReauthUserPopup from "../../../components/reauthUserPopup.svelte";
+
+    let reauth = false;
+
+    const setReauth = newReauth => reauth = newReauth;
 
     const logout = () => {
         localStorage.removeItem("accessToken");
@@ -21,6 +26,9 @@
         })
     }
 </script>
+{#if reauth}
+<ReauthUserPopup setReauth={setReauth} />
+{/if}
 <div class="wrapper">
     <section class="card">
         <p>Account details</p>

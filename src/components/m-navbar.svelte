@@ -33,11 +33,11 @@
         }
     ];
 
-    let navbarVisible = true;
+    let visible = true;
 
     const toggleNavbarVisible = (e) => {
         const height = e.target.innerHeight;
-        navbarVisible = (height >= 600);
+        visible = (height >= 600);
     }
     
 </script>
@@ -51,7 +51,7 @@
 <div class="content-wrapper hide-scrollbar">
     <slot></slot>
 </div>
-<section id="bottom" class="{navbarVisible ? 'visible' : ''}">
+<section id="bottom" class:visible>
     <nav>
         {#each items as {name, link, imgs}}
             <a href={link} class="{selectedItem.includes(link) ? "selected": ""}">

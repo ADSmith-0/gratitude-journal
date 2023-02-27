@@ -7,7 +7,7 @@
     $: localStorage.setItem(key, checked);
 </script>
 <div>
-    <label class="{checked ? 'checked' : ''}">
+    <label class:checked>
         <input type="checkbox" bind:checked={checked}>
         {label}
     </label>

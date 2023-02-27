@@ -56,8 +56,10 @@
     }
 
     $: checkValue(rawValue);
+
+    $: error = errorVisible && errorMessage
 </script>
-<section class="container {style} {errorVisible && errorMessage ? 'error' : ''}">
+<section class="container {style}" class:error>
     <!-- Can't use bind because of variable type -->
     <input type={type} value={rawValue} on:input={updateRawValue} on:blur={scrollToStart} bind:this={input}>
     <span class="placeholder">{placeholder}</span>
