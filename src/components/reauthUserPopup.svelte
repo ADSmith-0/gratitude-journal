@@ -2,14 +2,13 @@
 	import AuthUser from "./authUser.svelte";
 
     export let setReauth = () => {};
+    export let onSuccessfulReauth = res => res;
 
     const closePopup = () => setReauth(false);
 
     const focus = node => {
         node.focus();
     }
-
-
 </script>
 <div class="background-wrapper">
     <div class="wrapper" on:blur={closePopup} use:focus>
@@ -20,7 +19,11 @@
             <p>Please enter your login details to proceed</p>
         </section>
         <div class="input-wrapper">
-            <AuthUser name="Login" action="reauth" />
+            <AuthUser 
+                name="Login"
+                action="reauth"
+                onSuccessfulReauth={onSuccessfulReauth}
+            />
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@
     import ReauthUserPopup from "../../../components/reauthUserPopup.svelte";
 
     let reauth = false;
+    let blockedAction = "";
 
     const setReauth = newReauth => reauth = newReauth;
 
@@ -17,13 +18,18 @@
         deleteSelf(logout)
         .catch(error => {
             if(error.includes("requires recent login")){
+                blockedAction = "deleteAccount";
                 reauth = true;
             }
         })
     }
+
+    const tryActionAgain = userCredentials => {
+        blockedAction();
+    }
 </script>
 {#if reauth}
-<ReauthUserPopup setReauth={setReauth} />
+<ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
 {/if}
 <div class="wrapper">
     <section class="card">

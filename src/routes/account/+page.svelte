@@ -1,23 +1,31 @@
 <script>
     import AuthUser from '../../components/authUser.svelte';
+    import { browser } from '$app/environment';
+    import { goto } from '$app/navigation';
+
+    if(browser && !!localStorage.getItem("accessToken")){
+        goto("/account/details");
+    }
 
     let name = "Sign up";
+    let action = "signup";
     let authUser;
     const setName = e => {
         const newName = e.target.innerHTML;
         if(newName !== name){
             name = newName;
-            authUser.clearInputs();
-            authUser.resetErrors();
+            action = newName.replace(/\s/g, "").toLowerCase();
+            authUser.resetPage();
         }
     }
 
-    const onSuccessfulSignup = () => {
+    const onSuccessfulSignup = response => {
         name = "Login";
         authUser.resetPage();
     }
 
     const onSuccessfulLogin = userCredential => {
+        // TODO change to js HTTP read-only cookie?
         localStorage.setItem("accessToken", userCredential.user.accessToken);
         goto("/account/details");
     }
@@ -26,12 +34,13 @@
     <section class="selector">
         <button class="button" on:click={setName}>Login</button>
         <button class="button" on:click={setName}>Sign up</button>
-        <div class={"underline " + (name=="Sign up" && "translate")}></div>
+        <div class="underline" class:translate={name==="Sign up"}></div>
     </section>
     <AuthUser 
         name={name}
+        action={action}
         bind:this={authUser}
-        onSuccessSignup={onSuccessfulSignup}
+        onSuccessfulSignup={onSuccessfulSignup}
         onSuccessfulLogin={onSuccessfulLogin}
     />
 </section>
@@ -74,10 +83,5 @@
     }
     .translate {
         left: 63%;
-    }
-    .link {
-        font-size: var(--font-size-default);
-        text-align: center;
-        font-weight: 400;
     }
 </style>

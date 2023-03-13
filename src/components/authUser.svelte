@@ -1,14 +1,11 @@
 <script>
-    import { getAppAuth } from '../firebase.js';
     import { login, signup } from '../db-firebase.js';
-    import { reauthenticateWithCredential } from 'firebase/auth';
     import InputBox from './inputBox.svelte';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
     export let name;
     export let action = name.replace(/\s/g, "").toLowerCase();
-    export let onSuccessSignup = res => res;
+    export let onSuccessfulSignup = res => res;
     export let onSuccessfulLogin = res => res;
+    export let onSuccessfulReauth = res => res;
     let loading = false;
     let emailInput, passwordInput;
 
@@ -17,10 +14,6 @@
         password: ""
     };
     let errorsVisible = false;
-
-    if(browser && !!localStorage.getItem("accessToken")){
-        goto("/account/details");
-    }
 
     const setErrorsVisible = bool => errorsVisible = bool;
 
@@ -36,13 +29,13 @@
         passwordInput.blur();
     }
 
+    export const resetErrors = () => setErrorsVisible(false);
+
     export const resetPage = () => {
         clearInputs();
         blurInputs();
-        setErrorsVisible(false);
+        resetErrors();
     }
-    
-    export const resetErrors = () => setErrorsVisible(false);
 
     const updateField = values => {
         const [ id, newValue ] = values;
@@ -58,17 +51,6 @@
         return false;
     }
 
-    const reauth = async () => {
-        const user = getAppAuth().currentUser;
-
-        const token = browser && localStorage.getItem("apiToken");
-
-        reauthenticateWithCredential(user, token)
-        .catch(error => {
-            console.error(error);
-        })
-    }
-
     const setEmailInputError = error => {
         emailInput.setErrorMessage(error.toTitleCase());
         errorsVisible = true;
@@ -80,6 +62,17 @@
         .catch(error => setEmailInputError(error))
         .finally(() => loading = false)
     }
+   
+    const handleReauth = () => {
+        if(findEmptyField()){
+            setErrorsVisible(true);
+            return false;
+        }
+
+        const { email, password } = fields;
+        
+        makeRequest(login(email, password, onSuccessfulReauth));
+    }
 
     const handleSignup = () => {
         if(findEmptyField()){
@@ -89,12 +82,10 @@
 
         const { email, password } = fields;
         
-        makeRequest(signup(email, password, onSuccessSignup));
+        makeRequest(signup(email, password, onSuccessfulSignup));
     }
 
-    const handleLogin = async () => {
-        console.log("running login")
-
+    const handleLogin = () => {
         if(findEmptyField()){
             setErrorsVisible(true);        
             return false;
@@ -109,8 +100,9 @@
         const actions = {
             "login": handleLogin,
             "signup": handleSignup,
-            "reauth": reauth
+            "reauth": handleReauth
         }
+        console.log(actions[action]);
         
         actions[action]();
     }
