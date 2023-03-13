@@ -1,10 +1,12 @@
 <script>
-    import { auth } from '../firebase.js';
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+    import { getAppAuth } from '../firebase.js';
+    import { login, signup } from '../db-firebase.js';
+    import { reauthenticateWithCredential } from 'firebase/auth';
     import InputBox from './inputBox.svelte';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
     export let name;
+    export let action = name.replace(/\s/g, "").toLowerCase();
     let loading = false;
     let emailInput, passwordInput;
 
@@ -41,7 +43,41 @@
         return false;
     }
 
-    const signup = async () => {
+    const reauth = async () => {
+        const user = getAppAuth().currentUser;
+
+        const token = browser && localStorage.getItem("apiToken");
+
+        reauthenticateWithCredential(user, token)
+        .catch(error => {
+            console.error(error);
+        })
+    }
+
+    const setEmailInputError = error => {
+        emailInput.setErrorMessage(error.toTitleCase());
+        errorsVisible = true;
+    }
+
+    const makeRequest = request => {
+        loading = true;
+        request
+        .catch(error => setEmailInputError(error))
+        .finally(() => loading = false)
+    }
+
+    const resetPage = response => {
+        name="Login";
+        fields["email"] = "";
+        fields["password"] = "";
+        emailInput.clear();
+        passwordInput.clear();
+        emailInput.blur();
+        passwordInput.blur();
+        setErrorsVisible(false);
+    }
+
+    const handleSignup = () => {
         if(findEmptyField()){
             setErrorsVisible(true);
             return false;
@@ -49,56 +85,35 @@
 
         const { email, password } = fields;
         
-        const createUser = createUserWithEmailAndPassword(auth, email, password);
-        loading = true;
-        createUser.then(() => {
-            name="Login";
-            fields["email"] = "";
-            fields["password"] = "";
-            emailInput.clear();
-            passwordInput.clear();
-            emailInput.blur();
-            passwordInput.blur();
-            setErrorsVisible(false);
-        })
-        .catch(error => {
-            const errorCode = error.code;
-            // const errorMessage = error.message;
-            const readableErrorCode = errorCode.split("/")[1].replace(/-/g, " ");
-            emailInput.setErrorMessage(readableErrorCode.toTitleCase());
-            errorsVisible = true;
-        })
-        .finally(() => {
-            loading = false;
-        });
+        makeRequest(signup(email, password, resetPage));
     }
 
-    const login = async () => {
+    const onSuccessfulLogin = userCredential => {
+        localStorage.setItem("accessToken", userCredential.user.accessToken);
+        goto("/account/details");
+    }
+
+    const handleLogin = async () => {
+        console.log("running login")
+
         if(findEmptyField()){
             setErrorsVisible(true);        
             return false;
         }
 
-        const auth = getAuth();
-
         const { email, password } = fields;
 
-        const signIn = signInWithEmailAndPassword(auth, email, password);
-        loading = true;
-        signIn.then(userCredential => {
-            localStorage.setItem("accessToken", userCredential.user.accessToken);
-            goto("/account/details");
-        })
-        .catch(error => {
-            const errorCode = error.code;
-            // const errorMessage = error.message;
-            const readableErrorCode = errorCode.split("/")[1].replace(/-/g, " ");
-            emailInput.setErrorMessage(readableErrorCode.toTitleCase());
-            errorsVisible = true;
-        })
-        .finally(() => {
-            loading = false;
-        });
+        makeRequest(login(email, password, onSuccessfulLogin));
+    }
+
+    const doAction = () => {
+        const actions = {
+            "login": handleLogin,
+            "signup": handleSignup,
+            "reauth": reauth
+        }
+        
+        actions[action]();
     }
 
     let ctaBtn;
@@ -131,7 +146,7 @@
     {#if loading}
     <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
     {:else}
-    <button id="submit" class="button bg-green" on:click={name=="Sign up" ? signup : login} bind:this={ctaBtn}>{name}</button>
+    <button id="submit" class="button bg-green" on:click={doAction} bind:this={ctaBtn}>{name}</button>
     {/if}
 </section>
 <style>

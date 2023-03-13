@@ -1,6 +1,6 @@
 <script>
 	import { ISOFromDate } from "../util";
-	import { db } from "../db";
+	import { db } from "../db-local";
     export let date;
     export let month;
     export let year;

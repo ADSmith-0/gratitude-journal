@@ -1,6 +1,6 @@
 <script>
 	import { goto } from "$app/navigation";
-    import { auth } from "../../../firebase";
+    import { getAppAuth } from "../../../firebase";
     import { deleteUser } from "firebase/auth";
     import ReauthUserPopup from "../../../components/reauthUserPopup.svelte";
 
@@ -14,15 +14,16 @@
     }
 
     const deleteAccount = () => {
-        const user = auth.currentUser;
+        const user = getAppAuth().currentUser;
 
         deleteUser(user).then(() => {
-            logout();    
+            logout();
         })
         .catch(error => {
             const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorCode, ": ", errorMessage);
+            if(errorCode.includes("requires-recent-login")){
+                reauth = true;
+            }
         })
     }
 </script>

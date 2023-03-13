@@ -1,5 +1,5 @@
 <script>
-    import { db } from '../../db';
+    import { db } from '../../db-local';
     import { browser } from '$app/environment';
     import { ISOFromDate } from '../../util';
     import DateInput from '../../components/dateInput.svelte';

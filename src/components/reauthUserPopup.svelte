@@ -8,6 +8,8 @@
     const focus = node => {
         node.focus();
     }
+
+
 </script>
 <div class="background-wrapper">
     <div class="wrapper" on:blur={closePopup} use:focus>
@@ -18,7 +20,7 @@
             <p>Please enter your login details to proceed</p>
         </section>
         <div class="input-wrapper">
-            <AuthUser name="Login" />
+            <AuthUser name="Login" action="reauth" />
         </div>
     </div>
 </div>
@@ -36,6 +38,8 @@
     }
     .wrapper {
         background-color: var(--background-color);
+        border-radius: var(--radius);
+        width: 95%;
     }
     .bar {
         padding: 0.3em;

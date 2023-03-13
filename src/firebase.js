@@ -18,7 +18,7 @@ const app = initializeApp({
     appId: env.PUBLIC_FIREBASE_APP_ID,
     measurementId: env.PUBLIC_FIREBASE_MEASUREMENT_ID
 });
-const auth = getAuth(app);
+const getAppAuth = () => getAuth(app);
 const db = getFirestore();
 
-export { app, auth, db };
+export { app, getAppAuth, db };
