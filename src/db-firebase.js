@@ -1,5 +1,5 @@
 import { getAppAuth } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, deleteUser, reauthenticateWithCredential, signInWithEmailAndPassword } from 'firebase/auth';
 
 /**
  * Function to take error code and message and parse it to readable text
@@ -26,6 +26,24 @@ const firebaseRequest = (request, callback = (response) => (response)) => (
         throw _textFromError(error);
     })
 )
+
+/**
+ * Reauthorise the user to perform certain actions, e.g. delete their account, change their password etc.
+ * @param {UserCredential} credential 
+ * @param {Function} callback 
+ * @returns 
+ */
+const reauth = (credential, callback) => {
+    const auth = getAppAuth();
+    const user = auth.currentUser;
+
+    return reauthenticateWithCredential(user, credential)
+    .then(credentials => callback(credentials))
+    .catch(error => {
+        console.error(error);
+        throw _textFromError(error);
+    })
+}
 
 /**
  * Sign up a new user with email and password combination
@@ -55,4 +73,19 @@ const login = (email, password, callback) => (
     )
 )
 
-export { signup, login }
+/**
+ * Function for user to delete their account
+ * @param {Function} callback 
+ * @returns {Promise} firebase response
+ */
+const deleteSelf = callback => {
+    const auth = getAppAuth();
+    const user = auth.currentUser;
+
+    return firebaseRequest(
+        deleteUser(user),
+        callback
+    )
+}
+
+export { signup, login, reauth, deleteSelf }

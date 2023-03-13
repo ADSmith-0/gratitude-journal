@@ -7,6 +7,8 @@
 	import { browser } from '$app/environment';
     export let name;
     export let action = name.replace(/\s/g, "").toLowerCase();
+    export let onSuccessSignup = res => res;
+    export let onSuccessfulLogin = res => res;
     let loading = false;
     let emailInput, passwordInput;
 
@@ -23,8 +25,21 @@
     const setErrorsVisible = bool => errorsVisible = bool;
 
     export const clearInputs = () => {
+        fields["email"] = "";
+        fields["password"] = "";
         emailInput.clear();
         passwordInput.clear();
+    }
+
+    export const blurInputs = () => {
+        emailInput.blur();
+        passwordInput.blur();
+    }
+
+    export const resetPage = () => {
+        clearInputs();
+        blurInputs();
+        setErrorsVisible(false);
     }
     
     export const resetErrors = () => setErrorsVisible(false);
@@ -66,17 +81,6 @@
         .finally(() => loading = false)
     }
 
-    const resetPage = response => {
-        name="Login";
-        fields["email"] = "";
-        fields["password"] = "";
-        emailInput.clear();
-        passwordInput.clear();
-        emailInput.blur();
-        passwordInput.blur();
-        setErrorsVisible(false);
-    }
-
     const handleSignup = () => {
         if(findEmptyField()){
             setErrorsVisible(true);
@@ -85,12 +89,7 @@
 
         const { email, password } = fields;
         
-        makeRequest(signup(email, password, resetPage));
-    }
-
-    const onSuccessfulLogin = userCredential => {
-        localStorage.setItem("accessToken", userCredential.user.accessToken);
-        goto("/account/details");
+        makeRequest(signup(email, password, onSuccessSignup));
     }
 
     const handleLogin = async () => {

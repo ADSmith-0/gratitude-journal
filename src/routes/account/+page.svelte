@@ -3,19 +3,37 @@
 
     let name = "Sign up";
     let authUser;
-    const setName = newName => {
-        name = newName;
-        authUser.clearInputs();
-        authUser.resetErrors();
+    const setName = e => {
+        const newName = e.target.innerHTML;
+        if(newName !== name){
+            name = newName;
+            authUser.clearInputs();
+            authUser.resetErrors();
+        }
+    }
+
+    const onSuccessfulSignup = () => {
+        name = "Login";
+        authUser.resetPage();
+    }
+
+    const onSuccessfulLogin = userCredential => {
+        localStorage.setItem("accessToken", userCredential.user.accessToken);
+        goto("/account/details");
     }
 </script>
 <section class="container">
     <section class="selector">
-        <button class="button" on:click={() => setName("Login")}>Login</button>
-        <button class="button" on:click={() => setName("Sign up")}>Sign up</button>
+        <button class="button" on:click={setName}>Login</button>
+        <button class="button" on:click={setName}>Sign up</button>
         <div class={"underline " + (name=="Sign up" && "translate")}></div>
     </section>
-    <AuthUser name={name} bind:this={authUser}/>
+    <AuthUser 
+        name={name}
+        bind:this={authUser}
+        onSuccessSignup={onSuccessfulSignup}
+        onSuccessfulLogin={onSuccessfulLogin}
+    />
 </section>
 <style>
     .container {
