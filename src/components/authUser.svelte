@@ -135,7 +135,7 @@
         bind:this={passwordInput}
     />
     {#if loading}
-    <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="./img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
+    <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="/img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
     {:else}
     <button id="submit" class="button bg-green" on:click={doAction} bind:this={ctaBtn}>{name}</button>
     {/if}

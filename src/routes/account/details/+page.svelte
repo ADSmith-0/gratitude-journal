@@ -1,6 +1,5 @@
 <script>
 	import { goto } from "$app/navigation";
-    import { getAppAuth } from "../../../firebase";
     import { deleteSelf } from "../../../db-firebase";
     import ReauthUserPopup from "../../../components/reauthUserPopup.svelte";
 
@@ -25,6 +24,7 @@
     }
 
     const tryActionAgain = userCredentials => {
+        console.log(blockedAction);
         blockedAction();
     }
 </script>
