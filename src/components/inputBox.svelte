@@ -43,10 +43,10 @@
         const valueValid = validateValue(value);
         if(!valueValid){
             errorMessage = `Please enter a valid ${id}`;
-            passValueBack([id, ""]);
+            passValueBack(id, "");
             return;
         }
-        passValueBack([id, value]);
+        passValueBack(id, value);
     }
     const scrollToStart = e => e.target.scrollTo(0,0);
     let passwordVisible = false;

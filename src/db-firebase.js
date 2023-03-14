@@ -37,7 +37,7 @@ const firebaseRequest = (request, callback = (response) => (response)) => (
 /**
  * Reauthorise the user to perform certain actions, e.g. delete their account, change their password etc.
  * @param {UserCredential} credential 
- * @param {Function} callback 
+ * @param {function} callback 
  * @returns 
  */
 const reauth = (credential, callback) => {
@@ -98,7 +98,7 @@ const deleteSelf = callback => {
 /**
  * Function for user to change their email address
  * @param {string} email
- * @param {Function} callback 
+ * @param {function} callback 
  * @returns {Promise} firebase response
  */
 const changeEmail = (email, callback) => {
@@ -114,7 +114,7 @@ const changeEmail = (email, callback) => {
 /**
  * Function for user to change their password
  * @param {string} password
- * @param {Function} callback 
+ * @param {function} callback 
  * @returns {Promise} firebase response
  */
 const changePassword = (password, callback) => {

@@ -37,10 +37,7 @@
         resetErrors();
     }
 
-    const updateField = values => {
-        const [ id, newValue ] = values;
-        fields[id] = newValue;
-    }
+    const updateField = (id, newValue) => fields[id] = newValue;
 
     const findEmptyField = () => {
         for(let key in fields){

@@ -28,7 +28,7 @@
         blockedAction();
     }
 </script>
-{#if reauth}
+{#if !reauth}
 <ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
 {/if}
 <div class="wrapper">
