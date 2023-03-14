@@ -1,5 +1,12 @@
 import { getAppAuth } from './firebase';
-import { createUserWithEmailAndPassword, deleteUser, reauthenticateWithCredential, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+    createUserWithEmailAndPassword,
+    deleteUser,
+    reauthenticateWithCredential,
+    signInWithEmailAndPassword,
+    updateEmail,
+    updatePassword
+} from 'firebase/auth';
 
 /**
  * Function to take error code and message and parse it to readable text
@@ -88,4 +95,36 @@ const deleteSelf = callback => {
     )
 }
 
-export { signup, login, reauth, deleteSelf }
+/**
+ * Function for user to change their email address
+ * @param {string} email
+ * @param {Function} callback 
+ * @returns {Promise} firebase response
+ */
+const changeEmail = (email, callback) => {
+    const auth = getAppAuth();
+    const user = auth.currentUser;
+
+    return firebaseRequest(
+        updateEmail(user, email),
+        callback
+    )
+}
+
+/**
+ * Function for user to change their password
+ * @param {string} password
+ * @param {Function} callback 
+ * @returns {Promise} firebase response
+ */
+const changePassword = (password, callback) => {
+    const auth = getAppAuth();
+    const user = auth.currentUser;
+
+    return firebaseRequest(
+        updatePassword(user, password),
+        callback
+    )
+}
+
+export { signup, login, reauth, deleteSelf, changeEmail, changePassword }
