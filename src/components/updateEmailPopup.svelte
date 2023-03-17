@@ -17,7 +17,14 @@
 <Popup>
     <span slot="title">Please enter your new email</span>
     <span slot="inputs">
-        <form method="post" action="?/changeEmail" use:enhance>
+        <form method="post" action="?/changeEmail" use:enhance={({ data, cancel }) => {
+            
+
+            // if the app is offline then cancel the submission as it will error out
+            if(!navigator.onLine){
+                cancel();
+            }
+        }}>
             <InputBox 
                 id="newEmail"
                 placeholder="New Email"
