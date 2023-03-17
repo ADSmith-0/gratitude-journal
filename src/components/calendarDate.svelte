@@ -1,6 +1,6 @@
 <script>
 	import { ISOFromDate } from "../util";
-	import { db } from "../db-local";
+	import { db } from "../dexieInit";
     export let date;
     export let month;
     export let year;

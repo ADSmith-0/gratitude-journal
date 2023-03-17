@@ -61,7 +61,7 @@
 </script>
 <section class="container {style}" class:error>
     <!-- Can't use bind because of variable type -->
-    <input type={type} value={rawValue} on:input={updateRawValue} on:blur={scrollToStart} bind:this={input}>
+    <input name={id} type={type} value={rawValue} on:input={updateRawValue} on:blur={scrollToStart} bind:this={input}>
     <span class="placeholder">{placeholder}</span>
     {#if id == "password"}
     <button on:click={toggleVisible}>

@@ -46,4 +46,10 @@
         box-shadow: none;
         background-color: var(--background-color);
     }
+    slot[name="title"] {
+        font-size: var(--font-small);
+        display: inline-block;
+        font-family: var(--accent-font);
+        padding: 0.5em 0 0 1em;
+    }
 </style>

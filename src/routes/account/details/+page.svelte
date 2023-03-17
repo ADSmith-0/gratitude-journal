@@ -2,6 +2,7 @@
 	import { goto } from "$app/navigation";
     import { deleteSelf } from "../../../db-firebase";
     import ReauthUserPopup from "../../../components/reauthUserPopup.svelte";
+	import UpdateEmailPopup from "../../../components/updateEmailPopup.svelte";
 
     let reauth = false;
     let blockedAction = "";
@@ -28,7 +29,8 @@
         blockedAction();
     }
 </script>
-{#if !reauth}
+<UpdateEmailPopup />
+{#if reauth}
 <ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
 {/if}
 <div class="wrapper">

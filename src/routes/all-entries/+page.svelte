@@ -3,7 +3,7 @@
     import FilterEntries from '../../components/filterEntries.svelte';
     import Loading from '../../components/loading.svelte';
 	import EntryCard from '../../components/entryCard.svelte';
-	import { db } from '../../db-local';
+	import { db } from '../../dexieInit';
     import { browser } from '$app/environment';
 	import { sortDateAsc, sortDateDesc } from '../../util';
     let searchTerm = "";
