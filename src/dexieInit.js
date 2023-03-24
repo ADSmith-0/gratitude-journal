@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 
 export const db = new Dexie("GratitudeJournal");
-db.version(3).stores({
-    entries: "++id, date, content, isDeleted"
+db.version(1).stores({
+    entries: "&date, content, lastModified"
 });

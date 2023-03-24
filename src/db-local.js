@@ -1,13 +1,10 @@
 import { db } from "./dexieInit";
 
 const makeRequest = request => (
-    new Promise((resolve, reject) => {
-        try {
-            const response = request();
-            resolve(response);
-        } catch (error) {
-            reject(error);
-        }
+    request
+    .catch(error => {
+        console.error(error);
+        throw error;
     })
 )
 
@@ -31,16 +28,16 @@ const getEntries = () => (
 /**
  * Function to add a record to dexie
  * @param {ISOString} date 
- * @param {string} content 
- * @param {boolean} isDeleted 
+ * @param {string} content
+ * @param {DateString} lastModified
  * @returns {Promise}
  */
-const addEntry = (date, content, isDeleted = false) => (
+const addEntry = (date, content, lastModified = ((new Date).toString())) => (
     makeRequest(
         db.entries.add({
             date,
             content,
-            isDeleted
+            lastModified
         })
     )
 )
