@@ -1,71 +1,27 @@
 <script>
-    import { db } from '../../dexieInit';
-    import { browser } from '$app/environment';
     import { addEntry, updateEntryContent, deleteEntry, getEntry } from '../../db-local';
     import { getTodaysDate, ISOFromDate } from '../../util';
     import DateInput from '../../components/dateInput.svelte';
     import { getDayStrFromNum } from '../../helpers/util.svelte';
 	import { enhance } from '$app/forms';
-    let date = new Date();
-    let newContent = "";
     let content = "";
-    
+    let entryContent = ""; // content pulled from the entry to check if it's been updated
+    let date = new Date();
     $: readableDate = date.toLocaleDateString();
-
+    $: ISODate = ISOFromDate(date);
+    
     const setDate = newDate => date = newDate;
 
-    // const setEntry = newEntry => entry = newEntry;
+    $: entry = getEntry(ISODate);
 
-    // const getEntry = async (date, callback) => {
-    //     let entry = browser ? (await db.entries.get(ISOFromDate(date))) : { content: "" };
-    //     entry = entry || { content: "" };
-    //     callback(entry);
-    // }
+    const updateContentFromEntry = async entry => {
+        content = (await entry)?.content || "";
+        entryContent = content;
+    }
 
-    // $: getEntry(date, setEntry);
-
-    $: newContent == content;
+    $: updateContentFromEntry(entry);
 
     $: day = getDayStrFromNum(date.getDay());
-
-    // const addEntry = async () => {
-    //     try {
-    //         const dateId = ISOFromDate(date);
-    //         const result = await db.entries.add({
-    //             date: dateId,
-    //             content: content
-    //         });
-    //         // console.log(result);
-    //     }catch(error){
-    //         console.error(error);
-    //     }
-        
-    //     getEntry(date, setEntry);
-    // }
-
-    // const editEntry = async () => {
-    //     try {
-    //         const dateId = ISOFromDate(date);
-    //         await db.entries.update(dateId, {
-    //             content: content
-    //         });
-    //     }catch(error){
-    //         console.error(error);
-    //     }
-
-    //     getEntry(date, setEntry);
-    // }
-
-    // const deleteEntry = async () => {
-    //     try {
-    //         const dateId = ISOFromDate(date);
-    //         await db.entries.delete(dateId);
-    //     }catch(error){
-    //         console.error(error);
-    //     }
-
-    //     getEntry(date, setEntry);
-    // }
 
     const functionFromAction = action => {
         const functionsMap = {
@@ -77,18 +33,17 @@
     }
 
     const handleEnhance = async ({ data, action, cancel }) => {
-        // get action name to perform
-        const fn = functionFromAction(action.search.split("/")[1]);
+        const actionName = action.search.split("/")[1];
+        const fn = functionFromAction(actionName);
         const date = data.get("date");
-        const newContent = data.get("content");
+        const content = data.get("content");
         const lastModified = (new Date).toString();
 
         try {
-            await fn(date, newContent, lastModified);
-            content = newContent;
+            await fn(date, content, lastModified);
+            entry = getEntry(date);
         }catch(error){
             console.error(error);
-            // throw error;
         }
         
         // If the app is offline cancel the server call as it will error out
@@ -101,29 +56,33 @@
     <DateInput passDateBack={setDate}/>
 </div>
 <div class="main-wrapper">
-    <form method="POST" use:enhance={handleEnhance}>
-        <p class="entry-title">
-            {readableDate === getTodaysDate() ?
-            "What are you grateful for today?" : 
-            `What were you grateful for on ${day}?`}
-        </p>
-        <input type="hidden" name="date" value={ISOFromDate(date)}>
-        <textarea 
-            name="content"
-            class="entry-text"
-            value={newContent}
-            on:input={e => newContent = e.target.value}
-            placeholder={readableDate === (new Date().toLocaleDateString()) ? "I'm grateful for..." : "I was grateful for..."}
-        />
-        {#if content}
-            <div class="buttons">
-                <button class="button bg-blue" formaction="?/updateEntryContent">Update</button>
-                <button class="button bg-light-red" formaction="?/deleteEntry">Delete</button>
-            </div>
-        {:else}
-            <button class="button bg-green" formaction="?/addEntry" disabled={newContent === ""}>Add</button>
-        {/if}
-    </form>
+    {#await entry}
+        <p>Loading...</p>
+    {:then entryRes}
+        <form method="POST" use:enhance={handleEnhance}>
+            <p class="entry-title">
+                {readableDate === getTodaysDate() ?
+                "What are you grateful for today?" : 
+                `What were you grateful for on ${day}?`}
+            </p>
+            <input type="hidden" name="date" value={ISODate}>
+            <textarea 
+                name="content"
+                class="entry-text"
+                value={content}
+                on:input={e => content = e.target.value}
+                placeholder={readableDate === (new Date().toLocaleDateString()) ? "I'm grateful for..." : "I was grateful for..."}
+            />
+            {#if entryRes && entryRes.content !== ""}
+                <div class="buttons">
+                    <button class="button bg-blue" formaction="?/updateEntryContent" disabled={entryContent === content}>Update</button>
+                    <button class="button bg-light-red" formaction="?/deleteEntry">Delete</button>
+                </div>
+            {:else}
+                <button class="button bg-green" formaction="?/addEntry" disabled={content === ""}>Add</button>
+            {/if}
+        </form>
+    {/await}
 </div>
 <style>
     .container {

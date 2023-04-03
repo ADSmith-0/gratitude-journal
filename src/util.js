@@ -1,6 +1,14 @@
 const getTodaysDate = () => (new Date().toLocaleDateString());
 
-const ISOFromDate = date => date.toISOString().split("T")[0];
+// ISO format for date, but one that ignores timezone offset,
+// unlike toISOString()
+const ISOFromDate = dateObj => {
+    const year = dateObj.getFullYear();
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0'); // +1 because it indexes at 0
+    const date = (dateObj.getDate()).toString().padStart(2, '0');
+    const ISODate = `${year}-${month}-${date}`;
+    return ISODate;
+}
 
 const dateFromISO = ISOString => (new Date(ISOString));
 

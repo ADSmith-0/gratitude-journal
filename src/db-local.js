@@ -1,29 +1,17 @@
 import { db } from "./dexieInit";
 
-const makeRequest = request => (
-    request
-    .catch(error => {
-        console.error(error);
-        throw error;
-    })
-)
-
 /**
  * Function get a record by date from dexie
  * @param {ISOString} date
  * @returns {Promise} with record
  */
-const getEntry = date => (
-    makeRequest(db.entries.get(date))
-)
+const getEntry = date => db.entries.get(date);
 
 /**
  * Function to get all records from dexie
  * @returns {Promise} all records
  */
-const getEntries = () => (
-    makeRequest(db.entries.toArray())
-)
+const getEntries = () => db.entries.toArray();
 
 /**
  * Function to add a record to dexie
@@ -33,14 +21,12 @@ const getEntries = () => (
  * @returns {Promise}
  */
 const addEntry = (date, content, lastModified = ((new Date).toString())) => (
-    makeRequest(
-        db.entries.add({
-            date,
-            content,
-            lastModified
-        })
-    )
-)
+    db.entries.add({
+        date,
+        content,
+        lastModified
+    })
+);
 
 /**
  * Function to update the content of an entry
@@ -49,30 +35,24 @@ const addEntry = (date, content, lastModified = ((new Date).toString())) => (
  * @returns {Promise}
  */
 const updateEntryContent = (date, content) => (
-    makeRequest(
-        db.entries.update(date, {
-            content,
-        })
-    )
-)
+    db.entries.update(date, {
+        content,
+    })
+);
 
 /**
  * Function for hard deletion of an entry from dexie
  * @param {ISOString} date 
  * @returns {Promise}
  */
-const deleteEntry = date => (
-    makeRequest(db.entries.delete(date))
-)
+const deleteEntry = date => db.entries.delete(date);
 
 /**
  * Function to return all entries that contains a search term
  * @param {string} searchTerm 
  * @returns {Promise}
  */
-const findEntries = searchTerm => (
-    makeRequest(db.entries.filter(({ content })=> content.includes(searchTerm)))
-)
+const findEntries = searchTerm => db.entries.filter(({ content }) => content.includes(searchTerm));
 
 export { 
     getEntry,
