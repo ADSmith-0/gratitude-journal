@@ -12,14 +12,12 @@
     
     const setDate = newDate => date = newDate;
 
-    $: entry = getEntry(ISODate);
-
-    const updateContentFromEntry = async entry => {
-        content = (await entry)?.content || "";
+    const setContent = response => {
+        content = response?.content || "";
         entryContent = content;
     }
 
-    $: updateContentFromEntry(entry);
+    $: entry = getEntry(ISODate, setContent);
 
     $: day = getDayStrFromNum(date.getDay());
 

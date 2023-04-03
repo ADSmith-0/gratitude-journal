@@ -5,7 +5,7 @@ import { db } from "./dexieInit";
  * @param {ISOString} date
  * @returns {Promise} with record
  */
-const getEntry = date => db.entries.get(date);
+const getEntry = (date, callback = (response) => (response)) => (db.entries.get(date).then(entry => callback(entry)));
 
 /**
  * Function to get all records from dexie
