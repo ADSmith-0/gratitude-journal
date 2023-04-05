@@ -12,12 +12,14 @@
     
     const setDate = newDate => date = newDate;
 
-    const setContent = response => {
-        content = response?.content || "";
+    $: entry = getEntry(ISODate, setContent);
+    
+    const setContent = async () => {
+        content = (await entry)?.content || "";
         entryContent = content;
     }
 
-    $: entry = getEntry(ISODate, setContent);
+    $: setContent(date);
 
     $: day = getDayStrFromNum(date.getDay());
 
@@ -45,6 +47,8 @@
         }
         
         // If the app is offline cancel the server call as it will error out
+        // TODO: get better implementation
+        // https://stackoverflow.com/questions/189430/detect-if-the-internet-connection-is-offline
         if(!navigator.onLine){
             cancel();
         }
