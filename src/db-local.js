@@ -3,7 +3,7 @@ import { db } from "./dexieInit";
 const request = request => {
     // eslint-disable-next-line no-useless-catch
     try {
-        request
+        return request;
     }catch(e){
         throw e;
     }
@@ -65,7 +65,7 @@ const deleteEntry = date => request(db.entries.delete(date));
  * @param {string} searchTerm 
  * @returns {Promise}
  */
-const findEntries = searchTerm => request(db.entries.filter(({ content }) => content.includes(searchTerm)));
+const findEntries = searchTerm => request(db.entries.filter(({ content }) => content.toLowerCase().includes(searchTerm.toLowerCase())).toArray());
 
 export { 
     getEntry,

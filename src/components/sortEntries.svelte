@@ -1,8 +1,8 @@
 <script>
     let filter;
-    export let passFilterBack = () => {}
+    export let passSortBack = () => {}
 
-    $: passFilterBack(filter);
+    $: passSortBack(filter);
 </script>
 <div class="wrapper">
     <p>Sort by:</p>
