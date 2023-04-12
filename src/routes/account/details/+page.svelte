@@ -29,7 +29,7 @@
         blockedAction();
     }
 </script>
-<UpdateEmailPopup />
+<!-- <UpdateEmailPopup /> -->
 {#if reauth}
 <ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
 {/if}

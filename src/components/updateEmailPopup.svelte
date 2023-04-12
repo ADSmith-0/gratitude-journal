@@ -47,6 +47,13 @@
     </span>
 </Popup>
 <style>
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 1em;
+    }
     span[slot="title"] {
         font-size: var(--font-small);
         display: inline-block;
