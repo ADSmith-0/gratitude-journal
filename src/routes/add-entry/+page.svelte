@@ -12,14 +12,14 @@
     
     const setDate = newDate => date = newDate;
 
-    $: entry = getEntry(ISODate, setContent);
+    $: entry = getEntry(ISODate);
     
     const setContent = async () => {
         content = (await entry)?.content || "";
         entryContent = content;
     }
 
-    $: setContent(date);
+    $: date && setContent();
 
     $: day = getDayStrFromNum(date.getDay());
 
@@ -42,6 +42,7 @@
         try {
             await fn(date, content, lastModified);
             entry = getEntry(date);
+            setContent();
         }catch(error){
             console.error(error);
         }
