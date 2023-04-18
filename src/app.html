@@ -16,7 +16,7 @@
         <script>
             String.prototype.toTitleCase = function () {
                 const firstChar = this[0];
-                const remainder = this.slice(1, this.length);
+                const remainder = this.slice(1);
                 return firstChar.toUpperCase() + remainder;
             }
         </script>

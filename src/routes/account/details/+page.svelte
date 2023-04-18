@@ -31,7 +31,7 @@
 </script>
 <!-- <UpdateEmailPopup /> -->
 {#if reauth}
-<ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
+    <ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
 {/if}
 <div class="wrapper">
     <section class="card">

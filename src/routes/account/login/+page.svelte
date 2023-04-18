@@ -1,5 +1,5 @@
 <script>
-    import AuthUser from '../../components/authUser.svelte';
+    import AuthUser from '../../../components/authUser.svelte';
     import { browser } from '$app/environment';
     import { goto } from '$app/navigation';
 

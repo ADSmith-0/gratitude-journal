@@ -1,5 +1,5 @@
 <script>
-    import { modulo } from '../helpers/util.svelte';
+    import { modulo } from '../lib/util';
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     export let passMonthBack = () => {};
     export let passYearBack = () => {};

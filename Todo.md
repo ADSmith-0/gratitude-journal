@@ -23,13 +23,17 @@
 
 - [x] Add entry delete button doesn't work
 
-- [ ] Fix styling for login/sign up page
+- [x] Fix styling for login/sign up page
 
 - [x] Placeholder text for add entry needs to be fixed
 
 - [x] Fix add entry selecting empty date when no date is given
 
-- [ ] Need to refactor inputs with forms
+- [x] Need to refactor inputs with forms
+
+- [ ] Complete settings page
+
+- [ ] Complete authorisation stuff 
 
 # Future features:
 

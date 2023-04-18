@@ -1,5 +1,5 @@
 <script>
-    import { getDayStrFromNum } from '../helpers/util.svelte';
+    import { getDayFromNum } from '../lib/util';
     export let entry = {};
     export let searchTerm = "";
 
@@ -14,7 +14,7 @@
 
     const getDayFromDateStr = dateStr => {
         const [year, month, date] = dateStr.split("-");
-        return (getDayStrFromNum(new Date(year, month-1, date).getDay()));
+        return (getDayFromNum(new Date(year, month-1, date).getDay()));
     }
 
     $: dateStr = new Date(date).toLocaleDateString();
