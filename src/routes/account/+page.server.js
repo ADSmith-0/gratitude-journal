@@ -1,8 +1,9 @@
 import { redirect } from "@sveltejs/kit";
-import { getAppAuth } from "../../firebase";
+import { auth } from "../../firebase";
 
 export async function load(){
-    const auth = getAppAuth();
+    throw redirect(307, "/account/login");
+
     try {
         await auth.currentUser.getIdToken(false);
         throw redirect(307, "/account/details");

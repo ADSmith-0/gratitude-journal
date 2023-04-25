@@ -1,5 +1,5 @@
 <script>
-    import { getDatesArray } from '../lib/calendar';
+    import { getDatesArray } from '$lib/calendar';
     import CalendarDate from './calendarDate.svelte';
     export let passBackSelectedDate = () => {};
     export let allowFuture = false;

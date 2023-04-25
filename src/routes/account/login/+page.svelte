@@ -3,26 +3,21 @@
     import { browser } from '$app/environment';
     import { goto } from '$app/navigation';
 
-    if(browser && !!localStorage.getItem("accessToken")){
-        goto("/account/details");
-    }
+    // if(browser && !!localStorage.getItem("accessToken")){
+    //     goto("/account/details");
+    // }
 
     let name = "Sign up";
-    let action = "signup";
-    let authUser;
+    let action = "sign-up";
     const setName = e => {
         const newName = e.target.innerHTML;
         if(newName !== name){
             name = newName;
-            action = newName.replace(/\s/g, "").toLowerCase();
-            authUser.resetPage();
+            action = newName.replace(/\s/g, "-").toLowerCase();
         }
     }
 
-    const onSuccessfulSignup = response => {
-        name = "Login";
-        authUser.resetPage();
-    }
+    const onSuccessfulSignup = response => name = "Login";
 
     const onSuccessfulLogin = userCredential => {
         // TODO change to js HTTP read-only cookie?
@@ -39,7 +34,6 @@
     <AuthUser 
         name={name}
         action={action}
-        bind:this={authUser}
         onSuccessfulSignup={onSuccessfulSignup}
         onSuccessfulLogin={onSuccessfulLogin}
     />

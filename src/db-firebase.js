@@ -1,4 +1,4 @@
-import { getAppAuth } from './firebase';
+import { auth } from './firebase';
 import {
     createUserWithEmailAndPassword,
     deleteUser,
@@ -41,7 +41,6 @@ const firebaseRequest = (request, callback = (response) => (response)) => (
  * @returns 
  */
 const reauth = (credential, callback) => {
-    const auth = getAppAuth();
     const user = auth.currentUser;
 
     return reauthenticateWithCredential(user, credential)
@@ -61,7 +60,7 @@ const reauth = (credential, callback) => {
  */
 const signup = (email, password, callback) => (
     firebaseRequest(
-        createUserWithEmailAndPassword(getAppAuth(), email, password),
+        createUserWithEmailAndPassword(auth, email, password),
         callback
     )
 )
@@ -75,7 +74,7 @@ const signup = (email, password, callback) => (
  */
 const login = (email, password, callback) => (
     firebaseRequest(
-        signInWithEmailAndPassword(getAppAuth(), email, password),
+        signInWithEmailAndPassword(auth, email, password),
         callback
     )
 )
@@ -86,7 +85,6 @@ const login = (email, password, callback) => (
  * @returns {Promise} firebase response
  */
 const deleteSelf = callback => {
-    const auth = getAppAuth();
     const user = auth.currentUser;
 
     return firebaseRequest(
@@ -102,7 +100,6 @@ const deleteSelf = callback => {
  * @returns {Promise} firebase response
  */
 const changeEmail = (email, callback) => {
-    const auth = getAppAuth();
     const user = auth.currentUser;
 
     return firebaseRequest(
@@ -118,7 +115,6 @@ const changeEmail = (email, callback) => {
  * @returns {Promise} firebase response
  */
 const changePassword = (password, callback) => {
-    const auth = getAppAuth();
     const user = auth.currentUser;
 
     return firebaseRequest(

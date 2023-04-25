@@ -1,5 +1,5 @@
 <script>
-    import SigninPopup from "../components/signin-popup.svelte";
+    import SigninPopup from "$lib/components/signin-popup.svelte";
 </script>
 <main>
     <h1>Welcome to Gratitude.io</h1>

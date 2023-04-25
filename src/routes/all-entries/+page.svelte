@@ -1,8 +1,8 @@
 <script>
-    import Searchbar from '../../components/searchbar.svelte';
-    import SortEntries from '../../components/sortEntries.svelte';
-    import Loading from '../../components/loading.svelte';
-	import EntryList from '../../components/entryList.svelte';
+    import Searchbar from '$lib/components/searchbar.svelte';
+    import SortEntries from '$lib/components/sortEntries.svelte';
+    import Loading from '$lib/components/loading.svelte';
+	import EntryList from '$lib/components/entryList.svelte';
 	import { findEntries, getEntries } from '../../db-local';
     let searchTerm = "";
     let sort = "date-desc";
