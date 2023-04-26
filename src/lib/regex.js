@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
-const email = "^[\w|\d]+(\.[\w|\d]+)*@[\w|\d]+(\.[\w|\d]+)+$";
-const number = "\d+";
+const email = "^[\\w|\\d]+(\\.[\\w|\\d]+)*@[\\w|\\d]+(\\.[\\w|\\d]+)+$";
+const number = "\\d+";
 const text = "[a-zA-Z]+";
 const any = ".*";
 
