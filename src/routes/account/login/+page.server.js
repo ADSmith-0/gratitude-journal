@@ -1,4 +1,4 @@
-import { login } from '../../../db-firebase';
+import { login } from '$lib/db/db-firebase';
 
 export const actions = {
     login: async ({ request }) => {

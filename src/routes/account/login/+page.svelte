@@ -1,19 +1,17 @@
 <script>
-    import AuthUser from '../../../components/authUser.svelte';
-    import { browser } from '$app/environment';
+    import AuthUser from '$lib/components/authUser.svelte';
     import { goto } from '$app/navigation';
-
-    // if(browser && !!localStorage.getItem("accessToken")){
-    //     goto("/account/details");
-    // }
 
     let name = "Sign up";
     let action = "sign-up";
+    
+    const actionFromName = name => name.replace(/\s/g, "-").toLowerCase();
+
     const setName = e => {
         const newName = e.target.innerHTML;
         if(newName !== name){
             name = newName;
-            action = newName.replace(/\s/g, "-").toLowerCase();
+            action = actionFromName(newName);
         }
     }
 
@@ -32,10 +30,8 @@
         <div class="underline" class:translate={name==="Sign up"}></div>
     </section>
     <AuthUser 
-        name={name}
+        submit={name}
         action={action}
-        onSuccessfulSignup={onSuccessfulSignup}
-        onSuccessfulLogin={onSuccessfulLogin}
     />
 </section>
 <style>

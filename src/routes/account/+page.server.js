@@ -1,5 +1,5 @@
 import { redirect } from "@sveltejs/kit";
-import { auth } from "../../firebase";
+import { auth } from "$lib/db/firebase";
 
 export async function load(){
     throw redirect(307, "/account/login");

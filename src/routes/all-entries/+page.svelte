@@ -3,7 +3,7 @@
     import SortEntries from '$lib/components/sortEntries.svelte';
     import Loading from '$lib/components/loading.svelte';
 	import EntryList from '$lib/components/entryList.svelte';
-	import { findEntries, getEntries } from '../../db-local';
+	import { findEntries, getEntries } from '$lib/db/db-local';
     let searchTerm = "";
     let sort = "date-desc";
     let pEntries = getEntries();

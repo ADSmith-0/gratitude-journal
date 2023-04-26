@@ -1,11 +1,12 @@
 <script>
     import { enhance } from '$app/forms';
     import CustomInput from './customInput.svelte';
+    import PasswordInput from './passwordInput.svelte';
+    
     export let submit="Sign up";
     export let action = submit.replace(/\s/g, "").toLowerCase();
-    let loading = false;
 
-    import PasswordInput from '../components/passwordInput.svelte';
+    let loading = false;
 </script>
 <form class="container" method="POST" action={"?/"+action} use:enhance>
     <CustomInput 
