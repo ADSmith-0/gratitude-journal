@@ -1,17 +1,27 @@
 import { login, signup } from '$lib/db/db-firebase';
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const actions = {
-    login: async ({ request }) => {
+    login: async ({ cookies, request }) => {
         const data = await request.formData();
         const email = data.get('email');
         const password = data.get('password');
 
         if (!email || !password) return fail(400, "Email or Password undefined");
 
-        await login(email, password);
+        const userCredential = await login(email, password);
+        const user = await userCredential.user;
 
-        return { success: true }
+        cookies.set('session', user.accessToken, {
+            path: '/',
+            httpOnly: true,
+            sameSite: 'strict',
+            // TODO set up env variables for secure!
+            secure: false,
+            maxAge: 60 * 60 * 24 * 30
+        });
+
+        throw redirect(307, "/account");
     },
     signup: async ({ request }) => {
         const data = await request.formData();

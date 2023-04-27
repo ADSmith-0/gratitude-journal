@@ -1,9 +1,8 @@
 <script>
     import AuthUser from '$lib/components/authUser.svelte';
-    import { goto } from '$app/navigation';
 
-    let name = "Sign up";
-    let action = "signup";
+    let name = "Login";
+    let action = "login";
     
     const actionFromName = name => name.replace(/\s/g, "").toLowerCase();
 

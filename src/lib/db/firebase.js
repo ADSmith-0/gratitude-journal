@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public';
-import { initializeApp, getApp, getApps, deleteApp } from "firebase/app";
+import { initializeApp, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -19,17 +19,10 @@ const config = {
     measurementId: env.PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 // Initialize Firebase
-let firebaseApp;
-if (!getApps().length) {
-    firebaseApp = initializeApp(config);
-} else {
-    firebaseApp = getApp();
-    deleteApp(firebaseApp);
-    firebaseApp = initializeApp(config);
-}
+const firebaseApp = initializeApp(config);
 
-const app = () => getApp();
-const auth = () => getAuth(app);
+const app = getApp();
+const auth = getAuth(firebaseApp);
 const db = getFirestore();
 
 export { app, auth, db };
