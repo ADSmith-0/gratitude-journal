@@ -15,17 +15,13 @@
         }
     }
 
+    let authUser;
     const changeToLogin = response => {
         if(name === "Sign up"){
             name = "Login";
+            authUser.clearInputs();
         }
     };
-
-    const onSuccessfulLogin = userCredential => {
-        // TODO change to js HTTP read-only cookie?
-        localStorage.setItem("accessToken", userCredential.user.accessToken);
-        goto("/account/details");
-    }
 </script>
 <section class="container">
     <section class="selector">
@@ -37,6 +33,7 @@
         submit={name}
         action={action}
         callback={changeToLogin}
+        bind:this={authUser}
     />
 </section>
 <style>

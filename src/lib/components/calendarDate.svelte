@@ -13,6 +13,7 @@
             if(parseInt(date)){
                 const thisDate = new Date(year, month, date);
                 const exists = await db.entries.get(ISOFromDate(thisDate));
+                return exists;
             }
         }catch(error){
             console.error(error);

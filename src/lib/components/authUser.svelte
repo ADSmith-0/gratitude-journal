@@ -8,6 +8,12 @@
     export let callback = () => {};
 
     const handleEnhance = () => callback();
+    
+    let emailInput, passwordInput;
+    export const clearInputs = () => {
+        emailInput.clearInput();
+        passwordInput.clearInput();
+    }
 
     let loading = false;
 </script>
@@ -17,8 +23,9 @@
         label="Email"
         type="text"
         validation="email"
+        bind:this={emailInput}
     />
-    <PasswordInput />
+    <PasswordInput bind:this={passwordInput}/>
     {#if loading}
     <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="/img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
     {:else}
