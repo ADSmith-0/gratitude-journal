@@ -11,7 +11,7 @@
 
     let loading = false;
 </script>
-<form class="container" method="POST" action={"?/"+action} use:enhance={handleEnhance}>
+<form class="container" method="POST" action={`?/${action}`} use:enhance={handleEnhance}>
     <CustomInput 
         name="email"
         label="Email"

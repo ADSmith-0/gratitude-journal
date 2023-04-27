@@ -1,11 +1,11 @@
-import { login, signup, reauth } from '$lib/db/db-firebase';
+import fb from '$lib/db/db-firebase';
 
 export const actions = {
     login: async ({ request }) => {
         const data = await request.formData();
         const { email, password } = data;
 
-        const user = await login(email, password);
+        const user = await fb.login(email, password);
         console.log(user);
 
         return { success: true };
@@ -14,7 +14,7 @@ export const actions = {
         const data = await request.formData();
         const { email, password } = data;
 
-        await signup(email, password);
+        await fb.signup(email, password);
 
         return { success: true }
     },
