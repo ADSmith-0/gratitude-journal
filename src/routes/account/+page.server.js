@@ -1,13 +1,12 @@
 import { redirect } from "@sveltejs/kit";
 import { auth } from "$lib/db/firebase";
 
-export async function load(){
-    throw redirect(307, "/account/login");
+export async function load({ cookies }){
+    const accessToken = cookies.get('accessToken');
 
-    try {
-        await auth.currentUser.getIdToken(false);
+    if(accessToken){
         throw redirect(307, "/account/details");
-    }catch(e){
-        throw redirect(307, "/account/login");
     }
+    
+    throw redirect(307, "/account/login");
 }

@@ -12,7 +12,8 @@ export const actions = {
         const userCredential = await login(email, password);
         const user = await userCredential.user;
 
-        cookies.set('session', user.accessToken, {
+        // Set access token as cookie
+        cookies.set('accessToken', user.accessToken, {
             path: '/',
             httpOnly: true,
             sameSite: 'strict',
