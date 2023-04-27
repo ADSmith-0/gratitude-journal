@@ -1,4 +1,4 @@
-import { login } from '$lib/db/db-firebase';
+import { login, signup, reauth } from '$lib/db/db-firebase';
 
 export const actions = {
     login: async ({ request }) => {
@@ -11,7 +11,12 @@ export const actions = {
         return { success: true };
     },
     signup: async ({ request }) => {
-        return { success: true };
+        const data = await request.formData();
+        const { email, password } = data;
+
+        await signup(email, password);
+
+        return { success: true }
     },
     reauth: async ({ request }) => {
         return { success: true };

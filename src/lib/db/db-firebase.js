@@ -25,14 +25,15 @@ const _textFromError = error => {
  * @param {function} callback
  * @returns {Promise} firebase response
  */
-const firebaseRequest = (request, callback = (response) => (response)) => (
-    request
-    .then(response => callback(response))
-    .catch(error => {
-        console.error(error);
+const firebaseRequest = async (request, callback = (response) => (response)) => {
+    try {
+        const response = await request;
+        callback(response);
+        return response;
+    }catch(error){
         throw _textFromError(error);
-    })
-)
+    }
+}
 
 /**
  * Reauthorise the user to perform certain actions, e.g. delete their account, change their password etc.

@@ -5,10 +5,13 @@
     
     export let submit="Sign up";
     export let action = submit.replace(/\s/g, "").toLowerCase();
+    export let callback = () => {};
+
+    const handleEnhance = () => callback();
 
     let loading = false;
 </script>
-<form class="container" method="POST" action={"?/"+action} use:enhance>
+<form class="container" method="POST" action={"?/"+action} use:enhance={handleEnhance}>
     <CustomInput 
         name="email"
         label="Email"

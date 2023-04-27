@@ -3,9 +3,9 @@
     import { goto } from '$app/navigation';
 
     let name = "Sign up";
-    let action = "sign-up";
+    let action = "signup";
     
-    const actionFromName = name => name.replace(/\s/g, "-").toLowerCase();
+    const actionFromName = name => name.replace(/\s/g, "").toLowerCase();
 
     const setName = e => {
         const newName = e.target.innerHTML;
@@ -15,7 +15,11 @@
         }
     }
 
-    const onSuccessfulSignup = response => name = "Login";
+    const changeToLogin = response => {
+        if(name === "Sign up"){
+            name = "Login";
+        }
+    };
 
     const onSuccessfulLogin = userCredential => {
         // TODO change to js HTTP read-only cookie?
@@ -32,6 +36,7 @@
     <AuthUser 
         submit={name}
         action={action}
+        callback={changeToLogin}
     />
 </section>
 <style>
