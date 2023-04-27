@@ -1,8 +1,8 @@
 <script>
 	import { goto } from "$app/navigation";
-    import { deleteSelf } from "../../../db-firebase";
-    import ReauthUserPopup from "../../../components/reauthUserPopup.svelte";
-	import UpdateEmailPopup from "../../../components/updateEmailPopup.svelte";
+    import { deleteSelf } from "$lib/db/db-firebase";
+    import ReauthUserPopup from "$lib/components/reauthUserPopup.svelte";
+	import UpdateEmailPopup from "$lib/components/updateEmailPopup.svelte";
 
     let reauth = false;
     let blockedAction = "";

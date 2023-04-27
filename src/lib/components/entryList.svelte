@@ -1,6 +1,6 @@
 <script>
     import EntryCard from "./entryCard.svelte";
-    import { sortDateAsc, sortDateDesc } from '../lib/util';
+    import { sortDateAsc, sortDateDesc } from '$lib/util';
 
     export let entries = [];
     export let searchTerm = "";

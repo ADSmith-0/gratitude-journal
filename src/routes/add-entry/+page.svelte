@@ -1,7 +1,7 @@
 <script>
-    import { addEntry, updateEntryContent, deleteEntry, getEntry } from '../../db-local';
-    import { getTodaysDate, ISOFromDate, getDayFromNum } from '../../lib/util';
-    import DateInput from '../../components/dateInput.svelte';
+    import { addEntry, updateEntryContent, deleteEntry, getEntry } from '$lib/db/db-local';
+    import { getTodaysDate, ISOFromDate, getDayFromNum } from '$lib/util';
+    import DateInput from '$lib/components/dateInput.svelte';
 	import { enhance } from '$app/forms';
     let content = "";
     let entryContent = ""; // content pulled from the entry to check if it's been updated

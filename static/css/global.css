@@ -131,6 +131,12 @@ button {
 .bg-default-grey {
     background: var(--default-grey);
 }
+.font-body {
+    font-family: var(--accent-font);
+}
+.sm-font {
+    font-size: var(--font-small);
+}
 
 mark {
     font-family: var(--accent-font);

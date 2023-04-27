@@ -1,34 +1,26 @@
 <script>
-    import AuthUser from '../../../components/authUser.svelte';
-    import { browser } from '$app/environment';
-    import { goto } from '$app/navigation';
+    import AuthUser from '$lib/components/authUser.svelte';
 
-    if(browser && !!localStorage.getItem("accessToken")){
-        goto("/account/details");
-    }
+    let name = "Login";
+    let action = "login";
+    
+    const actionFromName = name => name.replace(/\s/g, "").toLowerCase();
 
-    let name = "Sign up";
-    let action = "signup";
-    let authUser;
     const setName = e => {
         const newName = e.target.innerHTML;
         if(newName !== name){
             name = newName;
-            action = newName.replace(/\s/g, "").toLowerCase();
-            authUser.resetPage();
+            action = actionFromName(newName);
         }
     }
 
-    const onSuccessfulSignup = response => {
-        name = "Login";
-        authUser.resetPage();
-    }
-
-    const onSuccessfulLogin = userCredential => {
-        // TODO change to js HTTP read-only cookie?
-        localStorage.setItem("accessToken", userCredential.user.accessToken);
-        goto("/account/details");
-    }
+    let authUser;
+    const changeToLogin = response => {
+        if(name === "Sign up"){
+            name = "Login";
+            authUser.clearInputs();
+        }
+    };
 </script>
 <section class="container">
     <section class="selector">
@@ -37,11 +29,10 @@
         <div class="underline" class:translate={name==="Sign up"}></div>
     </section>
     <AuthUser 
-        name={name}
+        submit={name}
         action={action}
+        callback={changeToLogin}
         bind:this={authUser}
-        onSuccessfulSignup={onSuccessfulSignup}
-        onSuccessfulLogin={onSuccessfulLogin}
     />
 </section>
 <style>

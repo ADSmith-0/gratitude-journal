@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/public';
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -9,7 +9,7 @@ import { getFirestore } from "firebase/firestore";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 // Initialize Firebase
-const app = initializeApp({
+const config = {
     apiKey: env.PUBLIC_FIREBASE_API_KEY,
     authDomain: env.PUBLIC_FIREBASE_AUTH_DOMAIN,
     projectId: env.PUBLIC_FIREBASE_PROJECT_ID,
@@ -17,8 +17,12 @@ const app = initializeApp({
     messagingSenderId: env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     appId: env.PUBLIC_FIREBASE_APP_ID,
     measurementId: env.PUBLIC_FIREBASE_MEASUREMENT_ID
-});
-const getAppAuth = () => getAuth(app);
+};
+// Initialize Firebase
+const firebaseApp = initializeApp(config);
+
+const app = getApp();
+const auth = getAuth(firebaseApp);
 const db = getFirestore();
 
-export { app, getAppAuth, db };
+export { app, auth, db };

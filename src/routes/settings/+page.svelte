@@ -1,5 +1,5 @@
 <script>
-	import NotificationComponent from '../../components/notificationComponent.svelte';
+	import NotificationComponent from '$lib/components/notificationComponent.svelte';
     let emailNotifications = false;
     let phoneNotifications = false;
 </script>

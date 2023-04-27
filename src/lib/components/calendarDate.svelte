@@ -1,25 +1,24 @@
 <script>
-	import { ISOFromDate } from "../lib/util";
-	import { db } from "../dexieInit";
+	import { ISOFromDate } from "$lib/util";
+	import { db } from "$lib/db/dexieInit";
     export let date;
     export let month;
     export let year;
     export let setSelected = () => {};
     export let isSelected = false;
     export let disabled = false;
-    const entryExists = async (date, month, year) => (
-        new Promise(async (resolve, reject) => {
-            try {
-                if(parseInt(date)){
-                    const thisDate = new Date(year, month, date);
-                    const exists = await db.entries.get(ISOFromDate(thisDate));
-                    resolve(exists);
-                }
-            }catch(error){
-                console.error(error);
+    
+    const entryExists = async (date, month, year) => {
+        try {
+            if(parseInt(date)){
+                const thisDate = new Date(year, month, date);
+                const exists = await db.entries.get(ISOFromDate(thisDate));
+                return exists;
             }
-        })
-    )
+        }catch(error){
+            console.error(error);
+        }
+    }
 
     $: doesEntryExist = entryExists(date, month, year);
 </script>

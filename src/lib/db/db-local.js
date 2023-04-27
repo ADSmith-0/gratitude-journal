@@ -1,9 +1,10 @@
 import { db } from "./dexieInit";
 
-const request = request => {
+const request = async (request) => {
     // eslint-disable-next-line no-useless-catch
     try {
-        return request;
+        const response = await request;
+        return response;
     }catch(e){
         throw e;
     }

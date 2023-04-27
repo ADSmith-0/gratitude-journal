@@ -1,15 +1,12 @@
 <script>
     import Popup from "./popup.svelte";
-    import InputBox from "./inputBox.svelte";
 	import { enhance } from "$app/forms";
+	import CustomInput from "./customInput.svelte";
 
     const fields = {
         "newEmail": "",
-        "newEmailRepeat": ""
+        "newEmailConfirm": ""
     }
-
-    let errorsVisible = false;
-    let newEmailRepeat;
 
     const updateField = (id, newValue) => fields[id] = newValue;
     
@@ -25,22 +22,15 @@
                 cancel();
             }
         }}>
-            <InputBox 
-                id="newEmail"
-                placeholder="New Email"
-                type="text"
-                passValueBack={updateField}
-                validateAs="email"
-                errorVisible={errorsVisible}
+            <CustomInput 
+                name="newEmail"
+                label="New Email"
+                validation="email"
             />
-            <InputBox 
-                id="newEmailConfirm"
-                placeholder="Confirm New Email"
-                type="text"
-                passValueBack={updateField}
-                validateAs="email"
-                errorVisible={errorsVisible}
-                bind:this={newEmailRepeat}
+            <CustomInput 
+                name="newEmailConfirm"
+                label="Confirm New Email"
+                validation="email"
             />
             <button class="button bg-green">Submit</button>
         </form>

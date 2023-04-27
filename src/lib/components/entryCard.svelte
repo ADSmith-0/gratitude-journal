@@ -1,5 +1,5 @@
 <script>
-    import { getDayFromNum } from '../lib/util';
+    import { getDayFromNum } from '$lib/util';
     export let entry = {};
     export let searchTerm = "";
 
