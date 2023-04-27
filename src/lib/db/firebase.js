@@ -28,8 +28,8 @@ if (!getApps().length) {
     firebaseApp = initializeApp(config);
 }
 
-const app = getApp();
-const auth = getAuth(firebaseApp);
+const app = () => getApp();
+const auth = () => getAuth(app);
 const db = getFirestore();
 
 export { app, auth, db };
