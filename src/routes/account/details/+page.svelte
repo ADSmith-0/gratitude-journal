@@ -1,6 +1,5 @@
 <script>
-	import { goto } from "$app/navigation";
-    import { deleteSelf } from "$lib/db/db-firebase";
+	import { deleteSelf } from "$lib/db/db-firebase";
     import ReauthUserPopup from "$lib/components/reauthUserPopup.svelte";
 	import UpdateEmailPopup from "$lib/components/updateEmailPopup.svelte";
 
@@ -8,11 +7,6 @@
     let blockedAction = "";
 
     const setReauth = newReauth => reauth = newReauth;
-
-    const logout = () => {
-        localStorage.removeItem("accessToken");
-        goto("/account");
-    }
 
     const deleteAccount = () => {
         deleteSelf(logout)
@@ -33,7 +27,7 @@
 {#if reauth}
     <ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
 {/if}
-<div class="wrapper">
+<section class="wrapper">
     <section class="card">
         <p>Account details</p>
         <div class="detail">
@@ -49,11 +43,11 @@
             <p class="email-address">adam00199382818@gmail.com</p>
         </div>
     </section>
-    <button class="button-small card">Change Email</button>
-    <button class="button-small card">Change password</button>
-    <button id="logout" class="button-small card" on:click={logout}>Logout</button>
-    <button id="delete-btn" class="button-small card" on:click={deleteAccount}>Delete Account</button>
-</div>
+    <button class="button small card">Change Email</button>
+    <button class="button small card">Change password</button>
+    <a id="logout" class="button small card" href="/logout">Logout</a>
+    <button id="delete-btn" class="button small card">Delete Account</button>
+</section>
 <style>
     .wrapper {
         display: flex;
@@ -62,14 +56,15 @@
         align-items: stretch;
         font-size: var(--font-size-default);
         background: var(--grey);
-        padding: 2em;
         box-sizing: border-box;
+        padding: 2em;
     }
     .email-address {
         overflow-wrap: break-word;
     }
     .wrapper section,
-    .wrapper > button {
+    .wrapper > button,
+    .wrapper > a {
         padding: 0.9em 1.5em;
         font-size: var(--font-x-small);
     }

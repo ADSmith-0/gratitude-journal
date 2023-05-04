@@ -4,7 +4,7 @@
 </script>
 <section>
     <input type="text" placeholder="Search..." bind:value={searchTerm}>
-    <button class="button-small" on:click={() => passSearchTermBack(searchTerm)}>Search</button>
+    <button class="button small" on:click={() => passSearchTermBack(searchTerm)}>Search</button>
 </section>
 <style>
     section {

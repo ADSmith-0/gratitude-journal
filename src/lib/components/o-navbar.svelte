@@ -4,7 +4,7 @@
         <a href="/add-entry">Add entry</a>
         <a href="/edit-entry">Edit entry</a>
         <a href="/all-entries">All entries</a>
-        <a href="/account">Account</a>
+        <a href="/account/login">Account</a>
     </nav>
 </section>
 <slot></slot>

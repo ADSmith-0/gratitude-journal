@@ -84,16 +84,15 @@ button {
     color: var(--font-color);
     padding: 0.63em 1.56em;
     box-shadow: var(--box-shadow);
+    text-decoration: none;
+    text-align: center;
 }
 
-.button-small {
-    border-radius: var(--radius);
-    border: none;
-    cursor: pointer;
-    font-weight: 400;
-    font-size: var(--font-size-default);
-    color: var(--font-color);
+.button.small {
     padding: 0.5em 0.7em;
+}
+
+.no-shadow {
     box-shadow: none;
 }
 

@@ -24,7 +24,7 @@
 <section class="card">
     <div class="info">
         <p>{dateStr} - {day}</p>
-        <a class="button-small bg-default-grey" href="/add-entry?date={date}">Edit</a>
+        <a class="button small bg-default-grey" href="/add-entry?date={date}">Edit</a>
     </div>
     <p>{@html highlightedContent}</p>
 </section>

@@ -25,7 +25,7 @@
         },
         { 
             name: "Account",
-            link: "/account",
+            link: "/account/login",
             imgs: {
                 "black": {src: "/img/account-black-icon-96x96.png", alt: "account black icon" },
                 "selected": {src: "/img/account-pink-icon-96x96.png", alt: "account selected icon" }
