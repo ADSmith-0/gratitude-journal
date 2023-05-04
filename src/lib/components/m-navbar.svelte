@@ -54,8 +54,9 @@
 <section id="bottom" class:visible>
     <nav>
         {#each items as {name, link, imgs}}
-            <a href={link} class="{selectedItem.includes(link) ? "selected": ""}">
-                {#if selectedItem.includes(link)}
+            {@const url = `/${link.split('/')[1]}`}
+            <a href={link} class="{selectedItem.includes(url) ? "selected": ""}">
+                {#if selectedItem.includes(url)}
                     <img src={imgs.selected.src} alt={imgs.selected.alt}> 
                 {:else}
                     <img src={imgs.black.src} alt={imgs.black.alt}>
