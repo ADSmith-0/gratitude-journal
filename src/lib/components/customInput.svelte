@@ -8,12 +8,11 @@
     export let label = "";
     export let type = "text";
     export let validation = "any";
-    export const clearInput = () => value = "";
+    export let value = "";
 
     let input;
     let floatingLabel;
     let lineRipple;
-    let value = "";
 </script>
 
 <Textfield

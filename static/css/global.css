@@ -124,17 +124,31 @@ button {
 }
 
 .bg-grey {
-    background: var(--grey);
+    background-color: var(--grey);
 }
 
 .bg-default-grey {
-    background: var(--default-grey);
+    background-color: var(--default-grey);
 }
+
+.bg-white {
+    background-color: #fff;
+}
+
 .font-body {
     font-family: var(--accent-font);
 }
+
 .sm-font {
     font-size: var(--font-small);
+}
+
+.txt-white {
+    color: #fff;
+}
+
+.txt-light-red {
+    color: var(--light-red);
 }
 
 mark {

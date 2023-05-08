@@ -1,39 +1,21 @@
 <script>
     import AuthUser from '$lib/components/authUser.svelte';
 
-    let name = "Login";
-    let action = "login";
+    export let form;
     
-    const actionFromName = name => name.replace(/\s/g, "").toLowerCase();
-
-    const setName = e => {
-        const newName = e.target.innerHTML;
-        if(newName !== name){
-            name = newName;
-            action = actionFromName(newName);
-        }
-    }
-
-    let authUser;
-    const changeToLogin = response => {
-        if(name === "Sign up"){
-            name = "Login";
-            authUser.clearInputs();
-        }
-    };
+    let name = "Login";
 </script>
 <section class="container">
     <section class="selector">
-        <button class="button" on:click={setName}>Login</button>
-        <button class="button" on:click={setName}>Sign up</button>
+        <button class="button" on:click={() => name = "Login"}>Login</button>
+        <button class="button" on:click={() => name = "Sign up"}>Sign up</button>
         <div class="underline" class:translate={name==="Sign up"}></div>
     </section>
-    <AuthUser 
-        submit={name}
-        action={action}
-        callback={changeToLogin}
-        bind:this={authUser}
-    />
+    {#if name === "Login"}
+    <AuthUser submit="Login" action="?/login" form={form}/>
+    {:else if name === "Sign up"}
+    <AuthUser submit="Sign up" action="?/signup" form={form}/>
+    {/if}
 </section>
 <style>
     .container {
