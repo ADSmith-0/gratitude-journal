@@ -7,11 +7,26 @@
     export let submit = "Login";
     export let action = "?/login";
     export let form;
+    export let callback = () => {};
     let open = true;
 
     let loading = false;
+
+    const handleEnhance = () => {
+        loading = true;
+
+        return async ({ result, update }) => {
+            loading = false;
+
+            if(result.type === "success"){
+                callback();
+            }
+
+            update();
+        }
+    }
 </script>
-<form class="container" method="POST" action={action} use:enhance>
+<form class="container" method="POST" action={action} use:enhance={handleEnhance}>
     {#if form?.error}
     <Banner
         class="bg-light-red"
