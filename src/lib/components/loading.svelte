@@ -1,2 +1,14 @@
-<!-- TODO: Make a spinner -->
-<p>Loading</p>
+<div class="material-icons rotating">autorenew</div>
+<style>
+    .rotating {
+        animation: rotating 2s linear infinite;
+    }
+    @keyframes rotating {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>

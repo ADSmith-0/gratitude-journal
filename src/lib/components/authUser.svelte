@@ -2,6 +2,7 @@
     import { enhance } from '$app/forms';
     import CustomInput from './customInput.svelte';
     import PasswordInput from './passwordInput.svelte';
+    import Loading from './loading.svelte';
     import Banner, { Icon, Label } from '@smui/banner';
     
     export let submit = "Login";
@@ -46,7 +47,7 @@
     />
     <PasswordInput />
     {#if loading}
-    <button class="button bg-default-grey loading" disabled="true"><img class="rotating" src="/img/refresh-icon-black-48x48.png" alt="Loading icon"></button>
+    <button class="button bg-default-grey loading" disabled="true"><Loading /></button>
     {:else}
     <button id="submit" type="submit" class="button bg-green">{submit}</button>
     {/if}
@@ -72,21 +73,5 @@
         justify-content: center;
         align-items: center;
         cursor: not-allowed;
-    }
-    .loading img {
-        height: 1.5em;
-        width: 1.5em;
-    }
-    .rotating {
-        animation: rotating 2s linear infinite;
-
-    }
-    @keyframes rotating {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
     }
 </style>
