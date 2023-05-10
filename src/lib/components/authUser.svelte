@@ -4,11 +4,18 @@
     import PasswordInput from './passwordInput.svelte';
     import Loading from './loading.svelte';
     import Banner, { Icon, Label } from '@smui/banner';
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
+    const dispatchEvent = {
+        "?/login": "login",
+        "?/signup": "signup"
+    };
     
     export let submit = "Login";
     export let action = "?/login";
     export let form;
-    export let callback = () => {};
     let open = true;
 
     let loading = false;
@@ -20,7 +27,10 @@
             loading = false;
 
             if(result.type === "success"){
-                callback();
+                const event = dispatchEvent[action];
+                if(event){
+                    dispatch(event);
+                }
             }
 
             update();

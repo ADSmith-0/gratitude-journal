@@ -9,12 +9,12 @@
     <section class="selector">
         <button class="button" on:click={() => name = "Login"}>Login</button>
         <button class="button" on:click={() => name = "Sign up"}>Sign up</button>
-        <div class="underline" class:translate={name==="Sign up"}></div>
+        <div class="underline" class:translate={name === "Sign up"}></div>
     </section>
     {#if name === "Login"}
     <AuthUser submit="Login" action="?/login" form={form}/>
     {:else if name === "Sign up"}
-    <AuthUser submit="Sign up" action="?/signup" form={form}/>
+    <AuthUser submit="Sign up" action="?/signup" on:signup={() => name = "Login"} form={form}/>
     {/if}
 </section>
 <style>
