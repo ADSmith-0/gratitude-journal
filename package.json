@@ -15,7 +15,6 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
-		"@smui/banner": "^7.0.0-beta.8",
 		"@smui/floating-label": "^7.0.0-beta.3",
 		"@smui/icon-button": "^7.0.0-beta.3",
 		"@smui/line-ripple": "^7.0.0-beta.3",

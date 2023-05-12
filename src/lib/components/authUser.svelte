@@ -3,7 +3,7 @@
     import CustomInput from './customInput.svelte';
     import PasswordInput from './passwordInput.svelte';
     import Loading from './loading.svelte';
-    import Banner, { Icon, Label } from '@smui/banner';
+    import Snackbar from './snackbar.svelte';
     import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
@@ -16,7 +16,6 @@
     export let submit = "Login";
     export let action = "?/login";
     export let form;
-    let open = true;
 
     let loading = false;
 
@@ -39,20 +38,14 @@
 </script>
 <form class="container" method="POST" action={action} use:enhance={handleEnhance}>
     {#if form?.error}
-    <Banner
-        class="bg-light-red"
-        bind:open
-        on:SMUIBanner:closed={() => open = false}
-    >
-        <Icon slot="icon" class="sm-font material-icons bg-white txt-light-red" size="button">priority_high</Icon>
-        <Label slot="label" class="sm-font txt-white font-body ">{form?.error}</Label>
-    </Banner>
+    <Snackbar variant="error" dismissable={false}>
+        <span slot="message" class="bold x-sm-font">{form?.error}</span>
+    </Snackbar>
     {/if}
     <CustomInput 
         name="email"
         label="Email"
         type="email"
-        value={form?.email ?? ""}
         validation="email"
     />
     <PasswordInput />

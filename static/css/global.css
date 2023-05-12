@@ -67,14 +67,21 @@
     font-weight: 300;
 }
 
-a, p {
-    font-size: var(--font-normal);
+a, p, span, div, input {
+    font-family: var(--accent-font);
+    font-size: var(--font-size-default);
 }
 
 button {
     font-size: var(--font-small);
+    font-family: var(--main-font);
     align-items: center;
 }
+
+.bold {
+    font-weight: 500;
+}
+
 .button {
     border-radius: var(--radius);
     border: none;
@@ -137,6 +144,10 @@ button {
 
 .font-body {
     font-family: var(--accent-font);
+}
+
+.x-sm-font {
+    font-size: var(--font-x-small);
 }
 
 .sm-font {

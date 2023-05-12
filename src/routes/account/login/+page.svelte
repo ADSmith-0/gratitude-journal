@@ -4,6 +4,10 @@
     export let form;
     
     let name = "Login";
+
+    $: if(name){
+        form = "";
+    }
 </script>
 <section class="container">
     <section class="selector">
