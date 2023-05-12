@@ -5,6 +5,7 @@
     
     let name = "Login";
 
+    // When name changes reset form, so errors disappear
     $: if(name){
         form = "";
     }
