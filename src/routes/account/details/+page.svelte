@@ -1,32 +1,3 @@
-<script>
-	import { deleteSelf } from "$lib/db/db-firebase";
-    import ReauthUserPopup from "$lib/components/reauthUserPopup.svelte";
-	import UpdateEmailPopup from "$lib/components/updateEmailPopup.svelte";
-
-    let reauth = false;
-    let blockedAction = "";
-
-    const setReauth = newReauth => reauth = newReauth;
-
-    const deleteAccount = () => {
-        deleteSelf(logout)
-        .catch(error => {
-            if(error.includes("requires recent login")){
-                blockedAction = "deleteAccount";
-                reauth = true;
-            }
-        })
-    }
-
-    const tryActionAgain = userCredentials => {
-        console.log(blockedAction);
-        blockedAction();
-    }
-</script>
-<!-- <UpdateEmailPopup /> -->
-{#if reauth}
-    <ReauthUserPopup setReauth={setReauth} onSuccessfulReauth={tryActionAgain}/>
-{/if}
 <section class="wrapper">
     <section class="card">
         <p>Account details</p>
@@ -43,10 +14,9 @@
             <p class="email-address">adam00199382818@gmail.com</p>
         </div>
     </section>
-    <button class="button small card">Change Email</button>
-    <button class="button small card">Change password</button>
-    <a id="logout" class="button small card" href="/logout">Logout</a>
-    <button id="delete-btn" class="button small card">Delete Account</button>
+    <a class="button small card" href="details/change-password">Change password</a>
+    <a class="button small card" href="/logout">Logout</a>
+    <a class="button small card txt-red" href="/delete-account">Delete Account</a>
 </section>
 <style>
     .wrapper {
@@ -63,7 +33,6 @@
         overflow-wrap: break-word;
     }
     .wrapper section,
-    .wrapper > button,
     .wrapper > a {
         padding: 0.9em 1.5em;
         font-size: var(--font-x-small);
@@ -84,8 +53,5 @@
     }
     .detail p:last-child{
         margin-bottom: 1em;
-    }
-    #delete-btn {
-        color: var(--red);
     }
 </style>
