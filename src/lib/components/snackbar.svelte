@@ -29,7 +29,7 @@
         display: grid;
         grid-template-columns: auto 1fr auto;
         place-items: center;
-        gap: 1rem;
+        gap: 0.8rem;
         padding: 0.7rem 0.9rem;
         border-radius: var(--radius);
     }
