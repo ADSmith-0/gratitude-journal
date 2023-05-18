@@ -1,5 +1,6 @@
-import { login, signup } from '$lib/db/db-firebase';
 import { fail, redirect } from '@sveltejs/kit';
+import { login, signup } from '$lib/db/db-firebase';
+import { getError } from '$lib/server/firebase-error-parser.js';
 
 export async function load({ cookies }) {
     const accessToken = cookies.get('accessToken');
@@ -33,10 +34,8 @@ export const actions = {
 
             throw redirect(303, '/account/login');
         }catch(error){
-            if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
-                return fail(400, { email, error: "Email or password incorrect" });
-            }
-            return { error: error.code }
+            const errorMsg = getError(error.code);
+            return fail(400, { error: errorMsg });
         }
     },
     signup: async ({ request }) => {
@@ -50,13 +49,8 @@ export const actions = {
             await signup(email, password);
             return { success: true }
         }catch(error){
-            if(error.code === "auth/email-already-in-use"){
-                return fail(400, { email, error: "Email already in use" });
-            }
-            return { error: error.code }
+            const errorMsg = getError(error.code);
+            return fail(400, { error: errorMsg });
         }
-    },
-    reauth: async ({ request }) => {
-        return { success: true };
     }
 }
