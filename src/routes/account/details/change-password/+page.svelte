@@ -9,6 +9,11 @@
 <BackButton href="/account/details" />
 <div class="wrapper card flex-column-center">
     <h1>Change password:</h1>
+    {#if form?.success}
+    <Snackbar variant="success" dismissable={false}>
+        <p slot="message">Password successfully changed</p>
+    </Snackbar>
+    {/if}
     {#if form?.error}
     <Snackbar variant="error" dismissable={false}>
         <p slot="message">{form?.error}</p>
