@@ -2,21 +2,9 @@ import { auth } from './firebase';
 import {
     createUserWithEmailAndPassword,
     deleteUser,
-    reauthenticateWithCredential,
     signInWithEmailAndPassword,
-    updateEmail,
     updatePassword
 } from 'firebase/auth';
-
-/**
- * Reauthorise the user to perform certain actions, e.g. delete their account, change their password etc.
- * @param {UserCredential} credential 
- * @returns 
- */
-const reauth = async (credential) => {
-    const user = auth.currentUser;
-    return await reauthenticateWithCredential(user, credential);
-}
 
 /**
  * Sign up a new user with email and password combination
@@ -40,18 +28,7 @@ const login = async (email, password) => (await signInWithEmailAndPassword(auth,
  */
 const deleteSelf = async () => {
     const user = auth.currentUser;
-
     return (await deleteUser(user))
-}
-
-/**
- * Function for user to change their email address
- * @param {string} email
- * @returns {Promise} firebase response
- */
-const changeEmail = async (email) => {
-    const user = auth.currentUser;
-    return (await updateEmail(user, email))
 }
 
 /**
@@ -64,4 +41,4 @@ const changePassword = async (password) => {
     return (await updatePassword(user, password));
 }
 
-export { signup, login, reauth, deleteSelf, changeEmail, changePassword }
+export { signup, login, deleteSelf, changePassword }
