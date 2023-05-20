@@ -1,11 +1,14 @@
 <script>
 	import { Icon } from "@smui/icon-button";
-    import { fly } from "svelte/transition";
+    import { fade, fly } from "svelte/transition";
+    import { createEventDispatcher } from "svelte";
+    
+    const dispatch = createEventDispatcher();
 
     export let variant = "";
     export let dismissable = true;
 </script>
-<section class={`wrapper ${variant}`} aria-relevant="additions" in:fly="{{ x: 100, duration: 500 }}">
+<section class={`wrapper ${variant}`} aria-relevant="additions" in:fly="{{ x: 100, duration: 500 }}" out:fade>
     <slot name="icon" aria-atomic="true">
         <Icon class="material-icons">
             {#if variant === "success"}
@@ -17,7 +20,7 @@
     </slot>
     <slot name="message" aria-atomic="true"></slot>
     {#if dismissable}
-    <button aria-atomic="true" title="Dismiss" type="button">
+    <button aria-atomic="true" title="Dismiss" type="button" on:click={() => dispatch('close')}>
         <Icon class="material-icons">
             close
         </Icon>

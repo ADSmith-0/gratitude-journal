@@ -37,9 +37,14 @@
     }
 </script>
 <form class="container" method="POST" action={action} use:enhance={handleEnhance}>
+    {#if form?.success}
+    <Snackbar variant="success" dismissable={true} on:close={() => form.success = ""}>
+        <span slot="message" class="bold">{form?.success}</span>
+    </Snackbar>
+    {/if}
     {#if form?.error}
     <Snackbar variant="error" dismissable={false}>
-        <span slot="message" class="bold x-sm-font">{form?.error}</span>
+        <span slot="message" class="bold">{form?.error}</span>
     </Snackbar>
     {/if}
     <CustomInput 

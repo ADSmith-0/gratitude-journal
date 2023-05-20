@@ -47,7 +47,7 @@ export const actions = {
 
         try {
             await signup(email, password);
-            return { success: true }
+            return { success: "Account created" }
         }catch(error){
             const errorMsg = getError(error.code);
             return fail(400, { error: errorMsg });

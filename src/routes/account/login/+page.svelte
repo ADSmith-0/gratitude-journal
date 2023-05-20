@@ -5,21 +5,28 @@
     
     let name = "Login";
 
-    // When name changes reset form, so errors disappear
-    $: if(name){
-        form = "";
+    const swapTab = (tabName, resetSuccessMsg = true, resetErrorMsg = true) => {
+        name = tabName;
+        if(form){
+            if(resetSuccessMsg){
+                form.success = "";
+            }
+            if(resetErrorMsg){
+                form.error = "";
+            }
+        }
     }
 </script>
 <section class="container">
     <section class="selector">
-        <button class="button" on:click={() => name = "Login"}>Login</button>
-        <button class="button" on:click={() => name = "Sign up"}>Sign up</button>
+        <button class="button" on:click={() => swapTab("Login")}>Login</button>
+        <button class="button" on:click={() => swapTab("Sign up")}>Sign up</button>
         <div class="underline" class:translate={name === "Sign up"}></div>
     </section>
     {#if name === "Login"}
     <AuthUser submit="Login" action="?/login" form={form}/>
     {:else if name === "Sign up"}
-    <AuthUser submit="Sign up" action="?/signup" on:signup={() => name = "Login"} form={form}/>
+    <AuthUser submit="Sign up" action="?/signup" on:signup={() => swapTab("Login", false)} form={form}/>
     {/if}
 </section>
 <style>
