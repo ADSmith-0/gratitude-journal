@@ -1,12 +1,11 @@
 <script>
-    let filter;
-    export let passSortBack = () => {}
-
-    $: passSortBack(filter);
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+    let sort="date-desc";
 </script>
 <div class="wrapper">
     <p>Sort by:</p>
-    <select bind:value={filter} >
+    <select bind:value={sort} on:change={dispatch('changeSort', { sort })}>
         <option value="date-desc" selected>Date Desc</option>
         <option value="date-asc">Date Asc</option>
     </select>

@@ -1,10 +1,11 @@
 <script>
-    export let passSearchTermBack = () => {};
-    let searchTerm;
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+    let searchTerm = "";
 </script>
 <section>
     <input type="text" placeholder="Search..." bind:value={searchTerm}>
-    <button class="button small" on:click={() => passSearchTermBack(searchTerm)}>Search</button>
+    <button class="button small" on:click={dispatch('changeSearchTerm', { searchTerm })}>Search</button>
 </section>
 <style>
     section {

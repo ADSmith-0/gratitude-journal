@@ -4,18 +4,18 @@
     import Loading from '$lib/components/loading.svelte';
 	import EntryList from '$lib/components/entryList.svelte';
 	import { findEntries, getEntries } from '$lib/db/db-local';
+    let pEntries = getEntries();
     let searchTerm = "";
     let sort = "date-desc";
-    let pEntries = getEntries();
-    const setSearchTerm = newTerm => searchTerm = newTerm;
-    const setSort = newSort => sort = newSort;
+    const changeSearchTerm = e => searchTerm = e.detail.searchTerm;
+    const changeSort = e => sort = e.detail.sort;
 
     $: pEntries = !!searchTerm ? findEntries(searchTerm) : getEntries();
 </script>
 <section class="searchbar-section">
     <section class="searchbar-wrapper">
-        <Searchbar passSearchTermBack={setSearchTerm}/>
-        <SortEntries passSortBack={setSort}/>
+        <Searchbar on:changeSearchTerm={changeSearchTerm}/>
+        <SortEntries on:changeSort={changeSort}/>
     </section>
 </section>
 <section class="entries hide-scrollbar">
