@@ -15,8 +15,8 @@
         </div>
     </section>
     <a class="button small card" href="details/change-password">Change password</a>
-    <a class="button small card" href="/logout">Logout</a>
-    <a class="button small card txt-red" href="/delete-account">Delete Account</a>
+    <a class="button small card" href="/user/logout">Logout</a>
+    <a class="button small card txt-red" href="/user/delete-account">Delete Account</a>
 </section>
 <style>
     .wrapper {
